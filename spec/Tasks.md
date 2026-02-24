@@ -64,11 +64,11 @@
 
 ### 1.6 Synthetic Data Generator
 
-- ⬜ **T-151:** Implement `generate_synthetic_data.py` script — *Ref: FR-306*
-- ⬜ **T-152:** Generate ~300 vulnerable samples (various missing protections)
-- ⬜ **T-153:** Generate ~300 protected samples (various protection combinations)
-- ⬜ **T-154:** Output labeled CSV/JSON files to `data/synthetic/`
-- ⬜ **T-155:** Validate synthetic data quality and feature distribution
+- ✅ **T-151:** Implement `generate_synthetic_data.py` script — *Ref: FR-306*
+- ✅ **T-152:** Generate ~300 vulnerable samples (various missing protections)
+- ✅ **T-153:** Generate ~300 protected samples (various protection combinations)
+- ✅ **T-154:** Output labeled CSV/JSON files to `data/synthetic/`
+- ✅ **T-155:** Validate synthetic data quality and feature distribution
 
 ### 1.7 CLI Entry Point
 

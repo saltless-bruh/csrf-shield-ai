@@ -54,9 +54,9 @@
 
 ### Milestone 6: Synthetic Data Generator
 
-- [ ] Script generates 600 labeled feature vectors (300 vulnerable, 300 protected)
-- [ ] Outputs to `data/synthetic/` in CSV format
-- [ ] Validated feature distributions
+- [x] Script generates 600 labeled feature vectors (300 vulnerable, 300 protected)
+- [x] Outputs to `data/synthetic/` in CSV format
+- [x] Validated feature distributions
 
 ### Milestone 7: CLI Skeleton
 
