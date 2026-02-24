@@ -35,10 +35,10 @@
 
 ### Milestone 3: HAR Parser
 
-- [ ] Parse HAR 1.2 files → list of `HttpExchange`
-- [ ] Handle all 3 content types (urlencoded, multipart, JSON)
-- [ ] Implement `postData.params` fallback
-- [ ] Test with sample HAR files in `data/sample_har/`
+- [x] Parse HAR 1.2 files → list of `HttpExchange`
+- [x] Handle all 3 content types (urlencoded, multipart, JSON)
+- [x] Implement `postData.params` fallback
+- [x] Test with sample HAR files in `data/sample_har/`
 
 ### Milestone 4: Flow Reconstructor
 

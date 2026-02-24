@@ -40,13 +40,13 @@
 
 ### 1.3 HAR Parser
 
-- ⬜ **T-121:** Implement HAR 1.2 file reading and validation — *Ref: FR-101*
-- ⬜ **T-122:** Parse request/response pairs into `HttpExchange` objects
-- ⬜ **T-123:** Handle `application/x-www-form-urlencoded` body parsing — *Ref: FR-102*
-- ⬜ **T-124:** Handle `multipart/form-data` body parsing (text fields only) — *Ref: FR-103*
-- ⬜ **T-125:** Handle `application/json` body parsing — *Ref: FR-104*
-- ⬜ **T-126:** Implement `postData.params` fallback for truncated bodies — *Ref: FR-107*
-- ⬜ **T-127:** Write unit tests for HAR parser (all content types)
+- ✅ **T-121:** Implement HAR 1.2 file reading and validation — *Ref: FR-101*
+- ✅ **T-122:** Parse request/response pairs into `HttpExchange` objects
+- ✅ **T-123:** Handle `application/x-www-form-urlencoded` body parsing — *Ref: FR-102*
+- ✅ **T-124:** Handle `multipart/form-data` body parsing (text fields only) — *Ref: FR-103*
+- ✅ **T-125:** Handle `application/json` body parsing — *Ref: FR-104*
+- ✅ **T-126:** Implement `postData.params` fallback for truncated bodies — *Ref: FR-107*
+- ✅ **T-127:** Write unit tests for HAR parser (all content types)
 
 ### 1.4 Flow Reconstructor
 
