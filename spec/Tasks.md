@@ -50,17 +50,17 @@
 
 ### 1.4 Flow Reconstructor
 
-- ⬜ **T-131:** Implement session identification from cookies
-- ⬜ **T-132:** Group exchanges into `SessionFlow` objects — *Ref: FR-105*
-- ⬜ **T-133:** Sort exchanges chronologically within each flow
-- ⬜ **T-134:** Write unit tests for flow reconstruction
+- ✅ **T-131:** Implement session identification from cookies
+- ✅ **T-132:** Group exchanges into `SessionFlow` objects — *Ref: FR-105*
+- ✅ **T-133:** Sort exchanges chronologically within each flow
+- ✅ **T-134:** Write unit tests for flow reconstruction
 
 ### 1.5 Auth Mechanism Detector
 
-- ⬜ **T-141:** Implement `detect_auth_mechanism()` with all 5 custom auth headers — *Ref: FR-106*
-- ⬜ **T-142:** Implement short-circuit logic for `header_only` auth — *Ref: FR-212, FR-404*
-- ⬜ **T-143:** Generate `AnalysisResult` with CSRF-011 finding for short-circuited flows
-- ⬜ **T-144:** Write unit tests for auth detection (cookie, bearer, API key, mixed, none)
+- ✅ **T-141:** Implement `detect_auth_mechanism()` with all 5 custom auth headers — *Ref: FR-106*
+- ✅ **T-142:** Implement short-circuit logic for `header_only` auth — *Ref: FR-212, FR-404*
+- ✅ **T-143:** Generate `AnalysisResult` with CSRF-011 finding for short-circuited flows
+- ✅ **T-144:** Write unit tests for auth detection (cookie, bearer, API key, mixed, none)
 
 ### 1.6 Synthetic Data Generator
 

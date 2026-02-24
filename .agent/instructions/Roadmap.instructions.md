@@ -42,15 +42,15 @@
 
 ### Milestone 4: Flow Reconstructor
 
-- [ ] Group exchanges by session cookie
-- [ ] Sort chronologically
-- [ ] Output `SessionFlow` objects
+- [x] Group exchanges by session cookie
+- [x] Sort chronologically
+- [x] Output `SessionFlow` objects
 
 ### Milestone 5: Auth Detector
 
-- [ ] Implement `detect_auth_mechanism()` with all 5 custom headers _(see PROPOSAL.md §8.4 — `CUSTOM_AUTH_HEADERS`: Authorization, X-API-Key, X-Auth-Token, Api-Key, X-Access-Token)_
-- [ ] Implement short-circuit path (yields `AnalysisResult` directly)
-- [ ] Test cookie-only, bearer-only, API-key, mixed, and no-auth cases
+- [x] Implement `detect_auth_mechanism()` with all 5 custom headers _(see PROPOSAL.md §8.4 — `CUSTOM_AUTH_HEADERS`: Authorization, X-API-Key, X-Auth-Token, Api-Key, X-Access-Token)_
+- [x] Implement short-circuit path (yields `AnalysisResult` directly)
+- [x] Test cookie-only, bearer-only, API-key, mixed, and no-auth cases
 
 ### Milestone 6: Synthetic Data Generator
 
