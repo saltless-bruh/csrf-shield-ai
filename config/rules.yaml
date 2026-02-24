@@ -1,0 +1,103 @@
+# CSRF Shield AI — Static Analysis Rules
+# Ref: docs/proposal/PROPOSAL.md §8.2 (Static Analysis Rules)
+# Last Updated: 2026-02-24
+#
+# Each rule maps to a Python module in src/analysis/rules/csrf_xxx.py
+# Rules can be disabled by setting enabled: false
+
+rules:
+  - id: "CSRF-001"
+    name: "Missing CSRF Token in Form"
+    severity: "HIGH"
+    description: "State-changing request without CSRF token in form body."
+    module: "csrf_001"
+    enabled: true
+
+  - id: "CSRF-002"
+    name: "Missing CSRF Token in Header"
+    severity: "MEDIUM"
+    description: "No custom anti-CSRF header present."
+    module: "csrf_002"
+    enabled: true
+
+  - id: "CSRF-003"
+    name: "Predictable CSRF Token"
+    severity: "HIGH"
+    description: "Token has low entropy (< 3.0 bits/char)."
+    module: "csrf_003"
+    enabled: true
+
+  - id: "CSRF-004"
+    name: "Static CSRF Token"
+    severity: "CRITICAL"
+    description: "Same token used across multiple requests."
+    module: "csrf_004"
+    enabled: true
+
+  - id: "CSRF-005"
+    name: "Missing SameSite Cookie"
+    severity: "MEDIUM"
+    description: "Session cookie without SameSite attribute."
+    module: "csrf_005"
+    enabled: true
+
+  - id: "CSRF-006"
+    name: "SameSite=None Without Secure"
+    severity: "HIGH"
+    description: "SameSite=None but Secure flag not set."
+    module: "csrf_006"
+    enabled: true
+
+  - id: "CSRF-007"
+    name: "No Origin Header Validation"
+    severity: "MEDIUM"
+    description: "Server doesn't reject cross-origin requests."
+    module: "csrf_007"
+    enabled: true
+
+  - id: "CSRF-008"
+    name: "GET Request with Side Effects"
+    severity: "HIGH"
+    description: >
+      State-changing operation via GET method.
+      Detected via URL patterns: /delete, /update, /add, /remove, /transfer;
+      and query params: ?action=, ?op=, ?do=.
+    module: "csrf_008"
+    enabled: true
+    detection_patterns:
+      url_patterns:
+        - "/delete"
+        - "/update"
+        - "/add"
+        - "/remove"
+        - "/transfer"
+      query_params:
+        - "action"
+        - "op"
+        - "do"
+
+  - id: "CSRF-009"
+    name: "Missing Referer Validation"
+    severity: "LOW"
+    description: "No evidence of Referer header checking."
+    module: "csrf_009"
+    enabled: true
+
+  - id: "CSRF-010"
+    name: "JSON Endpoint Without CORS"
+    severity: "MEDIUM"
+    description: "JSON API without proper CORS restrictions."
+    module: "csrf_010"
+    enabled: true
+
+  - id: "CSRF-011"
+    name: "Non-Cookie Auth (CSRF N/A)"
+    severity: "INFO"
+    description: >
+      Session uses header-based authentication exclusively
+      (Bearer token / API key). CSRF risk is inherently LOW
+      because the browser does not auto-attach these headers
+      to cross-origin requests.
+    module: "csrf_011"
+    enabled: true
+    short_circuit: true

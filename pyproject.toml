@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "csrf-shield-ai"
+version = "0.1.0"
+description = "AI-Powered CSRF Risk Scoring Tool"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Group 9 — IAW Course, FPT University"},
+]
+dependencies = [
+    "scikit-learn>=1.3",
+    "xgboost>=2.0",
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "flask>=3.0",
+    "mitmproxy>=10.0",
+    "jinja2>=3.1",
+    "joblib>=1.3",
+    "pyyaml>=6.0",
+    "click>=8.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "black>=23.0",
+    "flake8>=6.0",
+    "mypy>=1.0",
+    "isort>=5.12",
+]
+
+[project.scripts]
+csrf-shield = "src.main:main"
+
+# --- Tool Configuration ---
+# Ref: .agent/instructions/coding_standards.instructions.md
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks integration tests",
+]

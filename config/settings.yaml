@@ -1,0 +1,67 @@
+# CSRF Shield AI — Application Settings
+# Ref: docs/proposal/PROPOSAL.md §10 (Risk Scoring Model)
+# Last Updated: 2026-02-24
+
+# --- Scoring Weights ---
+# Base Score = (W_ml × ML_Probability + W_static × Static_Normalized) × 100
+scoring:
+  weights:
+    ml: 0.50 # ML model confidence weight
+    static: 0.50 # Static analysis severity weight
+
+  # Risk level thresholds (Ref: PROPOSAL §10.2)
+  thresholds:
+    low: 20 # 0–20  = LOW (Green)
+    medium: 40 # 21–40 = MEDIUM (Yellow)
+    high: 70 # 41–70 = HIGH (Orange)
+    # 71–100 = CRITICAL (Red) — implicit
+
+  # Context modifiers — flat integer adjustments (Ref: PROPOSAL §10.3)
+  context_modifiers:
+    financial_data: 15 # Endpoint handles financial data
+    user_data_modify: 10 # Endpoint modifies user data
+    admin_only: 10 # Endpoint is admin-only
+    uses_https: -5 # Application uses HTTPS
+    multiple_protections: -15 # Multiple CSRF protections present
+    get_state_change: 20 # GET-based state change
+
+  # Short-circuit score for header-only auth (Ref: PROPOSAL §8.4)
+  short_circuit_score: 5
+
+# --- Static Analysis Severity Normalization ---
+# Maps severity labels to 0.0–1.0 for scoring formula
+severity_map:
+  CRITICAL: 1.0
+  HIGH: 0.75
+  MEDIUM: 0.50
+  LOW: 0.25
+  INFO: 0.0
+
+# --- Auth Detection ---
+# Custom auth headers to check (Ref: PROPOSAL §8.4)
+auth_detection:
+  custom_headers:
+    - "Authorization"
+    - "X-API-Key"
+    - "X-Auth-Token"
+    - "Api-Key"
+    - "X-Access-Token"
+  session_cookie_patterns:
+    - "session"
+    - "sid"
+    - "auth"
+
+# --- Output Defaults ---
+output:
+  default_format: json # json | html
+  verbosity: normal # quiet | normal | verbose
+
+# --- Model ---
+model:
+  path: src/ml/models/csrf_rf_model.pkl
+  type: random_forest # random_forest | xgboost
+
+# --- Logging ---
+logging:
+  level: INFO # DEBUG | INFO | WARNING | ERROR
+  format: "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
