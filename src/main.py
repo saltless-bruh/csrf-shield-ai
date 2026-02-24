@@ -58,7 +58,7 @@ def _configure_logging(verbosity: str) -> None:
 # ---------------------------------------------------------------------------
 
 
-@click.group()
+@click.group(invoke_without_command=True)
 @click.version_option(version="0.1.0", prog_name="csrf-shield")
 @click.option(
     "--verbosity",
@@ -77,6 +77,9 @@ def main(ctx: click.Context, verbosity: str) -> None:
     ctx.ensure_object(dict)
     ctx.obj["verbosity"] = verbosity
     _configure_logging(verbosity)
+    
+    if ctx.invoked_subcommand is None:
+        click.echo(ctx.get_help())
 
 
 # ---------------------------------------------------------------------------
