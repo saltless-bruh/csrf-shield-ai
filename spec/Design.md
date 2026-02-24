@@ -67,9 +67,9 @@ The interactive interface uses a **two-process architecture**:
 
 ```shell
 ┌───────────────────┐    stdin (NDJSON)    ┌───────────────────┐
-│   Go TUI Process  │ ──────────────────> │  Python Backend  │
-│   (gocui, panels, │ <────────────────── │  (ipc_server.py) │
-│    keybindings)   │    stdout (NDJSON)   │  Wraps Phases 1-4│
+│   Go TUI Process  │ ──────────────────>  │  Python Backend   │
+│   (gocui, panels, │ <──────────────────  │  (ipc_server.py)  │
+│    keybindings)   │    stdout (NDJSON)   │  Wraps Phases 1-4 │
 └───────────────────┘                      └───────────────────┘
 ```
 
