@@ -60,9 +60,9 @@
 
 ### Milestone 7: CLI Skeleton
 
-- [ ] Implement `src/main.py` with argparse CLI _(Ref: spec/Tasks.md T-161, T-162, T-163)_
-- [ ] Add `analyze` subcommand (skeleton — calls pipeline once implemented)
-- [ ] Add `train` subcommand (skeleton — calls trainer once implemented)
+- [x] Implement `src/main.py` with argparse CLI _(Ref: spec/Tasks.md T-161, T-162, T-163)_
+- [x] Add `analyze` subcommand (skeleton — calls pipeline once implemented)
+- [x] Add `train` subcommand (skeleton — calls trainer once implemented)
 
 ### ✅ Phase 1 Exit Criteria
 

@@ -72,9 +72,9 @@
 
 ### 1.7 CLI Entry Point
 
-- ⬜ **T-161:** Implement `main.py` with argparse CLI — *Ref: FR-504*
-- ⬜ **T-162:** Add `analyze` subcommand skeleton
-- ⬜ **T-163:** Add `train` subcommand skeleton
+- ✅ **T-161:** Implement `main.py` with argparse CLI — *Ref: FR-504*
+- ✅ **T-162:** Add `analyze` subcommand skeleton
+- ✅ **T-163:** Add `train` subcommand skeleton
 
 ---
 
