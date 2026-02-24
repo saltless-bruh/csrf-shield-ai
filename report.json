@@ -1,0 +1,12 @@
+{
+  "flows": [
+    {
+      "session_id": "no-session-4d680919",
+      "short_circuited": true,
+      "risk_score": 5,
+      "risk_level": "LOW",
+      "finding": "CSRF-011"
+    }
+  ],
+  "total_flows": 1
+}
