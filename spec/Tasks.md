@@ -1,9 +1,9 @@
 # ✅ Tasks Breakdown — CSRF Shield AI
 
 > **Project:** AI-Powered CSRF Risk Scoring Tool
-> **Version:** 1.0
+> **Version:** 1.1
 > **Last Updated:** February 24, 2026
-> **Proposal Reference:** `docs/PROPOSAL.md` v1.2
+> **Proposal Reference:** `docs/PROPOSAL.md` v1.2, `docs/proposal/CLI_TUI_PROPOSAL.md` v2.3
 
 ---
 
@@ -143,7 +143,7 @@
 
 ---
 
-## Phase 4: Risk Scoring & Reports (Week 7–8)
+## Phase 4: Risk Scoring, Reports & TUI (Week 7–8)
 
 ### 4.1 Risk Scoring
 
@@ -167,18 +167,42 @@
 - ⬜ **T-422:** Write integration test with sample HAR file
 - ⬜ **T-423:** Validate output against manually calculated expected scores
 
+### 4.4 IPC Server *(Ref: CLI_TUI_PROPOSAL.md §3.2)*
+
+- ⬜ **T-431:** Implement `src/ipc_server.py` — NDJSON server over stdin/stdout wrapping Phases 1–4 — *Ref: FR-506*
+- ⬜ **T-432:** Implement IPC serialization (enum `.value` strings, `Finding.exchange` compact refs, `static_score` on-the-fly computation)
+- ⬜ **T-433:** Create IPC golden fixtures in `tests/fixtures/ipc/` for cross-language testing
+- ⬜ **T-434:** Write unit tests for `ipc_server.py` (all 8 methods + error responses + progress events)
+
+### 4.5 Go TUI *(Ref: CLI_TUI_PROPOSAL.md §4–8)*
+
+- ⬜ **T-435:** Initialize Go module (`cmd/tui/main.go`, `internal/`, `go.mod`) — *Ref: FR-505*
+- ⬜ **T-436:** Implement Go data models mirroring Python dataclasses (`internal/models/types.go`)
+- ⬜ **T-437:** Implement IPC client: process spawn, NDJSON stream, health ping, crash detection (`internal/ipc/`)
+- ⬜ **T-438:** Implement TUI layout + panel rendering: Sessions, Exchanges, Analysis Engine (`internal/ui/panels/`)
+- ⬜ **T-439:** Implement keybindings + modal system (help, export, raw view, finding detail, quit confirm) — *Ref: FR-507*
+- ⬜ **T-440:** Implement status bar + toast notifications + clipboard strategy — *Ref: FR-510*
+- ⬜ **T-441:** Implement state machine lifecycle (LAUNCH → LOADING → BROWSING → ANALYZING → EXPORTING → EXIT → ERROR)
+- ⬜ **T-442:** Write TUI integration tests (Go ↔ Python IPC round-trip)
+
 ---
 
-## Phase 5: Web Dashboard (Week 9)
+## Phase 5: Polish & Optional Dashboard (Week 9)
 
-### 5.1 Flask Application
+### 5.1 TUI Polish *(Ref: CLI_TUI_PROPOSAL.md §9)*
 
-- ⬜ **T-501:** Set up Flask app structure — *Ref: FR-601*
-- ⬜ **T-502:** Implement HAR file upload endpoint
-- ⬜ **T-503:** Implement analysis trigger and progress tracking
-- ⬜ **T-504:** Design dashboard HTML template
-- ⬜ **T-505:** Implement result visualization — *Ref: FR-602*
-- ⬜ **T-506:** Implement report export — *Ref: FR-603*
+- ⬜ **T-501:** Handle terminal resize events and minimum size enforcement (100x24)
+- ⬜ **T-502:** Implement virtual scrolling for large sessions (200+ exchanges)
+- ⬜ **T-503:** Handle all empty/degenerate states (0 sessions, 0 exchanges, GETs only)
+- ⬜ **T-504:** Test TUI across minimum (100x24) and large (200x50) terminal sizes
+
+### 5.2 Web Dashboard (Optional)
+
+> **Note:** The Go TUI is the flagship interactive interface per CLI_TUI_PROPOSAL.md §11. The Flask dashboard is demoted to optional.
+
+- ⬜ **T-511:** *(Optional)* Set up Flask app with file upload — *Ref: FR-601*
+- ⬜ **T-512:** *(Optional)* Implement results visualization — *Ref: FR-602*
+- ⬜ **T-513:** *(Optional)* Implement report export — *Ref: FR-603*
 
 ---
 
@@ -218,6 +242,10 @@ T-101 (Project Setup)
         │                       └─> T-311–T-316 (Model Training)
         │                             └─> T-401–T-405 (Risk Scoring)
         │                                   └─> T-421–T-423 (Integration)
+        │                                         ├─> T-431–T-434 (IPC Server)
+        │                                         │     └─> T-435–T-442 (Go TUI)
+        │                                         │           └─> T-501–T-504 (TUI Polish)
+        │                                         └─> T-411–T-415 (Reports)
         └─> T-151–T-155 (Synthetic Data)
               └─> T-301–T-305 (Data Prep)
                     └─> T-311 (Training)

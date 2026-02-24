@@ -1,9 +1,9 @@
 # 📋 Requirements Document — CSRF Shield AI
 
 > **Project:** AI-Powered CSRF Risk Scoring Tool
-> **Version:** 1.0
+> **Version:** 1.1
 > **Last Updated:** February 24, 2026
-> **Proposal Reference:** `docs/PROPOSAL.md` v1.2
+> **Proposal Reference:** `docs/PROPOSAL.md` v1.2, `docs/proposal/CLI_TUI_PROPOSAL.md` v2.3
 
 ---
 
@@ -68,9 +68,17 @@
 | FR-501 | Generate JSON report with all findings, scores, and recommendations | MUST | 4 |
 | FR-502 | Generate HTML report with visual risk indicators | MUST | 4 |
 | FR-503 | Include remediation recommendations per finding | MUST | 4 |
-| FR-504 | Provide CLI interface for analysis | MUST | 1 |
+| FR-504 | Provide CLI interface for non-interactive analysis | MUST | 1 |
+| FR-505 | Provide interactive TUI for browsing sessions, exchanges, and analysis results | MUST | 4 |
+| FR-506 | TUI communicates with Python backend via NDJSON IPC over stdin/stdout | MUST | 4 |
+| FR-507 | TUI supports keyboard-driven navigation (Vim-style h/j/k/l + Tab) | MUST | 4 |
+| FR-508 | TUI displays real-time analysis progress with per-session and per-step granularity | SHOULD | 4 |
+| FR-509 | TUI supports export to JSON/HTML from within the interface | MUST | 4 |
+| FR-510 | TUI supports copying exchange as cURL command to clipboard | SHOULD | 4 |
 
 ### 1.6 Web Dashboard (FR-6xx)
+
+> **Note:** Demoted from flagship per CLI_TUI_PROPOSAL.md §11. The Go TUI (FR-505) is the primary interactive interface.
 
 | ID | Requirement | Priority | Phase |
 | --- | --- | --- | --- |
@@ -108,6 +116,9 @@
 | NFR-301 | CLI requires no configuration for basic usage | ✅ |
 | NFR-302 | Reports are self-contained (no external dependencies) | ✅ |
 | NFR-303 | Risk scores include natural-language explanations | ✅ |
+| NFR-304 | TUI minimum terminal size | 100×24 |
+| NFR-305 | TUI keyboard response latency | <50ms |
+| NFR-306 | TUI compiles to single static binary (Go) | ✅ |
 
 ### 2.4 Maintainability (NFR-4xx)
 
@@ -137,6 +148,7 @@
 | **C-03** | No deep learning — classical ML only (course requirement) |
 | **C-04** | 10-week development timeline |
 | **C-05** | Single-developer / small team capacity |
+| **C-06** | Go 1.21+ required for TUI component |
 
 ---
 
@@ -162,6 +174,7 @@ The project is considered complete when:
 3. ✅ End-to-end analysis of a sample HAR file produces a valid risk report
 4. ✅ Documentation (User Guide + API Reference) is complete
 5. ✅ Live demo successfully analyzes a DVWA traffic capture
+6. ✅ TUI can load HAR, analyze sessions, display findings, and export reports interactively
 
 ---
 

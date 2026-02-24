@@ -12,7 +12,8 @@
 3. **Write tests alongside implementation** — never leave tests for "later"
 4. **Commit after each completed task** — small, focused commits with task IDs
 5. **Update `spec/Tasks.md`** status symbols as tasks are completed
-6. **Refer to `docs/proposal/PROPOSAL.md` v1.2** as the source of truth for design decisions
+6. **Refer to `docs/proposal/PROPOSAL.md` v1.2** as the source of truth for analysis pipeline design decisions
+7. **Refer to `docs/proposal/CLI_TUI_PROPOSAL.md` v2.3** as the source of truth for TUI design, IPC protocol, and Go project structure
 
 ---
 
@@ -115,38 +116,61 @@
 
 ---
 
-## Phase 4: Risk Scoring & Reports (Week 7–8)
+## Phase 4: Risk Scoring, Reports & TUI (Week 7–8)
 
-**Goal:** Full pipeline from HAR file to risk report.
+**Goal:** Full pipeline from HAR file to risk report, plus interactive TUI.
 
-### Key Deliverables
+### Key Deliverables — Scoring & Reports
 
 - [ ] Risk scorer with Base Score + Modifier formula
 - [ ] JSON and HTML report generation
 - [ ] Remediation recommendations
 - [ ] Full end-to-end integration test
 
+### Key Deliverables — IPC Server _(Ref: CLI_TUI_PROPOSAL.md §3.2)_
+
+- [ ] `src/ipc_server.py` — NDJSON server wrapping Phases 1–4 pipeline
+- [ ] IPC serialization: enum `.value` strings, `Finding.exchange` compact refs, `static_score` on-the-fly
+- [ ] IPC golden fixtures in `tests/fixtures/ipc/` for cross-language testing
+
+### Key Deliverables — Go TUI _(Ref: CLI_TUI_PROPOSAL.md §4–8)_
+
+- [ ] Initialize Go module (`cmd/tui/`, `internal/`, `go.mod`)
+- [ ] Go data models mirroring Python dataclasses (`internal/models/types.go`)
+- [ ] IPC client: process spawn, NDJSON stream, health ping (`internal/ipc/`)
+- [ ] Panel rendering: Sessions, Exchanges, Analysis Engine (`internal/ui/panels/`)
+- [ ] Keybindings + modal system (help, export, raw view, finding detail, quit confirm)
+- [ ] Status bar + toast notifications
+- [ ] State machine: LAUNCH → LOADING → BROWSING → ANALYZING → EXPORTING → EXIT → ERROR
+- [ ] TUI integration tests (Go ↔ Python IPC round-trip)
+
 ### ✅ Phase 4 Exit Criteria
 
 - Scoring formula matches proposal examples exactly
 - HTML report is self-contained and presentable
 - End-to-end test: HAR → parse → analyze → ML → score → report ✅
+- `ipc_server.py` handles all 8 IPC methods correctly
+- Go TUI loads HAR, displays sessions/exchanges, runs analysis, shows results
+- IPC golden fixtures pass on both Python and Go sides
 
 ---
 
-## Phase 5: Web Dashboard (Week 9)
+## Phase 5: Polish & Optional Dashboard (Week 9)
 
-**Goal:** Browser-based interface for non-CLI users.
+**Goal:** TUI polish, edge case handling, and optional web dashboard.
 
 ### Key Deliverables
 
-- [ ] Flask app with file upload
-- [ ] Results visualization
-- [ ] Report export
+- [ ] TUI edge cases: terminal resize, large sessions (200+ exchanges), empty states
+- [ ] TUI clipboard strategy (xclip/pbcopy/wl-copy/clip.exe/OSC 52 fallback)
+- [ ] TUI stderr log viewer for debugging (`~/.csrf-shield/backend.log`)
+- [ ] _(Optional)_ Flask dashboard for non-CLI users — demoted from flagship per [CLI_TUI_PROPOSAL.md §11](file:///home/ple/Documents/IAW/IAW_Project/docs/proposal/CLI_TUI_PROPOSAL.md)
 
 ### ✅ Phase 5 Exit Criteria
 
-- User can upload HAR, see results, and download report via browser
+- TUI handles minimum terminal size (100x24), resize events, and virtual scrolling
+- Clipboard copy works on at least Linux + macOS
+- _(If Flask implemented)_ User can upload HAR, see results, and download report
 
 ---
 
@@ -172,6 +196,7 @@
 | Purpose                  | File                                                           |
 | ------------------------ | -------------------------------------------------------------- |
 | Source of truth (design) | `docs/proposal/PROPOSAL.md`                                    |
+| Source of truth (TUI)    | `docs/proposal/CLI_TUI_PROPOSAL.md`                            |
 | Defense prep             | `docs/defense/DEFENSE_NOTES.md`                                |
 | Architecture details     | `spec/Design.md`                                               |
 | Requirements list        | `spec/Requirements.md`                                         |

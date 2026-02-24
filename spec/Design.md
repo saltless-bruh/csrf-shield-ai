@@ -1,9 +1,9 @@
 # 🏗️ Design Document — CSRF Shield AI
 
 > **Project:** AI-Powered CSRF Risk Scoring Tool
-> **Version:** 1.0
+> **Version:** 1.1
 > **Last Updated:** February 24, 2026
-> **Proposal Reference:** `docs/PROPOSAL.md` v1.2
+> **Proposal Reference:** `docs/PROPOSAL.md` v1.2, `docs/proposal/CLI_TUI_PROPOSAL.md` v2.3
 
 ---
 
@@ -26,18 +26,18 @@ CSRF Shield AI is a passive security analysis tool that detects Cross-Site Reque
 
 ### 2.1 High-Level Pipeline
 
-```
-┌─────────┐    ┌─────────────┐    ┌──────────────┐    ┌────────────┐    ┌──────────┐
+```shell
+┌──────────┐    ┌─────────────┐    ┌──────────────┐    ┌────────────┐    ┌──────────┐
 │  Input   │───>│ Flow Parser │───>│ Static       │───>│ ML         │───>│ Risk     │
 │ HAR/Proxy│    │ + Auth Det. │    │ Analyzer     │    │ Classifier │    │ Scorer   │
-└─────────┘    └─────────────┘    └──────────────┘    └────────────┘    └──────────┘
+└──────────┘    └─────────────┘    └──────────────┘    └────────────┘    └──────────┘
                      │                                                        │
                      │  [header_only auth?]                                   │
                      │  YES → Short-circuit                                   ▼
                      └──────────────────────────────────────────────────> ┌──────────┐
-                                                                         │  Report  │
-                                                                         │ Generator│
-                                                                         └──────────┘
+                                                                          │  Report  │
+                                                                          │ Generator│
+                                                                          └──────────┘
 ```
 
 ### 2.2 Phase Responsibilities
@@ -60,6 +60,24 @@ When `auth_detector.py` identifies a session using **purely header-based authent
 - Produce final `AnalysisResult` directly
 
 This is a conscious design trade-off: we sacrifice depth of analysis for correctness — CSRF is simply not applicable to header-only auth, so running the full pipeline would waste compute and potentially produce misleading results.
+
+### 2.4 TUI ↔ Backend Architecture *(Ref: CLI_TUI_PROPOSAL.md §2–3)*
+
+The interactive interface uses a **two-process architecture**:
+
+```shell
+┌───────────────────┐    stdin (NDJSON)    ┌───────────────────┐
+│   Go TUI Process  │ ──────────────────> │  Python Backend  │
+│   (gocui, panels, │ <────────────────── │  (ipc_server.py) │
+│    keybindings)   │    stdout (NDJSON)   │  Wraps Phases 1-4│
+└───────────────────┘                      └───────────────────┘
+```
+
+- **Go TUI** spawns `python src/ipc_server.py` as a child process
+- Communication uses **NDJSON** (one JSON object per line) over stdin/stdout
+- Python stderr is captured separately for logging (`~/.csrf-shield/backend.log`)
+- Go side manages process lifecycle: health pings (every 5s), crash detection, restart
+- 8 IPC methods: `ping`, `load_har`, `list_flows`, `analyze_flow`, `analyze_all`, `get_results`, `cancel`, `export_report`
 
 ---
 
@@ -112,6 +130,8 @@ class AnalysisResult:
     recommendations: List[str]       # Remediation suggestions
 ```
 
+> **IPC serialization note:** When transmitted over the NDJSON IPC protocol, each `AnalysisResult` includes an additional `static_score` field (computed on-the-fly by `ipc_server.py` as `sum(triggered_rule_severities) / max_possible_severity`). `Finding.exchange` is serialized as a compact reference `{"method": "POST", "url": "/path", "status": 200}` to avoid payload bloat. See CLI_TUI_PROPOSAL.md §3.2.
+
 ---
 
 ## 4. Key Design Decisions
@@ -147,12 +167,15 @@ class AnalysisResult:
 | Component | Technology | Justification |
 | --- | --- | --- |
 | **Language** | Python 3.10+ | Rich ML/security ecosystem, rapid development |
+| **Language (TUI)** | Go 1.21+ | Compiled, single binary, goroutine concurrency for responsive UI |
+| **TUI Framework** | gocui (jesseduffield/gocui) | Terminal UI with overlapping views, custom keybindings |
+| **IPC Protocol** | NDJSON over stdin/stdout | Language-agnostic, debuggable, simple |
 | **ML Framework** | scikit-learn, XGBoost | Classical ML, well-suited for tabular data |
 | **Data Processing** | pandas, numpy | Feature engineering and data manipulation |
-| **Web Framework** | Flask 3.0+ | Lightweight dashboard, minimal overhead |
+| **Web Framework** | Flask 3.0+ *(optional)* | Lightweight dashboard, demoted from flagship |
 | **Proxy Integration** | mitmproxy | Industry-standard traffic interception |
 | **Templating** | Jinja2 | HTML report generation |
-| **Testing** | pytest | Python testing standard |
+| **Testing** | pytest (Python), `go test` (Go) | Standard testing for both languages |
 | **Config** | YAML | Human-readable rule configuration |
 
 ---
@@ -162,11 +185,14 @@ class AnalysisResult:
 ### 6.1 CLI Interface
 
 ```shell
-# Analyze a HAR file
+# Analyze a HAR file (non-interactive, CI/CD usage)
 csrf-shield analyze --input traffic.har --output report.json --format json
 
 # Analyze with HTML report
 csrf-shield analyze --input traffic.har --output report.html --format html
+
+# Launch interactive TUI (flagship interface)
+csrf-shield tui --input traffic.har
 
 # Start proxy listener
 csrf-shield proxy --port 8080 --output live_report.html
@@ -175,9 +201,22 @@ csrf-shield proxy --port 8080 --output live_report.html
 csrf-shield train --data data/training/ --output src/ml/models/csrf_rf_model.pkl
 ```
 
-### 6.2 Web Dashboard (Phase 5)
+### 6.2 Terminal User Interface (TUI) — Flagship *(Ref: CLI_TUI_PROPOSAL.md)*
+
+The Go TUI is the primary interactive interface, featuring:
+
+- 3-panel layout: Sessions (top-left), Exchanges (bottom-left), Analysis Engine (right)
+- Vim-style keyboard navigation (h/j/k/l, Tab, single-key actions)
+- Real-time analysis progress with dual-level reporting (batch + pipeline)
+- Modal popups for export, help, raw HTTP view, and finding detail
+- Color-coded risk indicators: GREEN (LOW), YELLOW (MEDIUM), ORANGE (HIGH), RED (CRITICAL)
+
+### 6.3 Web Dashboard *(Optional — Phase 5)*
+
+> **Note:** Demoted from flagship per CLI_TUI_PROPOSAL.md §11. The TUI is the primary interactive interface.
 
 The Flask dashboard provides:
+
 - Upload HAR files via drag-and-drop
 - Real-time analysis progress
 - Interactive risk score visualization
