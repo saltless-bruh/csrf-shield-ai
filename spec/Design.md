@@ -86,7 +86,7 @@ The interactive interface uses a **two-process architecture**:
 ### 3.1 Core Entities
 
 ```python
-@dataclass
+@dataclass(frozen=True)
 class HttpExchange:
     """A single HTTP request/response pair."""
     request_method: str              # GET, POST, PUT, DELETE, PATCH
@@ -100,34 +100,34 @@ class HttpExchange:
     response_body: Optional[str]     # Raw response body
     timestamp: datetime              # When the exchange occurred
 
-@dataclass
+@dataclass(frozen=True)
 class SessionFlow:
     """An ordered sequence of exchanges belonging to one user session."""
     session_id: str                  # Derived from session cookie or auto-generated
     exchanges: List[HttpExchange]    # Chronologically ordered
-    auth_mechanism: str              # 'cookie' | 'header_only' | 'mixed' | 'none'
+    auth_mechanism: AuthMechanism    # Drives short-circuit decision
 
-@dataclass
+@dataclass(frozen=True)
 class Finding:
     """A single security finding from static analysis."""
     rule_id: str                     # e.g., 'CSRF-001'
     rule_name: str                   # Human-readable name
-    severity: str                    # CRITICAL | HIGH | MEDIUM | LOW | INFO
+    severity: Severity               # Severity enum
     description: str                 # What was found
     evidence: str                    # Supporting data/quote
     exchange: HttpExchange           # The exchange that triggered this finding
 
-@dataclass
+@dataclass(frozen=True)
 class AnalysisResult:
     """The final analysis output for a single endpoint/flow."""
     endpoint: str                    # URL path
     http_method: str                 # Method
     risk_score: int                  # 0–100
-    risk_level: str                  # LOW | MEDIUM | HIGH | CRITICAL
+    risk_level: RiskLevel            # Classified risk level
     findings: List[Finding]          # All triggered rules
-    ml_probability: Optional[float]  # ML prediction (None if short-circuited)
-    feature_vector: Optional[Dict]   # Extracted features (None if short-circuited)
     recommendations: List[str]       # Remediation suggestions
+    ml_probability: Optional[float] = None   # ML prediction (None if short-circuited)
+    feature_vector: Optional[Dict] = None    # Extracted features (None if short-circuited)
 ```
 
 > **IPC serialization note:** When transmitted over the NDJSON IPC protocol, each `AnalysisResult` includes an additional `static_score` field (computed on-the-fly by `ipc_server.py` as `sum(triggered_rule_severities) / max_possible_severity`). `Finding.exchange` is serialized as a compact reference `{"method": "POST", "url": "/path", "status": 200}` to avoid payload bloat. See CLI_TUI_PROPOSAL.md §3.2.

@@ -316,56 +316,73 @@ Apply rule-based checks and extract features for ML:
 
 ### 8.1 Data Models
 
-#### RequestFlow Object
+#### Core Data Models
+
+> **Note:** The canonical implementation is in `src/input/models.py`. The code below
+> shows the logical structure; see `spec/Design.md` §3.1 for the definitive version.
 
 ```python
-@dataclass
+class Severity(str, Enum):
+    CRITICAL = "CRITICAL"
+    HIGH     = "HIGH"
+    MEDIUM   = "MEDIUM"
+    LOW      = "LOW"
+    INFO     = "INFO"
+
+class RiskLevel(str, Enum):
+    LOW      = "LOW"
+    MEDIUM   = "MEDIUM"
+    HIGH     = "HIGH"
+    CRITICAL = "CRITICAL"
+
+class AuthMechanism(str, Enum):
+    COOKIE      = "cookie"
+    HEADER_ONLY = "header_only"
+    MIXED       = "mixed"
+    NONE        = "none"
+
+@dataclass(frozen=True)
 class HttpExchange:
-    """Represents a single HTTP request/response pair."""
+    """A single HTTP request/response pair."""
     request_method: str           # GET, POST, PUT, DELETE, PATCH
     request_url: str              # Full URL
     request_headers: Dict[str, str]
     request_cookies: Dict[str, str]
     request_body: Optional[str]
     request_content_type: str
-    
     response_status: int
     response_headers: Dict[str, str]
     response_body: Optional[str]
-    
     timestamp: datetime
 
-@dataclass
+@dataclass(frozen=True)
 class SessionFlow:
-    """Represents a sequence of exchanges within a session."""
+    """An ordered sequence of exchanges belonging to one user session."""
     session_id: str
     exchanges: List[HttpExchange]
-    session_cookies: Dict[str, str]
+    auth_mechanism: AuthMechanism  # Drives short-circuit decision (§8.4)
 
-@dataclass
-class AnalysisResult:
-    """Result of analyzing a single exchange for CSRF risk."""
-    exchange: HttpExchange
-    findings: List[Finding]
-    feature_vector: Optional[Dict[str, Any]]  # None if short-circuited (§8.4)
-    ml_probability: Optional[float] = None    # None if short-circuited, else 0.0–1.0
-    risk_score: int               # 0 - 100
-    risk_level: str               # LOW / MEDIUM / HIGH / CRITICAL
-    recommendations: List[str]
-```
-
-#### Finding Object
-
-```python
-@dataclass
+@dataclass(frozen=True)
 class Finding:
-    """A specific CSRF-related finding."""
+    """A single security finding from static analysis."""
     rule_id: str                  # e.g., "CSRF-001"
-    title: str                    # e.g., "Missing CSRF Token in Form"
-    severity: str                 # LOW / MEDIUM / HIGH / CRITICAL
+    rule_name: str                # Human-readable name
+    severity: Severity            # Severity enum
     description: str
     evidence: str                 # Specific data from the request/response
-    recommendation: str
+    exchange: HttpExchange        # The exchange that triggered this finding
+
+@dataclass(frozen=True)
+class AnalysisResult:
+    """Final analysis output for a single endpoint/flow."""
+    endpoint: str                 # URL path
+    http_method: str              # HTTP method
+    risk_score: int               # 0–100
+    risk_level: RiskLevel         # Classified risk level
+    findings: List[Finding]       # All triggered rules
+    recommendations: List[str]    # Remediation suggestions
+    ml_probability: Optional[float] = None   # None if short-circuited
+    feature_vector: Optional[Dict[str, Any]] = None  # None if short-circuited
 ```
 
 ### 8.2 Static Analysis Rules
@@ -694,23 +711,25 @@ Context modifiers are **flat integer adjustments** applied after the base score 
 ```shell
 csrf-shield-ai/
 ├── README.md
+├── pyproject.toml              # Package config (replaces setup.py)
 ├── requirements.txt
-├── setup.py
+├── requirements-dev.txt
 ├── config/
 │   ├── rules.yaml              # Static analysis rules configuration
 │   └── settings.yaml           # Application settings
 ├── src/
 │   ├── __init__.py
-│   ├── main.py                 # CLI entry point
+│   ├── main.py                 # CLI entry point (click-based)
+│   ├── ipc_server.py           # NDJSON IPC server for Go TUI (Phase 4)
 │   ├── input/
 │   │   ├── __init__.py
 │   │   ├── har_parser.py       # HAR file parser
+│   │   ├── flow_reconstructor.py # Session/flow reconstruction
 │   │   ├── proxy_listener.py   # mitmproxy integration
-│   │   ├── models.py           # Data models (HttpExchange, SessionFlow)
+│   │   ├── models.py           # Data models (HttpExchange, SessionFlow, etc.)
 │   │   └── auth_detector.py    # JWT/Cookie auth mechanism detection (§8.4)
 │   ├── analysis/
 │   │   ├── __init__.py
-│   │   ├── flow_analyzer.py    # Session/flow reconstruction
 │   │   ├── static_analyzer.py  # Rule-based CSRF checks
 │   │   ├── feature_extractor.py # ML feature extraction
 │   │   └── rules/
@@ -735,7 +754,7 @@ csrf-shield-ai/
 │   │       └── report.html     # HTML report template
 │   └── web/
 │       ├── __init__.py
-│       ├── app.py              # Flask web dashboard
+│       ├── app.py              # Flask web dashboard (optional, Phase 5)
 │       ├── static/
 │       │   ├── css/
 │       │   └── js/
@@ -751,19 +770,22 @@ csrf-shield-ai/
 │   └── generate_synthetic_data.py  # Synthetic training data generator (Phase 1)
 ├── tests/
 │   ├── __init__.py
+│   ├── conftest.py             # Shared pytest fixtures
 │   ├── test_har_parser.py
-│   ├── test_static_analyzer.py
-│   ├── test_feature_extractor.py
-│   ├── test_ml_predictor.py
-│   ├── test_risk_scorer.py
-│   └── test_integration.py
+│   ├── test_models.py
+│   ├── test_auth_detector.py
+│   ├── test_flow_reconstructor.py
+│   ├── test_cli.py
+│   ├── test_synthetic_data.py
+│   └── test_integration.py     # End-to-end pipeline tests
 ├── notebooks/
 │   ├── 01_data_exploration.ipynb
 │   ├── 02_feature_analysis.ipynb
 │   └── 03_model_evaluation.ipynb
 ├── docs/
 │   ├── proposal/
-│   │   └── PROPOSAL.md             # This document
+│   │   ├── PROPOSAL.md             # This document
+│   │   └── CLI_TUI_PROPOSAL.md     # TUI design specification (v2.3)
 │   ├── defense/
 │   │   └── DEFENSE_NOTES.md        # Defense preparation Q&A
 │   ├── guides/
@@ -785,6 +807,9 @@ csrf-shield-ai/
     ├── task_completion_workflow.instructions.md     # Mandatory task completion workflow
     └── documentation_standards.instructions.md     # Where & how to organize docs
 ```
+
+> **Note:** The Go TUI project structure (under `cmd/tui/` and `internal/`) is defined in
+> [CLI_TUI_PROPOSAL.md §11](docs/proposal/CLI_TUI_PROPOSAL.md) and will be initialized in Phase 4.
 
 ### 11.2 Development Phases
 

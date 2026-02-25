@@ -22,7 +22,7 @@ import json
 import logging
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
+from typing import Dict, List, Optional, Union
 from urllib.parse import urlencode
 
 from src.input.models import HttpExchange
@@ -247,7 +247,7 @@ def _parse_body(post_data: Optional[dict]) -> Optional[str]:
     # Primary: use .text field directly (handles all content types)
     text = post_data.get("text")
     if text is not None:
-        return text
+        return str(text)
 
     # Fallback: reconstruct from .params (FR-107)
     params = post_data.get("params")
