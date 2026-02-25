@@ -289,7 +289,7 @@ When the user first loads a HAR file, sessions and exchanges are visible, but th
 After pressing `a` to analyze a session, the right panel shows the **session-level summary** (aggregated across all exchanges). This view is active when **Panel 1 (Sessions)** has focus:
 
 ```shell
-+= Sessions ========================================++-- Analysis Engine -------------------------------+
++== Sessions =======================================++-- Analysis Engine -------------------------------+
 |                                                   ||                                                  |
 | > abc123  api.target.com   (C) Cookie [12]  [!!]  ||  RISK SCORE: 87 / 100        [!!] CRITICAL       |
 |   qwe890  auth.target.com  (H) Header  [4]  [*]   ||  ML Confidence: 85%  |  Static: 70%              |
@@ -325,7 +325,7 @@ When the user presses `Tab` to move focus to **Panel 2 (Exchanges)** and selects
 |                                                   ||                                                    |
 |                                                   ||  [!] [CSRF-001] Missing Form Token          HIGH   |
 +---------------------------------------------------+|      > param 'amount', 'account_to'                |
-+= Exchanges =======================================+|                                                    |
++== Exchanges ======================================+|                                                    |
 |                                                   || --- ML Feature Vector (14) ----------------------  |
 |  GET    /dashboard              --- 200           ||                                                    |
 |  GET    /api/user               --- 200           ||  has_csrf_token_in_form  : false                   |
@@ -354,7 +354,7 @@ When the user presses `Tab` to move focus to **Panel 2 (Exchanges)** and selects
 When a `HEADER_ONLY` session is selected (either loaded or after pressing `a`), the analysis panel shows the short-circuit result immediately:
 
 ```shell
-+= Sessions ========================================++-- Analysis Engine --------------------------------+
++== Sessions =======================================++-- Analysis Engine --------------------------------+
 |                                                   ||                                                   |
 |   abc123  api.target.com   (C) Cookie [12]  [!!]  ||  RISK SCORE: 5 / 100         [*] LOW              |
 | > qwe890  auth.target.com  (H) Header  [4]  [*]   ||  >> SHORT-CIRCUITED (Header-Only Auth)            |
@@ -789,7 +789,7 @@ The TUI follows a state machine that includes both happy path and error recovery
           |   No analysis |  |   <q> to quit     |       |
           +---+-----------+  +---------+--------+        |
               |       |                |                 |
-         <a>/<A>   <q>+<y>      <r> to retry            |
+         <a>/<A>   <q>+<y>      <r> to retry             |
               |       |                |                 |
     +---------v-+  +--v--------+  +----v-----------+     |
     | ANALYZING |  |   EXIT    |  |   LOADING      |     |
