@@ -51,6 +51,14 @@ auth_detection:
     - "sid"
     - "auth"
 
+# --- Token Identification ---
+# Thresholds for 3-tier CSRF token identification (Ref: PROPOSAL.md §9.3.1, FR-302)
+# Tier 3 (entropy fallback) activates when value length >= min_token_length
+# AND Shannon entropy >= entropy_threshold bits/char.
+token_identification:
+  entropy_threshold: 3.5  # Minimum Shannon entropy (bits/char) for Tier 3
+  min_token_length: 16    # Minimum value length (chars) for Tier 3
+
 # --- Output Defaults ---
 output:
   default_format: json # json | html
