@@ -54,9 +54,9 @@ parse_har_file()
 
 reconstruct_flows()
   -> List[SessionFlow]                 -> Panel 1: Sessions list
-    .session_id                       ->   Session label
-    .exchanges                        ->   Request count badge
-    .auth_mechanism                   ->   Auth type badge
+    .session_id                        ->   Session label
+    .exchanges                         ->   Request count badge
+    .auth_mechanism                    ->   Auth type badge
 
 detect_auth_mechanism()
   -> AuthMechanism enum                -> Panel 1: Auth badge color
@@ -67,9 +67,9 @@ detect_auth_mechanism()
 
 static_analyzer (Phase 2)
   -> List[Finding]                     -> Panel 3: Findings section
-    .rule_id                          ->   [CSRF-001] badge
-    .severity                         ->   Color: HIGH=orange, CRITICAL=red
-    .evidence                         ->   > evidence line beneath finding
+    .rule_id                           ->   [CSRF-001] badge
+    .severity                          ->   Color: HIGH=orange, CRITICAL=red
+    .evidence                          ->   > evidence line beneath finding
 
 feature_extractor (Phase 2)
   -> Dict[str, Any]                    -> Panel 3: Feature vector section
@@ -81,7 +81,7 @@ predictor (Phase 3)
   -> str (risk_level)                  -> Panel 3: Color of score header
 
 AnalysisResult
-  .recommendations                    -> Panel 3: Recommendations section
+  .recommendations                     -> Panel 3: Recommendations section
 ```
 
 ### 3.2 IPC Protocol (Go <-> Python)
@@ -792,8 +792,8 @@ The TUI follows a state machine that includes both happy path and error recovery
          <a>/<A>   <q>+<y>      <r> to retry             |
               |       |                |                 |
     +---------v-+  +--v--------+  +----v-----------+     |
-    | ANALYZING |  |   EXIT    |  |   LOADING      |     |
-    | Spinner   |  +-----^-----+  |   (retry)      +-----+
+    | ANALYZING |  |   EXIT    |  |    LOADING     |     |
+    | Spinner   |  +-----^-----+  |    (retry)     +-----+
     | Progress  |        |        +----------------+
     +-----+-----+        |
           |              |
@@ -814,7 +814,7 @@ The TUI follows a state machine that includes both happy path and error recovery
      (done/cancel)
           |
     +-----v------+
-    | BROWSING   |
+    |  BROWSING  |
     +------------+
 
   Any state -----(Python process dies)-----> ERROR
