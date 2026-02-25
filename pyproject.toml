@@ -1,6 +1,6 @@
 [build-system]
 requires = ["setuptools>=68.0", "wheel"]
-build-backend = "setuptools.backends._legacy:_Backend"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "csrf-shield-ai"
@@ -37,6 +37,9 @@ dev = [
 
 [project.scripts]
 csrf-shield = "src.main:main"
+
+[tool.setuptools.packages.find]
+include = ["src*"]
 
 # --- Tool Configuration ---
 # Ref: .agent/instructions/coding_standards.instructions.md

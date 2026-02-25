@@ -24,16 +24,15 @@ project_root = Path(__file__).resolve().parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-import click
+import click  # noqa: E402
 
-from src.input.auth_detector import (
+from src.input.auth_detector import (  # noqa: E402
     build_short_circuit_result,
-    detect_auth_mechanism,
     update_flow_auth,
 )
-from src.input.flow_reconstructor import reconstruct_flows
-from src.input.har_parser import HarParseError, parse_har_file
-from src.input.models import AuthMechanism
+from src.input.flow_reconstructor import reconstruct_flows  # noqa: E402
+from src.input.har_parser import HarParseError, parse_har_file  # noqa: E402
+from src.input.models import AuthMechanism  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Logging Setup
@@ -82,7 +81,7 @@ def main(ctx: click.Context, verbosity: str) -> None:
     ctx.ensure_object(dict)
     ctx.obj["verbosity"] = verbosity
     _configure_logging(verbosity)
-    
+
     if ctx.invoked_subcommand is None:
         click.echo(ctx.get_help())
 
@@ -172,7 +171,7 @@ def analyze(ctx: click.Context, input_file: str, output_file: str, output_format
                 "exchanges": len(flow.exchanges),
                 "status": "awaiting_phase2",
             })
-            click.echo(f"    ⏳ Queued for analysis (Phase 2 not yet implemented)")
+            click.echo("    ⏳ Queued for analysis (Phase 2 not yet implemented)")
 
     # Step 4: Output results
     click.echo(f"\n📄 Output format: {output_format}")
@@ -185,7 +184,7 @@ def analyze(ctx: click.Context, input_file: str, output_file: str, output_format
         click.echo(f"💾 Report saved to: {output_file}")
     else:
         # TODO: HTML report generation (Phase 4)
-        click.echo(f"⚠️  HTML format not yet implemented — use JSON.")
+        click.echo("⚠️  HTML format not yet implemented — use JSON.")
 
     click.echo("✅ Analysis complete.")
 
