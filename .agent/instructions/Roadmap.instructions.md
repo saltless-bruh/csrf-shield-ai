@@ -83,7 +83,7 @@
 
 - [x] Token identification (3-tier strategy) _(see PROPOSAL.md §9.3.1 — Tier 1: exact name match, Tier 2: fuzzy keyword match, Tier 3: high-entropy string detection)_
 - [x] All 11 rules in `src/analysis/rules/`
-- [ ] Feature extractor (14 features) _(see PROPOSAL.md §9.3.2 for full feature list)_
+- [x] Feature extractor (14 features) _(see PROPOSAL.md §9.3.2 for full feature list)_
 - [ ] Static analyzer orchestrator
 - [ ] Integration test: HAR → parse → static analysis → findings
 

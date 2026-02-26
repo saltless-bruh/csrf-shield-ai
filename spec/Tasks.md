@@ -103,10 +103,10 @@
 
 ### 2.3 Feature Extraction
 
-- ⬜ **T-231:** Implement `feature_extractor.py` — extract all 14 features — _Ref: FR-301_
-- ⬜ **T-232:** Implement categorical feature encoding (one-hot for SameSite, method, content_type, auth_mechanism)
-- ⬜ **T-233:** Implement feature normalization
-- ⬜ **T-234:** Write unit tests for feature extraction
+- ✅ **T-231:** Implement `feature_extractor.py` — extract all 14 features — _Ref: FR-301_
+- ✅ **T-232:** Implement categorical feature encoding (one-hot for SameSite, method, content_type, auth_mechanism)
+- ✅ **T-233:** Implement feature normalization
+- ✅ **T-234:** Write unit tests for feature extraction
 
 ### 2.4 Static Analyzer Orchestrator
 
