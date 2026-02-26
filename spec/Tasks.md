@@ -110,9 +110,9 @@
 
 ### 2.4 Static Analyzer Orchestrator
 
-- ⬜ **T-241:** Implement `static_analyzer.py` — run all rules against a SessionFlow
-- ⬜ **T-242:** Implement rule loading from `config/rules.yaml`
-- ⬜ **T-243:** Write integration test: HAR → parse → static analysis → findings
+- ✅ **T-241:** Implement `static_analyzer.py` — run all rules against a SessionFlow
+- ✅ **T-242:** Implement rule loading from `config/rules.yaml`
+- ✅ **T-243:** Write integration test: HAR → parse → static analysis → findings
 
 ---
 
