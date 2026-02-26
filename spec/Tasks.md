@@ -89,17 +89,17 @@
 
 ### 2.2 Static Analysis Rules
 
-- ⬜ **T-211:** Implement `csrf_001.py` — Missing CSRF Token in Form — _Ref: FR-202_
-- ⬜ **T-212:** Implement `csrf_002.py` — Missing CSRF Token in Header — _Ref: FR-203_
-- ⬜ **T-213:** Implement `csrf_003.py` — Predictable CSRF Token (low entropy) — _Ref: FR-204_
-- ⬜ **T-214:** Implement `csrf_004.py` — Static CSRF Token (non-rotating) — _Ref: FR-205_
-- ⬜ **T-215:** Implement `csrf_005.py` — Missing SameSite Cookie — _Ref: FR-206_
-- ⬜ **T-216:** Implement `csrf_006.py` — SameSite=None Without Secure — _Ref: FR-207_
-- ⬜ **T-217:** Implement `csrf_007.py` — No Origin Header Validation — _Ref: FR-208_
-- ⬜ **T-218:** Implement `csrf_008.py` — GET Request with Side Effects — _Ref: FR-209_
-- ⬜ **T-219:** Implement `csrf_009.py` — Missing Referer Validation — _Ref: FR-210_
-- ⬜ **T-220:** Implement `csrf_010.py` — JSON Endpoint Without CORS — _Ref: FR-211_
-- ⬜ **T-221:** Write unit tests for each rule (positive + negative cases)
+- ✅ **T-211:** Implement `csrf_001.py` — Missing CSRF Token in Form — _Ref: FR-202_
+- ✅ **T-212:** Implement `csrf_002.py` — Missing CSRF Token in Header — _Ref: FR-203_
+- ✅ **T-213:** Implement `csrf_003.py` — Predictable CSRF Token (low entropy) — _Ref: FR-204_
+- ✅ **T-214:** Implement `csrf_004.py` — Static CSRF Token (non-rotating) — _Ref: FR-205_
+- ✅ **T-215:** Implement `csrf_005.py` — Missing SameSite Cookie — _Ref: FR-206_
+- ✅ **T-216:** Implement `csrf_006.py` — SameSite=None Without Secure — _Ref: FR-207_
+- ✅ **T-217:** Implement `csrf_007.py` — No Origin Header Validation — _Ref: FR-208_
+- ✅ **T-218:** Implement `csrf_008.py` — GET Request with Side Effects — _Ref: FR-209_
+- ✅ **T-219:** Implement `csrf_009.py` — Missing Referer Validation — _Ref: FR-210_
+- ✅ **T-220:** Implement `csrf_010.py` — JSON Endpoint Without CORS — _Ref: FR-211_
+- ✅ **T-221:** Write unit tests for each rule (positive + negative cases)
 
 ### 2.3 Feature Extraction
 
