@@ -120,11 +120,11 @@
 
 ### 3.1 Data Preparation
 
-- ⬜ **T-301:** Collect and label OWASP Benchmark samples (~400)
-- ⬜ **T-302:** Capture and augment DVWA/WebGoat traffic (~200) — _Ref: FR-307_
-- ⬜ **T-303:** Collect and label real-world HAR files (~300)
-- ⬜ **T-304:** Merge all data sources into unified training dataset
-- ⬜ **T-305:** Implement train/validation/test split (70/15/15)
+- ✅ **T-301:** Collect and label OWASP Benchmark samples (~400)
+- ✅ **T-302:** Capture and augment DVWA/WebGoat traffic (~200) — _Ref: FR-307_
+- ✅ **T-303:** Collect and label real-world HAR files (~300)
+- ✅ **T-304:** Merge all data sources into unified training dataset
+- ✅ **T-305:** Implement train/validation/test split (70/15/15)
 
 ### 3.2 Model Training
 
