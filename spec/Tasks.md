@@ -128,12 +128,12 @@
 
 ### 3.2 Model Training
 
-- ⬜ **T-311:** Implement `trainer.py` — training pipeline — _Ref: FR-303_
-- ⬜ **T-312:** Train Random Forest classifier
-- ⬜ **T-313:** Train XGBoost classifier (secondary) — _Ref: FR-308_
-- ⬜ **T-314:** Evaluate models against accuracy targets — _Ref: FR-304_
-- ⬜ **T-315:** Serialize best model to `.pkl` file
-- ⬜ **T-316:** Document model performance metrics
+- ✅ **T-311:** Implement `trainer.py` — training pipeline — _Ref: FR-303_
+- ✅ **T-312:** Train Random Forest classifier
+- ✅ **T-313:** Train XGBoost classifier (secondary) — _Ref: FR-308_
+- ✅ **T-314:** Evaluate models against accuracy targets — _Ref: FR-304_
+- ✅ **T-315:** Serialize best model to `.pkl` file
+- ✅ **T-316:** Document model performance metrics
 
 ### 3.3 Inference Engine
 
