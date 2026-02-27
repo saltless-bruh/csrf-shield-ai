@@ -137,9 +137,9 @@
 
 ### 3.3 Inference Engine
 
-- ⬜ **T-321:** Implement `predictor.py` — load model and predict — _Ref: FR-303_
-- ⬜ **T-322:** Implement `heuristics.py` — heuristic boost logic — _Ref: FR-305_
-- ⬜ **T-323:** Write unit tests for prediction + heuristic adjustments
+- ✅ **T-321:** Implement `predictor.py` — load model and predict — _Ref: FR-303_
+- ✅ **T-322:** Implement `heuristics.py` — heuristic boost logic — _Ref: FR-305_
+- ✅ **T-323:** Write unit tests for prediction + heuristic adjustments
 
 ---
 
