@@ -180,7 +180,7 @@
 
 ### Key Deliverables
 
-- [ ] ≥80% test coverage
+- [x] ≥80% test coverage (90% achieved, 438 tests)
 - [ ] User Guide + API Reference
 - [ ] Project report, slides, demo video
 

@@ -210,9 +210,9 @@
 
 ### 6.1 Testing
 
-- ⬜ **T-601:** Run full test suite and achieve ≥80% coverage — _Ref: NFR-401_
-- ⬜ **T-602:** Fix any failing tests
-- ⬜ **T-603:** Run end-to-end test against DVWA live capture
+- ✅ **T-601:** Run full test suite and achieve ≥80% coverage — _Ref: NFR-401_
+- ✅ **T-602:** Fix any failing tests
+- ✅ **T-603:** Run end-to-end test against DVWA live capture
 
 ### 6.2 Documentation
 
