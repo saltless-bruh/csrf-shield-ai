@@ -13,15 +13,12 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Dict, List
 
-import pytest
-
 from src.input.auth_detector import (
     build_short_circuit_result,
     detect_auth_mechanism,
     update_flow_auth,
 )
 from src.input.models import (
-    AnalysisResult,
     AuthMechanism,
     HttpExchange,
     RiskLevel,

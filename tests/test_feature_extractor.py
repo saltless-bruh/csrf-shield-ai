@@ -12,9 +12,8 @@ Ref:
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Any, Dict, Optional
+from typing import Dict, Optional
 
-import pytest
 
 from src.analysis.feature_extractor import (
     encode_categoricals,

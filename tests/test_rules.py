@@ -12,9 +12,8 @@ Ref:
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import Dict, Optional
 
-import pytest
 
 from src.analysis.rules.base_rule import BaseRule
 from src.analysis.rules.csrf_001 import Csrf001
@@ -29,7 +28,6 @@ from src.analysis.rules.csrf_009 import Csrf009
 from src.analysis.rules.csrf_010 import Csrf010
 from src.input.models import (
     AuthMechanism,
-    Finding,
     HttpExchange,
     SessionFlow,
     Severity,

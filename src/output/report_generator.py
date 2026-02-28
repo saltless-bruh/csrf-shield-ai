@@ -12,16 +12,16 @@ from __future__ import annotations
 
 import json
 import logging
-from dataclasses import asdict, dataclass, field
+from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from jinja2 import Environment, FileSystemLoader
 
 from src.input.models import Finding, Severity
 from src.output.remediation import get_remediation
-from src.scoring.risk_scorer import RiskLevel, RiskResult
+from src.scoring.risk_scorer import RiskResult
 
 logger = logging.getLogger(__name__)
 

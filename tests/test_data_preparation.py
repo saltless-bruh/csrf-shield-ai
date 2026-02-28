@@ -9,7 +9,6 @@ Ref:
 from __future__ import annotations
 
 import csv
-import tempfile
 from pathlib import Path
 from typing import Any, Dict, List
 
@@ -23,11 +22,7 @@ from scripts.generate_synthetic_data import (
     LABEL_COLUMN,
     generate_dataset as generate_synthetic_dataset,
 )
-from scripts.merge_datasets import (
-    merge_datasets,
-    validate_schema,
-    write_merged,
-)
+from scripts.merge_datasets import merge_datasets
 from scripts.split_dataset import stratified_split
 
 

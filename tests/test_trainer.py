@@ -15,7 +15,6 @@ import pandas as pd
 import pytest
 
 from src.ml.trainer import (
-    CsrfTrainer,
     ModelMetrics,
     TARGETS,
     align_columns,

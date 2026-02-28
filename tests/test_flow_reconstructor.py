@@ -12,7 +12,6 @@ from __future__ import annotations
 
 from datetime import datetime
 
-import pytest
 
 from src.input.flow_reconstructor import (
     DEFAULT_SESSION_COOKIE_PATTERNS,

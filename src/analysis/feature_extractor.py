@@ -30,7 +30,6 @@ Ref:
 from __future__ import annotations
 
 import logging
-import re
 from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import urlparse
 

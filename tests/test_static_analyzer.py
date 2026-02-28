@@ -14,7 +14,6 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, Optional
 
-import pytest
 
 from src.analysis.rules.base_rule import BaseRule
 from src.analysis.static_analyzer import (

@@ -15,7 +15,7 @@ from __future__ import annotations
 import json
 import logging
 import sys
-from datetime import datetime
+
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 from urllib.parse import urlparse
@@ -25,7 +25,6 @@ from src.input.flow_reconstructor import reconstruct_flows
 from src.input.har_parser import parse_har_file
 from src.input.models import (
     AnalysisResult,
-    AuthMechanism,
     Finding,
     HttpExchange,
     Severity,
@@ -42,7 +41,6 @@ from src.scoring.risk_scorer import (
     RiskLevel,
     RiskResult,
     RiskScorer,
-    normalize_static_score,
 )
 
 # Configure logging to stderr only (stdout reserved for IPC).
@@ -391,7 +389,7 @@ class IpcServer:
 
         # Gather findings.
         all_findings: List[Finding] = []
-        best_risk: Optional[RiskResult] = None
+
         best_ml: float = 0.0
 
         if scope == "selected" and session_id:

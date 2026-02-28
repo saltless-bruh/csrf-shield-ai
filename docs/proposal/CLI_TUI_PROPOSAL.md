@@ -54,9 +54,9 @@ parse_har_file()
 
 reconstruct_flows()
   -> List[SessionFlow]                 -> Panel 1: Sessions list
-    .session_id                        ->   Session label
-    .exchanges                         ->   Request count badge
-    .auth_mechanism                    ->   Auth type badge
+    .session_id                       ->   Session label
+    .exchanges                        ->   Request count badge
+    .auth_mechanism                   ->   Auth type badge
 
 detect_auth_mechanism()
   -> AuthMechanism enum                -> Panel 1: Auth badge color
@@ -67,9 +67,9 @@ detect_auth_mechanism()
 
 static_analyzer (Phase 2)
   -> List[Finding]                     -> Panel 3: Findings section
-    .rule_id                           ->   [CSRF-001] badge
-    .severity                          ->   Color: HIGH=orange, CRITICAL=red
-    .evidence                          ->   > evidence line beneath finding
+    .rule_id                          ->   [CSRF-001] badge
+    .severity                         ->   Color: HIGH=orange, CRITICAL=red
+    .evidence                         ->   > evidence line beneath finding
 
 feature_extractor (Phase 2)
   -> Dict[str, Any]                    -> Panel 3: Feature vector section
@@ -81,7 +81,7 @@ predictor (Phase 3)
   -> str (risk_level)                  -> Panel 3: Color of score header
 
 AnalysisResult
-  .recommendations                     -> Panel 3: Recommendations section
+  .recommendations                    -> Panel 3: Recommendations section
 ```
 
 ### 3.2 IPC Protocol (Go <-> Python)
@@ -94,28 +94,28 @@ Python Enum types (`Severity`, `RiskLevel`, `AuthMechanism`) are serialized to t
 
 **Enum serialization values** (Go must match against these exact strings):
 
-| Python Enum | Enum Name | Serialized `.value` |
-| --- | --- | --- |
-| `Severity` | `CRITICAL` | `"CRITICAL"` |
-| `Severity` | `HIGH` | `"HIGH"` |
-| `Severity` | `MEDIUM` | `"MEDIUM"` |
-| `Severity` | `LOW` | `"LOW"` |
-| `Severity` | `INFO` | `"INFO"` |
-| `RiskLevel` | `CRITICAL` | `"CRITICAL"` |
-| `RiskLevel` | `HIGH` | `"HIGH"` |
-| `RiskLevel` | `MEDIUM` | `"MEDIUM"` |
-| `RiskLevel` | `LOW` | `"LOW"` |
-| `AuthMechanism` | `COOKIE` | `"cookie"` |
-| `AuthMechanism` | `HEADER_ONLY` | `"header_only"` |
-| `AuthMechanism` | `MIXED` | `"mixed"` |
-| `AuthMechanism` | `NONE` | `"none"` |
+| Python Enum     | Enum Name     | Serialized `.value` |
+| --------------- | ------------- | ------------------- |
+| `Severity`      | `CRITICAL`    | `"CRITICAL"`        |
+| `Severity`      | `HIGH`        | `"HIGH"`            |
+| `Severity`      | `MEDIUM`      | `"MEDIUM"`          |
+| `Severity`      | `LOW`         | `"LOW"`             |
+| `Severity`      | `INFO`        | `"INFO"`            |
+| `RiskLevel`     | `CRITICAL`    | `"CRITICAL"`        |
+| `RiskLevel`     | `HIGH`        | `"HIGH"`            |
+| `RiskLevel`     | `MEDIUM`      | `"MEDIUM"`          |
+| `RiskLevel`     | `LOW`         | `"LOW"`             |
+| `AuthMechanism` | `COOKIE`      | `"cookie"`          |
+| `AuthMechanism` | `HEADER_ONLY` | `"header_only"`     |
+| `AuthMechanism` | `MIXED`       | `"mixed"`           |
+| `AuthMechanism` | `NONE`        | `"none"`            |
 
 > **Caution:** `AuthMechanism` values are **lowercase** (e.g., `"header_only"`), while `Severity` and `RiskLevel` values are **UPPERCASE** (e.g., `"CRITICAL"`). This matches the Python definitions in `models.py`. Go struct tags must use these exact strings.
 
 **`Finding.exchange` serialization:** The `Finding` dataclass contains an `exchange: HttpExchange` field, which is a full request/response pair. To avoid bloating IPC payloads (each finding would duplicate the entire exchange), the IPC server serializes `Finding.exchange` as a **compact reference** instead of the full object:
 
 ```json
-{"exchange": {"method": "POST", "url": "/api/transfer", "status": 200}}
+{ "exchange": { "method": "POST", "url": "/api/transfer", "status": 200 } }
 ```
 
 The Go side can match this reference back to the full exchange data it already holds from `list_flows`.
@@ -135,16 +135,16 @@ The Go side can match this reference back to the full exchange data it already h
 {"id": 8, "method": "export_report", "params": {"format": "json", "scope": "selected", "session_id": "abc123", "path": "report.json"}}
 ```
 
-| Method | Purpose | When Called |
-| --- | --- | --- |
-| `ping` | Health check — confirms Python process is alive | On startup, and periodically (every 5s) |
-| `load_har` | Parse HAR file, reconstruct flows, detect auth | On TUI launch with `--input` |
-| `list_flows` | Return current list of SessionFlow summaries | After initial load only. Filtering is client-side in Go. |
-| `analyze_flow` | Run full pipeline on one session. Returns `List[AnalysisResult]` (one per state-changing exchange) plus a `summary` object with aggregated risk score. | User presses `a` |
-| `analyze_all` | Run full pipeline on all sessions sequentially | User presses `A` |
-| `get_results` | Retrieve ALL cached `AnalysisResult` objects for a session. The Go side filters by exchange for Mode B display — no server round-trip needed. | User switches selection in Panel 1 (to populate Panel 3 from cache) |
-| `cancel` | Abort the current `analyze_all` batch. Cancellation is cooperative: it takes effect between sessions, not mid-analysis. The session currently being analyzed will finish. | User presses `Esc` during `analyze_all` |
-| `export_report` | Generate report file. When `scope` = `"selected"`, the `session_id` param identifies which session. When `scope` = `"all"`, `session_id` is omitted. | User confirms in Export dialog |
+| Method          | Purpose                                                                                                                                                                   | When Called                                                         |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `ping`          | Health check — confirms Python process is alive                                                                                                                           | On startup, and periodically (every 5s)                             |
+| `load_har`      | Parse HAR file, reconstruct flows, detect auth                                                                                                                            | On TUI launch with `--input`                                        |
+| `list_flows`    | Return current list of SessionFlow summaries                                                                                                                              | After initial load only. Filtering is client-side in Go.            |
+| `analyze_flow`  | Run full pipeline on one session. Returns `List[AnalysisResult]` (one per state-changing exchange) plus a `summary` object with aggregated risk score.                    | User presses `a`                                                    |
+| `analyze_all`   | Run full pipeline on all sessions sequentially                                                                                                                            | User presses `A`                                                    |
+| `get_results`   | Retrieve ALL cached `AnalysisResult` objects for a session. The Go side filters by exchange for Mode B display — no server round-trip needed.                             | User switches selection in Panel 1 (to populate Panel 3 from cache) |
+| `cancel`        | Abort the current `analyze_all` batch. Cancellation is cooperative: it takes effect between sessions, not mid-analysis. The session currently being analyzed will finish. | User presses `Esc` during `analyze_all`                             |
+| `export_report` | Generate report file. When `scope` = `"selected"`, the `session_id` param identifies which session. When `scope` = `"all"`, `session_id` is omitted.                      | User confirms in Export dialog                                      |
 
 **Response (Python -> Go via stdout):**
 
@@ -175,28 +175,40 @@ The Go side can match this reference back to the full exchange data it already h
 **Progress events** (sent during `analyze_flow` and `analyze_all`):
 
 ```json
-{"id": 5, "progress": {"status": "analyzing", "session_id": "abc123", "session_index": 2, "session_total": 3, "step": "ml_inference", "step_current": 3, "step_total": 5, "percent": 80}}
+{
+  "id": 5,
+  "progress": {
+    "status": "analyzing",
+    "session_id": "abc123",
+    "session_index": 2,
+    "session_total": 3,
+    "step": "ml_inference",
+    "step_current": 3,
+    "step_total": 5,
+    "percent": 80
+  }
+}
 ```
 
 Progress events have **two levels of granularity**:
 
-| Field | Meaning | Example | Status Bar Display |
-| --- | --- | --- | --- |
-| `session_index` / `session_total` | Batch progress (which session, out of how many) | `2 / 3` | `[ML: Analyzing 2/3...]` |
-| `step_current` / `step_total` | Pipeline progress within the current session | `3 / 5` | (internal use, for progress bar in Panel 3) |
-| `percent` | Overall completion % across both levels | `80` | Progress bar fill |
+| Field                             | Meaning                                         | Example | Status Bar Display                          |
+| --------------------------------- | ----------------------------------------------- | ------- | ------------------------------------------- |
+| `session_index` / `session_total` | Batch progress (which session, out of how many) | `2 / 3` | `[ML: Analyzing 2/3...]`                    |
+| `step_current` / `step_total`     | Pipeline progress within the current session    | `3 / 5` | (internal use, for progress bar in Panel 3) |
+| `percent`                         | Overall completion % across both levels         | `80`    | Progress bar fill                           |
 
 For `analyze_flow` (single session), `session_index` = 1 and `session_total` = 1.
 
 **Pipeline steps** (the 5 stages that `step_current`/`step_total` refer to):
 
-| Step | `step` value | Description |
-| --- | --- | --- |
-| 1 | `static_analysis` | Run all CSRF rules (CSRF-001 through CSRF-011) against each exchange |
-| 2 | `feature_extraction` | Extract the 14-feature vector per state-changing exchange |
-| 3 | `ml_inference` | Run the trained classifier to get `ml_probability` |
-| 4 | `risk_scoring` | Combine static + ML scores using the Base Score + Modifier formula |
-| 5 | `recommendations` | Generate remediation suggestions based on findings |
+| Step | `step` value         | Description                                                          |
+| ---- | -------------------- | -------------------------------------------------------------------- |
+| 1    | `static_analysis`    | Run all CSRF rules (CSRF-001 through CSRF-011) against each exchange |
+| 2    | `feature_extraction` | Extract the 14-feature vector per state-changing exchange            |
+| 3    | `ml_inference`       | Run the trained classifier to get `ml_probability`                   |
+| 4    | `risk_scoring`       | Combine static + ML scores using the Base Score + Modifier formula   |
+| 5    | `recommendations`    | Generate remediation suggestions based on findings                   |
 
 The TUI listens on a goroutine and pushes updates to the UI thread via channel, so the UI never freezes. If the Python process exits unexpectedly (exit code != 0), the Go side transitions to the ERROR state (see §8).
 
@@ -262,7 +274,7 @@ If the Python backend fails to start (e.g., Python not installed, missing depend
 When the user first loads a HAR file, sessions and exchanges are visible, but the analysis panel is empty:
 
 ```shell
-+= Sessions ========================================++-- Analysis Engine -------------------------------+
++== Sessions =======================================++-- Analysis Engine -------------------------------+
 |                                                   ||                                                  |
 | > abc123  api.target.com   (C) Cookie [12]        ||         Not analyzed yet.                        |
 |   qwe890  auth.target.com  (H) Header  [4]        ||                                                  |
@@ -393,14 +405,14 @@ When a `HEADER_ONLY` session is selected (either loaded or after pressing `a`), 
 
 **Each row displays:**
 
-| Element | Source | Example |
-| --- | --- | --- |
-| Selection indicator | UI state | `>` (selected) or blank |
-| Session ID | `SessionFlow.session_id` (truncated to 7 chars) | `abc123` |
-| Target host | Extracted from first exchange URL | `api.target.com` |
-| Auth badge | `SessionFlow.auth_mechanism` | `(C) Cookie`, `(H) Header`, `(M) Mixed`, `(?) None` |
-| Request count | `len(SessionFlow.exchanges)` | `[12]` |
-| Risk indicator | `summary.risk_level` (after analysis) | `[!!]` `[!]` `[~]` `[*]` or `--` (not analyzed) |
+| Element             | Source                                          | Example                                             |
+| ------------------- | ----------------------------------------------- | --------------------------------------------------- |
+| Selection indicator | UI state                                        | `>` (selected) or blank                             |
+| Session ID          | `SessionFlow.session_id` (truncated to 7 chars) | `abc123`                                            |
+| Target host         | Extracted from first exchange URL               | `api.target.com`                                    |
+| Auth badge          | `SessionFlow.auth_mechanism`                    | `(C) Cookie`, `(H) Header`, `(M) Mixed`, `(?) None` |
+| Request count       | `len(SessionFlow.exchanges)`                    | `[12]`                                              |
+| Risk indicator      | `summary.risk_level` (after analysis)           | `[!!]` `[!]` `[~]` `[*]` or `--` (not analyzed)     |
 
 **Risk indicator rule:** Once a session has been analyzed, it **always** shows a risk dot based on `summary.risk_level` — even if the session has zero findings (in which case the risk score is near 0 and the dot is `[*]` LOW). The `--` indicator is **only** shown for sessions that have never been analyzed. This ensures the user can always distinguish "analyzed and safe" from "not yet analyzed".
 
@@ -422,27 +434,27 @@ When a `HEADER_ONLY` session is selected (either loaded or after pressing `a`), 
 
 **Each row displays:**
 
-| Element | Source | Example |
-| --- | --- | --- |
-| HTTP method | `HttpExchange.request_method` | `POST` |
-| URL path | Parsed from `HttpExchange.request_url` | `/api/transfer` |
-| Body type | Derived from `HttpExchange.request_content_type` | `[Form]`, `[JSON]`, `[None]` |
-| Response status | `HttpExchange.response_status` | `200` |
-| Risk dot | Highest severity of any `Finding` where `finding.exchange == this exchange` | `[!]` (has HIGH finding) |
+| Element         | Source                                                                      | Example                      |
+| --------------- | --------------------------------------------------------------------------- | ---------------------------- |
+| HTTP method     | `HttpExchange.request_method`                                               | `POST`                       |
+| URL path        | Parsed from `HttpExchange.request_url`                                      | `/api/transfer`              |
+| Body type       | Derived from `HttpExchange.request_content_type`                            | `[Form]`, `[JSON]`, `[None]` |
+| Response status | `HttpExchange.response_status`                                              | `200`                        |
+| Risk dot        | Highest severity of any `Finding` where `finding.exchange == this exchange` | `[!]` (has HIGH finding)     |
 
-**Risk dot derivation:** After analysis, each exchange row shows the risk indicator of the *most severe* finding that references it (via `Finding.exchange`). If an exchange has both a `MEDIUM` and a `HIGH` finding, only `[!]` (HIGH) is shown. Exchanges with no findings show no dot. Exchanges that were not analyzed (e.g., GETs with no state-changing behavior) show `--`.
+**Risk dot derivation:** After analysis, each exchange row shows the risk indicator of the _most severe_ finding that references it (via `Finding.exchange`). If an exchange has both a `MEDIUM` and a `HIGH` finding, only `[!]` (HIGH) is shown. Exchanges with no findings show no dot. Exchanges that were not analyzed (e.g., GETs with no state-changing behavior) show `--`.
 
 **Why this design:** The pentester needs to quickly identify which specific requests within a session are interesting. The body type badge (`[Form]`, `[JSON]`, `[None]`) is critical because CSRF exploitability differs by content type — form-urlencoded is trivially exploitable, JSON requires CORS misconfiguration, and GET requests with no body may indicate state-changing GETs (CSRF-008). The `[Text]` badge is also security-relevant: `text/plain` content type bypasses CORS preflight checks, making cross-origin form submissions possible without triggering an OPTIONS request.
 
 **Body type derivation logic:**
 
-| `request_content_type` | Badge |
-| --- | --- |
-| Contains `form-urlencoded` | `[Form]` |
-| Contains `multipart` | `[Multi]` |
-| Contains `json` | `[JSON]` |
-| Contains `text/plain` | `[Text]` |
-| Empty / None (GET requests) | `[None]` |
+| `request_content_type`      | Badge     |
+| --------------------------- | --------- |
+| Contains `form-urlencoded`  | `[Form]`  |
+| Contains `multipart`        | `[Multi]` |
+| Contains `json`             | `[JSON]`  |
+| Contains `text/plain`       | `[Text]`  |
+| Empty / None (GET requests) | `[None]`  |
 
 **Behavior when active:**
 
@@ -462,10 +474,10 @@ When a `HEADER_ONLY` session is selected (either loaded or after pressing `a`), 
 
 Shows aggregated results across the entire session:
 
-- **Risk Score Header** *(pinned)* — The highest risk score across all exchanges, with risk level badge. Sourced from `summary.risk_score` and `summary.risk_level`.
-- **Score Breakdown** *(pinned)* — ML confidence and static analysis percentages. Sourced from `summary.ml_probability_max` (displayed as %, e.g., 0.85 → "85%") and `summary.static_score_max` (displayed as %, e.g., 0.70 → "70%").
-- **Static Findings** *(scrollable)* — All unique findings across all exchanges, grouped, with counts
-- **Recommendations** *(scrollable)* — Aggregated remediation steps (deduplicated)
+- **Risk Score Header** _(pinned)_ — The highest risk score across all exchanges, with risk level badge. Sourced from `summary.risk_score` and `summary.risk_level`.
+- **Score Breakdown** _(pinned)_ — ML confidence and static analysis percentages. Sourced from `summary.ml_probability_max` (displayed as %, e.g., 0.85 → "85%") and `summary.static_score_max` (displayed as %, e.g., 0.70 → "70%").
+- **Static Findings** _(scrollable)_ — All unique findings across all exchanges, grouped, with counts
+- **Recommendations** _(scrollable)_ — Aggregated remediation steps (deduplicated)
 
 The Risk Score Header and Score Breakdown are **pinned** at the top of the panel and never scroll. Findings and Recommendations scroll beneath them via `j`/`k`.
 
@@ -475,54 +487,54 @@ Feature vector is **not shown** in this mode because there are multiple vectors 
 
 Shows results for the single selected exchange:
 
-- **Risk Score Header** *(pinned)* — That exchange's individual `risk_score` and `risk_level`
-- **Score Breakdown** *(pinned)* — `ml_probability` (as %) and `static_score` (as %) for that exchange
-- **Static Findings** *(scrollable)* — Only findings triggered by this specific exchange
-- **ML Feature Vector** *(scrollable)* — All 14 features for this exchange (see table below)
-- **Recommendations** *(scrollable)* — Remediation steps for this specific exchange
+- **Risk Score Header** _(pinned)_ — That exchange's individual `risk_score` and `risk_level`
+- **Score Breakdown** _(pinned)_ — `ml_probability` (as %) and `static_score` (as %) for that exchange
+- **Static Findings** _(scrollable)_ — Only findings triggered by this specific exchange
+- **ML Feature Vector** _(scrollable)_ — All 14 features for this exchange (see table below)
+- **Recommendations** _(scrollable)_ — Remediation steps for this specific exchange
 
 As in Mode A, the header is pinned. Findings, Feature Vector, and Recommendations scroll together beneath.
 
 **Feature vector display (all 14 features from PROPOSAL.md §9.3.2):**
 
-| Feature | Display Format | Example |
-| --- | --- | --- |
-| `has_csrf_token_in_form` | bool | `false` |
-| `has_csrf_token_in_header` | bool | `false` |
-| `has_samesite_cookie` | category | `none` / `lax` / `strict` |
-| `has_origin_check` | bool | `false` |
-| `has_referer_check` | bool | `false` |
-| `http_method` | string | `POST` |
-| `is_state_changing` | bool | `true` |
-| `content_type` | string | `form-urlencoded` |
-| `requires_auth` | bool | `true` |
-| `token_entropy` | float (2dp) | `0.00` |
-| `token_changes_per_request` | bool | `false` |
-| `response_sets_cookie` | bool | `true` |
-| `auth_mechanism` | category | `cookie` |
-| `endpoint_sensitivity` | float (2dp) | `0.95` |
+| Feature                     | Display Format | Example                   |
+| --------------------------- | -------------- | ------------------------- |
+| `has_csrf_token_in_form`    | bool           | `false`                   |
+| `has_csrf_token_in_header`  | bool           | `false`                   |
+| `has_samesite_cookie`       | category       | `none` / `lax` / `strict` |
+| `has_origin_check`          | bool           | `false`                   |
+| `has_referer_check`         | bool           | `false`                   |
+| `http_method`               | string         | `POST`                    |
+| `is_state_changing`         | bool           | `true`                    |
+| `content_type`              | string         | `form-urlencoded`         |
+| `requires_auth`             | bool           | `true`                    |
+| `token_entropy`             | float (2dp)    | `0.00`                    |
+| `token_changes_per_request` | bool           | `false`                   |
+| `response_sets_cookie`      | bool           | `true`                    |
+| `auth_mechanism`            | category       | `cookie`                  |
+| `endpoint_sensitivity`      | float (2dp)    | `0.95`                    |
 
 > **Why two modes:** A session may contain 50 exchanges. Showing a single aggregated feature vector would be meaningless — features are per-exchange. Showing all 50 vectors would overflow the panel. The lazygit pattern (commit summary vs. file diff) solves this naturally: the summary gives the big picture, the detail gives the specifics.
 
 **Data source mapping:**
 
-| TUI Section | Mode A Source (Session Summary) | Mode B Source (Per-Exchange) |
-| --- | --- | --- |
-| Risk Score Header | `summary.risk_score`, `summary.risk_level` | `results[i].risk_score`, `results[i].risk_level` |
-| ML Confidence | `summary.ml_probability_max` | `results[i].ml_probability` |
-| Static Score | `summary.static_score_max` | `results[i].static_score` |
-| Static Findings | All `results[*].findings[]` (deduplicated) | `results[i].findings[]` |
-| Feature Vector | *(not shown)* | `results[i].feature_vector` |
-| Recommendations | All `results[*].recommendations[]` (deduplicated) | `results[i].recommendations[]` |
+| TUI Section       | Mode A Source (Session Summary)                   | Mode B Source (Per-Exchange)                     |
+| ----------------- | ------------------------------------------------- | ------------------------------------------------ |
+| Risk Score Header | `summary.risk_score`, `summary.risk_level`        | `results[i].risk_score`, `results[i].risk_level` |
+| ML Confidence     | `summary.ml_probability_max`                      | `results[i].ml_probability`                      |
+| Static Score      | `summary.static_score_max`                        | `results[i].static_score`                        |
+| Static Findings   | All `results[*].findings[]` (deduplicated)        | `results[i].findings[]`                          |
+| Feature Vector    | _(not shown)_                                     | `results[i].feature_vector`                      |
+| Recommendations   | All `results[*].recommendations[]` (deduplicated) | `results[i].recommendations[]`                   |
 
 **Color mapping** (strictly follows PROPOSAL.md §10.2):
 
-| Score Range | risk_level | TUI Color | Terminal Code |
-| --- | --- | --- | --- |
-| 0--20 | LOW | Bright Green | `\033[1;32m` |
-| 21--40 | MEDIUM | Bright Yellow | `\033[1;33m` |
-| 41--70 | HIGH | Dark Orange (256-color) | `\033[38;5;208m` |
-| 71--100 | CRITICAL | Bright Red | `\033[1;31m` |
+| Score Range | risk_level | TUI Color               | Terminal Code    |
+| ----------- | ---------- | ----------------------- | ---------------- |
+| 0--20       | LOW        | Bright Green            | `\033[1;32m`     |
+| 21--40      | MEDIUM     | Bright Yellow           | `\033[1;33m`     |
+| 41--70      | HIGH       | Dark Orange (256-color) | `\033[38;5;208m` |
+| 71--100     | CRITICAL   | Bright Red              | `\033[1;31m`     |
 
 **Special states:**
 
@@ -542,12 +554,12 @@ As in Mode A, the header is pinned. Findings, Feature Vector, and Recommendation
 
 **Examples by active panel:**
 
-| Active Panel | Bar Content |
-| --- | --- |
-| Panel 1 (Sessions) | `<a> analyze  <A> analyze all  <f> filter  <x> remove  <e> export  <q> quit  <?> help [ML: Idle]` |
-| Panel 2 (Exchanges) | `<Enter> view raw  <c> copy cURL  <f> filter  <e> export  <q> quit  <?> help [ML: Idle]` |
-| Panel 3 (Analysis) | `<Enter> finding detail  <e> export  <q> quit  <?> help [ML: Idle]` |
-| During analysis | Same + `[ML: Analyzing 2/5...]` replaces `[ML: Idle]` |
+| Active Panel        | Bar Content                                                                                       |
+| ------------------- | ------------------------------------------------------------------------------------------------- |
+| Panel 1 (Sessions)  | `<a> analyze  <A> analyze all  <f> filter  <x> remove  <e> export  <q> quit  <?> help [ML: Idle]` |
+| Panel 2 (Exchanges) | `<Enter> view raw  <c> copy cURL  <f> filter  <e> export  <q> quit  <?> help [ML: Idle]`          |
+| Panel 3 (Analysis)  | `<Enter> finding detail  <e> export  <q> quit  <?> help [ML: Idle]`                               |
+| During analysis     | Same + `[ML: Analyzing 2/5...]` replaces `[ML: Idle]`                                             |
 
 **Engine status indicator:**
 
@@ -584,17 +596,17 @@ After 3 seconds, reverts to:
 
 ### 6.1 Global Keybindings (Always Available)
 
-| Key | Action | Visual Effect |
-| --- | --- | --- |
-| `Tab` | Move focus to next panel (1>2>3>1) | Active panel border changes from dim `--` to bright `==`. Previous panel reverts to dim. Bottom bar updates. |
-| `Shift+Tab` | Move focus to previous panel (1>3>2>1) | Same as Tab but reversed. |
-| `h`, `j`, `k`, `l` | Vim-style navigation: Left panel, Down in list, Up in list, Right panel | `h`/`l` act as `Shift+Tab`/`Tab`. `j`/`k` move the selection cursor within the active panel's list. Selected row is highlighted with inverted colors. |
-| Up / Down | Standard list navigation | Same as `k`/`j`. |
-| `e` | Open Export dialog | **Opens a modal popup** centered on screen. See §7.1. |
-| `?` | Open help/command palette | **Opens a modal popup** showing all keybindings grouped by context. See §7.2. |
-| `q` | Quit the application | **Opens a confirmation dialog**: "Quit CSRF Shield AI? [y/n]". Pressing `y` exits. Pressing `n` or `Esc` cancels and returns to the TUI. |
-| `Esc` | Close any open modal / cancel batch analysis | If a modal is open, closes it and returns focus to the previous panel. If `analyze_all` is running, sends a `cancel` IPC request (finishes current session, stops batch). If nothing is happening, `Esc` does nothing. |
-| `r` | Restart backend (ERROR state only) | Only active when the TUI is in the ERROR state (§8). Re-spawns the Python process and re-loads the HAR file. Transitions back to LOADING. Ignored in all other states. |
+| Key                | Action                                                                  | Visual Effect                                                                                                                                                                                                          |
+| ------------------ | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Tab`              | Move focus to next panel (1>2>3>1)                                      | Active panel border changes from dim `--` to bright `==`. Previous panel reverts to dim. Bottom bar updates.                                                                                                           |
+| `Shift+Tab`        | Move focus to previous panel (1>3>2>1)                                  | Same as Tab but reversed.                                                                                                                                                                                              |
+| `h`, `j`, `k`, `l` | Vim-style navigation: Left panel, Down in list, Up in list, Right panel | `h`/`l` act as `Shift+Tab`/`Tab`. `j`/`k` move the selection cursor within the active panel's list. Selected row is highlighted with inverted colors.                                                                  |
+| Up / Down          | Standard list navigation                                                | Same as `k`/`j`.                                                                                                                                                                                                       |
+| `e`                | Open Export dialog                                                      | **Opens a modal popup** centered on screen. See §7.1.                                                                                                                                                                  |
+| `?`                | Open help/command palette                                               | **Opens a modal popup** showing all keybindings grouped by context. See §7.2.                                                                                                                                          |
+| `q`                | Quit the application                                                    | **Opens a confirmation dialog**: "Quit CSRF Shield AI? [y/n]". Pressing `y` exits. Pressing `n` or `Esc` cancels and returns to the TUI.                                                                               |
+| `Esc`              | Close any open modal / cancel batch analysis                            | If a modal is open, closes it and returns focus to the previous panel. If `analyze_all` is running, sends a `cancel` IPC request (finishes current session, stops batch). If nothing is happening, `Esc` does nothing. |
+| `r`                | Restart backend (ERROR state only)                                      | Only active when the TUI is in the ERROR state (§8). Re-spawns the Python process and re-loads the HAR file. Transitions back to LOADING. Ignored in all other states.                                                 |
 
 > **Text input mode:** When a text input field has focus (e.g., the filter search bar in §6.2 or the path field in the Export dialog §7.1), **all global keybindings are suspended** except `Esc` (cancel) and `Enter` (confirm). This allows the user to type freely without triggering panel switches or actions. This matches lazygit's behavior in search/filter mode.
 
@@ -602,39 +614,39 @@ After 3 seconds, reverts to:
 
 #### Panel 1: Sessions
 
-| Key | Action | Visual Effect |
-| --- | --- | --- |
-| `a` | Analyze selected session | The risk indicator on the selected session row changes to a spinner (`-`, `\`, `\|`, `/`). Panel 3 shows "Analyzing..." with a progress bar. When complete, the spinner is replaced by the risk dot (`[!!]`/`[!]`/`[~]`/`[*]`) and Panel 3 populates with results. For `HEADER_ONLY` sessions, this is near-instant (short-circuit). **If pressed while already analyzing this session, the keypress is ignored.** If pressed on an already-analyzed session, the previous results are discarded and analysis re-runs. |
-| `A` (Shift+A) | Analyze ALL sessions sequentially | Sessions are analyzed one at a time, in list order. The currently-processing session shows a spinner; others show `--` until their turn. A progress counter appears in the status bar: `[ML: Analyzing 2/5...]`. Spinners resolve to risk dots as each session completes. Press `Esc` to cancel the batch (current session finishes, remaining are skipped). |
-| `x` | Remove selected session from workspace | The selected row immediately disappears. Selection moves to the next session. A toast notification appears: "Session abc123 removed". **This is a Go-side-only operation** — the Python backend is not notified. The Go side maintains its own filtered session list; `analyze_all` only sends non-removed session IDs to Python. |
-| `f` or `/` | Open fuzzy filter | **An inline text input appears at the top of the Sessions panel border**, replacing the title. All global keybindings are suspended (text input mode). As the user types, sessions are filtered in real-time by session ID or target host. Press `Enter` to confirm filter, `Esc` to cancel and restore full list. The filter is shown in the panel border: `[Filter: "api/"]`. |
+| Key           | Action                                 | Visual Effect                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `a`           | Analyze selected session               | The risk indicator on the selected session row changes to a spinner (`-`, `\`, `\|`, `/`). Panel 3 shows "Analyzing..." with a progress bar. When complete, the spinner is replaced by the risk dot (`[!!]`/`[!]`/`[~]`/`[*]`) and Panel 3 populates with results. For `HEADER_ONLY` sessions, this is near-instant (short-circuit). **If pressed while already analyzing this session, the keypress is ignored.** If pressed on an already-analyzed session, the previous results are discarded and analysis re-runs. |
+| `A` (Shift+A) | Analyze ALL sessions sequentially      | Sessions are analyzed one at a time, in list order. The currently-processing session shows a spinner; others show `--` until their turn. A progress counter appears in the status bar: `[ML: Analyzing 2/5...]`. Spinners resolve to risk dots as each session completes. Press `Esc` to cancel the batch (current session finishes, remaining are skipped).                                                                                                                                                           |
+| `x`           | Remove selected session from workspace | The selected row immediately disappears. Selection moves to the next session. A toast notification appears: "Session abc123 removed". **This is a Go-side-only operation** — the Python backend is not notified. The Go side maintains its own filtered session list; `analyze_all` only sends non-removed session IDs to Python.                                                                                                                                                                                      |
+| `f` or `/`    | Open fuzzy filter                      | **An inline text input appears at the top of the Sessions panel border**, replacing the title. All global keybindings are suspended (text input mode). As the user types, sessions are filtered in real-time by session ID or target host. Press `Enter` to confirm filter, `Esc` to cancel and restore full list. The filter is shown in the panel border: `[Filter: "api/"]`.                                                                                                                                        |
 
 #### Panel 2: Exchanges
 
-| Key | Action | Visual Effect |
-| --- | --- | --- |
-| `Enter` | View raw HTTP request/response | **Opens a full-screen modal** showing the raw HTTP request on the left half and raw HTTP response on the right half. Content is scrollable with `j`/`k`. Headers are syntax-highlighted. Press `Esc` or `q` to close. See §7.3. |
-| `c` | Copy selected request as cURL command | Generates a `cURL` command from the exchange's method, URL, headers, cookies, and body. Copies to system clipboard (see Clipboard Strategy below). A toast notification appears: "cURL copied to clipboard". |
-| `f` or `/` | Open fuzzy filter | Same as Panel 1, but filters exchanges by URL path or HTTP method. |
+| Key        | Action                                | Visual Effect                                                                                                                                                                                                                   |
+| ---------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Enter`    | View raw HTTP request/response        | **Opens a full-screen modal** showing the raw HTTP request on the left half and raw HTTP response on the right half. Content is scrollable with `j`/`k`. Headers are syntax-highlighted. Press `Esc` or `q` to close. See §7.3. |
+| `c`        | Copy selected request as cURL command | Generates a `cURL` command from the exchange's method, URL, headers, cookies, and body. Copies to system clipboard (see Clipboard Strategy below). A toast notification appears: "cURL copied to clipboard".                    |
+| `f` or `/` | Open fuzzy filter                     | Same as Panel 1, but filters exchanges by URL path or HTTP method.                                                                                                                                                              |
 
 **Clipboard Strategy:** The Go TUI uses the following platform-specific strategy for clipboard access:
 
-| Platform | Method |
-| --- | --- |
-| Linux (X11) | `xclip -selection clipboard` |
-| Linux (Wayland) | `wl-copy` |
-| macOS | `pbcopy` |
-| WSL | `clip.exe` |
-| Fallback | OSC 52 escape sequence (works in modern terminals: iTerm2, Alacritty, kitty) |
+| Platform        | Method                                                                       |
+| --------------- | ---------------------------------------------------------------------------- |
+| Linux (X11)     | `xclip -selection clipboard`                                                 |
+| Linux (Wayland) | `wl-copy`                                                                    |
+| macOS           | `pbcopy`                                                                     |
+| WSL             | `clip.exe`                                                                   |
+| Fallback        | OSC 52 escape sequence (works in modern terminals: iTerm2, Alacritty, kitty) |
 
 If no clipboard tool is available, the toast shows: `"cURL written to /tmp/csrf-shield-curl.txt"` and writes to a temp file instead.
 
 #### Panel 3: Analysis Engine
 
-| Key | Action | Visual Effect |
-| --- | --- | --- |
-| `Enter` | View finding detail | If the cursor is on a static finding (e.g., `[CSRF-001]`), **opens a modal popup** showing: full rule description (from `rules.yaml`), detailed evidence, the raw exchange that triggered it, and remediation advice. See §7.4. |
-| `j`/`k` | Scroll within the analysis detail | Scrolls through the analysis content (findings, feature vector, recommendations). The scrollbar position updates on the right edge of the panel. |
+| Key     | Action                            | Visual Effect                                                                                                                                                                                                                   |
+| ------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Enter` | View finding detail               | If the cursor is on a static finding (e.g., `[CSRF-001]`), **opens a modal popup** showing: full rule description (from `rules.yaml`), detailed evidence, the raw exchange that triggered it, and remediation advice. See §7.4. |
+| `j`/`k` | Scroll within the analysis detail | Scrolls through the analysis content (findings, feature vector, recommendations). The scrollbar position updates on the right edge of the panel.                                                                                |
 
 ---
 
@@ -792,8 +804,8 @@ The TUI follows a state machine that includes both happy path and error recovery
          <a>/<A>   <q>+<y>      <r> to retry             |
               |       |                |                 |
     +---------v-+  +--v--------+  +----v-----------+     |
-    | ANALYZING |  |   EXIT    |  |    LOADING     |     |
-    | Spinner   |  +-----^-----+  |    (retry)     +-----+
+    | ANALYZING |  |   EXIT    |  |   LOADING      |     |
+    | Spinner   |  +-----^-----+  |   (retry)      +-----+
     | Progress  |        |        +----------------+
     +-----+-----+        |
           |              |
@@ -814,7 +826,7 @@ The TUI follows a state machine that includes both happy path and error recovery
      (done/cancel)
           |
     +-----v------+
-    |  BROWSING  |
+    | BROWSING   |
     +------------+
 
   Any state -----(Python process dies)-----> ERROR
@@ -824,14 +836,14 @@ The TUI follows a state machine that includes both happy path and error recovery
 
 **Error state details:**
 
-| Error Condition | Message Shown | Recovery |
-| --- | --- | --- |
-| Python not found | `"Python 3 not found. Install Python 3.10+ and try again."` | `<q>` to quit |
-| Missing dependency | `"Backend error: ModuleNotFoundError: scikit-learn"` | `<q>` to quit, fix deps, restart |
-| HAR file not found | `"File not found: /bad/path.har"` | `<q>` to quit |
-| HAR parse error | `"Invalid HAR file at line 42: unexpected token"` | `<q>` to quit |
-| Backend crash mid-analysis | `"Backend process exited unexpectedly (code 1)"` | `<r>` to restart backend, or `<q>` to quit |
-| IPC timeout (>10s no ping response) | `"Backend not responding. Press <r> to restart."` | `<r>` to restart, `<q>` to quit |
+| Error Condition                     | Message Shown                                               | Recovery                                   |
+| ----------------------------------- | ----------------------------------------------------------- | ------------------------------------------ |
+| Python not found                    | `"Python 3 not found. Install Python 3.10+ and try again."` | `<q>` to quit                              |
+| Missing dependency                  | `"Backend error: ModuleNotFoundError: scikit-learn"`        | `<q>` to quit, fix deps, restart           |
+| HAR file not found                  | `"File not found: /bad/path.har"`                           | `<q>` to quit                              |
+| HAR parse error                     | `"Invalid HAR file at line 42: unexpected token"`           | `<q>` to quit                              |
+| Backend crash mid-analysis          | `"Backend process exited unexpectedly (code 1)"`            | `<r>` to restart backend, or `<q>` to quit |
+| IPC timeout (>10s no ping response) | `"Backend not responding. Press <r> to restart."`           | `<r>` to restart, `<q>` to quit            |
 
 ---
 
@@ -847,21 +859,21 @@ The 3-panel layout requires a terminal of at least **100 columns x 24 rows**. If
 
 ### 9.2 Large Session Handling
 
-| Scenario | Behavior |
-| --- | --- |
+| Scenario                    | Behavior                                                                                                                     |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | Session with 200+ exchanges | Panel 2 scrolls, showing a scroll indicator `[3/247]` on the right edge. Only visible rows are rendered (virtual scrolling). |
-| HAR file with 50+ sessions | Panel 1 scrolls, same virtual scrolling pattern. |
-| Very long URL (>40 chars) | Truncated with `...`: `/api/v2/user/preferences/notific...` |
-| Very long evidence string | Truncated in panel, full content visible in Finding Detail modal (§7.4). |
+| HAR file with 50+ sessions  | Panel 1 scrolls, same virtual scrolling pattern.                                                                             |
+| Very long URL (>40 chars)   | Truncated with `...`: `/api/v2/user/preferences/notific...`                                                                  |
+| Very long evidence string   | Truncated in panel, full content visible in Finding Detail modal (§7.4).                                                     |
 
 ### 9.3 Empty & Degenerate States
 
-| Scenario | Behavior |
-| --- | --- |
-| HAR file with 0 entries | Panel 1 shows: `"No sessions found."` Panel 2 & 3 are empty. |
+| Scenario                                 | Behavior                                                                                                                |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| HAR file with 0 entries                  | Panel 1 shows: `"No sessions found."` Panel 2 & 3 are empty.                                                            |
 | All requests are GET (no state-changing) | Analysis produces only INFO findings (no CSRF risk). Risk scores will be low (0-10). The TUI displays results normally. |
-| Session with 1 exchange | Works normally — one row in Panel 2. |
-| All sessions already analyzed | `<a>` re-analyzes (overwrites cached result). `<A>` re-analyzes all. |
+| Session with 1 exchange                  | Works normally — one row in Panel 2.                                                                                    |
+| All sessions already analyzed            | `<a>` re-analyzes (overwrites cached result). `<A>` re-analyzes all.                                                    |
 
 ### 9.4 Terminal Resize During Operation
 
@@ -957,10 +969,10 @@ IAW_Project/
 
 ## Appendix: Version Changelog
 
-| Version | Date | Changes |
-| --- | --- | --- |
-| v1.0 | Initial | Original TUI design specification: panel layout, keybindings, IPC protocol, state machine, mockups. |
-| v2.0 | Revised | Renamed `get_result` to `get_results`. Redesigned `analyze_flow` response to return `summary` + `results[]` array. Made `cancel` cooperative. Made `--input` required. Fixed state machine (`BROWSING -> EXIT` direct path). Added `r` key for backend restart. Replaced percentage-based panel widths with Go integer division. |
-| v2.1 | Revised | Added exchange risk dot derivation logic. Clarified `a`/`A` keypress edge cases. Updated `Esc` for batch cancellation. Added text input mode callout. |
-| v2.2 | Revised | Added `static_score` field to per-exchange IPC results + `ml_probability_max` / `static_score_max` to `summary` (fixes Mode A data gap). Added `session_id` to `export_report` params. Added stderr handling spec. Added modal keybinding override rule. Fixed right panel height formula. Added `[Text]` badge security note. Specified pinned vs scrollable sections in Panel 3. Clarified analyzed-session risk dot always shows (never blank). |
-| v2.3 | Revised | Added enum serialization value table (exact `.value` strings for Go). Added `Finding.exchange` compact serialization. Added `get_results` not-analyzed response format. Added dual-level progress events (`session_index`/`session_total` + `step_current`/`step_total`). Clarified `x` (remove) is Go-side only. Fixed "No session selected" mockup text. Fixed §4.3 status bar actions. Added `static_score` required backend change note. Added this changelog. |
+| Version | Date    | Changes                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| v1.0    | Initial | Original TUI design specification: panel layout, keybindings, IPC protocol, state machine, mockups.                                                                                                                                                                                                                                                                                                                                                                |
+| v2.0    | Revised | Renamed `get_result` to `get_results`. Redesigned `analyze_flow` response to return `summary` + `results[]` array. Made `cancel` cooperative. Made `--input` required. Fixed state machine (`BROWSING -> EXIT` direct path). Added `r` key for backend restart. Replaced percentage-based panel widths with Go integer division.                                                                                                                                   |
+| v2.1    | Revised | Added exchange risk dot derivation logic. Clarified `a`/`A` keypress edge cases. Updated `Esc` for batch cancellation. Added text input mode callout.                                                                                                                                                                                                                                                                                                              |
+| v2.2    | Revised | Added `static_score` field to per-exchange IPC results + `ml_probability_max` / `static_score_max` to `summary` (fixes Mode A data gap). Added `session_id` to `export_report` params. Added stderr handling spec. Added modal keybinding override rule. Fixed right panel height formula. Added `[Text]` badge security note. Specified pinned vs scrollable sections in Panel 3. Clarified analyzed-session risk dot always shows (never blank).                 |
+| v2.3    | Revised | Added enum serialization value table (exact `.value` strings for Go). Added `Finding.exchange` compact serialization. Added `get_results` not-analyzed response format. Added dual-level progress events (`session_index`/`session_total` + `step_current`/`step_total`). Clarified `x` (remove) is Go-side only. Fixed "No session selected" mockup text. Fixed §4.3 status bar actions. Added `static_score` required backend change note. Added this changelog. |

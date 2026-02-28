@@ -14,12 +14,8 @@ from __future__ import annotations
 
 import math
 
-import pytest
 
 from src.analysis.token_identifier import (
-    CSRF_HEADER_NAMES,
-    CSRF_TOKEN_KEYWORDS,
-    CSRF_TOKEN_NAMES,
     TokenMatch,
     identify_csrf_header,
     identify_csrf_token,

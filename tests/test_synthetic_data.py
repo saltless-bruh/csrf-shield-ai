@@ -13,14 +13,12 @@ from __future__ import annotations
 import csv
 from pathlib import Path
 
-import pytest
-
 # Import from scripts — add to path
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
-from generate_synthetic_data import (
+from generate_synthetic_data import (  # noqa: E402
     FEATURE_COLUMNS,
     LABEL_COLUMN,
     generate_dataset,
@@ -29,7 +27,7 @@ from generate_synthetic_data import (
     write_csv,
 )
 
-import random
+import random  # noqa: E402
 
 
 # ---------------------------------------------------------------------------
