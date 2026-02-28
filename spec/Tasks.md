@@ -155,11 +155,11 @@
 
 ### 4.2 Report Generation
 
-- ⬜ **T-411:** Implement JSON report output — _Ref: FR-501_
-- ⬜ **T-412:** Design HTML report template (`templates/report.html`)
-- ⬜ **T-413:** Implement HTML report generation with Jinja2 — _Ref: FR-502_
-- ⬜ **T-414:** Include remediation recommendations per finding — _Ref: FR-503_
-- ⬜ **T-415:** Write tests for report generation
+- ✅ **T-411:** Implement JSON report output — _Ref: FR-501_
+- ✅ **T-412:** Design HTML report template (`templates/report.html`)
+- ✅ **T-413:** Implement HTML report generation with Jinja2 — _Ref: FR-502_
+- ✅ **T-414:** Include remediation recommendations per finding — _Ref: FR-503_
+- ✅ **T-415:** Write tests for report generation
 
 ### 4.3 End-to-End Integration
 
