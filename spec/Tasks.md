@@ -191,10 +191,10 @@
 
 ### 5.1 TUI Polish _(Ref: CLI_TUI_PROPOSAL.md §9)_
 
-- ⬜ **T-501:** Handle terminal resize events and minimum size enforcement (100x24)
-- ⬜ **T-502:** Implement virtual scrolling for large sessions (200+ exchanges)
-- ⬜ **T-503:** Handle all empty/degenerate states (0 sessions, 0 exchanges, GETs only)
-- ⬜ **T-504:** Test TUI across minimum (100x24) and large (200x50) terminal sizes
+- ✅ **T-501:** Handle terminal resize events and minimum size enforcement (100x24)
+- ✅ **T-502:** Implement virtual scrolling for large sessions (200+ exchanges)
+- ✅ **T-503:** Handle all empty/degenerate states (0 sessions, 0 exchanges, GETs only)
+- ✅ **T-504:** Test TUI across minimum (100x24) and large (200x50) terminal sizes
 
 ### 5.2 Web Dashboard (Optional)
 

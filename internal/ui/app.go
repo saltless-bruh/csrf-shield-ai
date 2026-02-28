@@ -43,11 +43,13 @@ type App struct {
 	state models.AppState
 
 	// Data from backend.
-	flows       []models.FlowSummary
-	analyses    map[string]*models.SessionAnalysis
-	selectedIdx int
-	exchIdx     int
-	activePanel ActivePanel
+	flows         []models.FlowSummary
+	analyses      map[string]*models.SessionAnalysis
+	selectedIdx   int
+	exchIdx       int
+	activePanel   ActivePanel
+	sessionScroll int // T-502: virtual scroll offset for sessions
+	exchScroll    int // T-502: virtual scroll offset for exchanges
 
 	// IPC.
 	client  *ipc.Client
