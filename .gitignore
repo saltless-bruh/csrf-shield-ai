@@ -43,3 +43,4 @@ Thumbs.db
 data/synthetic/*.csv
 data/training/vulnerable/*.json
 data/training/protected/*.json
+tui

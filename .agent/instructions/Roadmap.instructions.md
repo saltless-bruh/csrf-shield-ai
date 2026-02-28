@@ -135,14 +135,14 @@
 
 ### Key Deliverables — Go TUI _(Ref: CLI_TUI_PROPOSAL.md §4–8)_
 
-- [ ] Initialize Go module (`cmd/tui/`, `internal/`, `go.mod`)
-- [ ] Go data models mirroring Python dataclasses (`internal/models/types.go`)
-- [ ] IPC client: process spawn, NDJSON stream, health ping (`internal/ipc/`)
-- [ ] Panel rendering: Sessions, Exchanges, Analysis Engine (`internal/ui/panels/`)
-- [ ] Keybindings + modal system (help, export, raw view, finding detail, quit confirm)
-- [ ] Status bar + toast notifications
-- [ ] State machine: LAUNCH → LOADING → BROWSING → ANALYZING → EXPORTING → EXIT → ERROR
-- [ ] TUI integration tests (Go ↔ Python IPC round-trip)
+- [x] Initialize Go module (`cmd/tui/`, `internal/`, `go.mod`)
+- [x] Go data models mirroring Python dataclasses (`internal/models/types.go`)
+- [x] IPC client: process spawn, NDJSON stream, health ping (`internal/ipc/`)
+- [x] Panel rendering: Sessions, Exchanges, Analysis Engine (`internal/ui/panels/`)
+- [x] Keybindings + modal system (help, export, raw view, finding detail, quit confirm)
+- [x] Status bar + toast notifications
+- [x] State machine: LAUNCH → LOADING → BROWSING → ANALYZING → EXPORTING → EXIT → ERROR
+- [x] TUI integration tests (Go ↔ Python IPC round-trip)
 
 ### ✅ Phase 4 Exit Criteria
 

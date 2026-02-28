@@ -176,14 +176,14 @@
 
 ### 4.5 Go TUI _(Ref: CLI_TUI_PROPOSAL.md §4–8)_
 
-- ⬜ **T-435:** Initialize Go module (`cmd/tui/main.go`, `internal/`, `go.mod`) — _Ref: FR-505_
-- ⬜ **T-436:** Implement Go data models mirroring Python dataclasses (`internal/models/types.go`)
-- ⬜ **T-437:** Implement IPC client: process spawn, NDJSON stream, health ping, crash detection (`internal/ipc/`)
-- ⬜ **T-438:** Implement TUI layout + panel rendering: Sessions, Exchanges, Analysis Engine (`internal/ui/panels/`)
-- ⬜ **T-439:** Implement keybindings + modal system (help, export, raw view, finding detail, quit confirm) — _Ref: FR-507_
-- ⬜ **T-440:** Implement status bar + toast notifications + clipboard strategy — _Ref: FR-510_
-- ⬜ **T-441:** Implement state machine lifecycle (LAUNCH → LOADING → BROWSING → ANALYZING → EXPORTING → EXIT → ERROR)
-- ⬜ **T-442:** Write TUI integration tests (Go ↔ Python IPC round-trip)
+- ✅ **T-435:** Initialize Go module (`cmd/tui/main.go`, `internal/`, `go.mod`) — _Ref: FR-505_
+- ✅ **T-436:** Implement Go data models mirroring Python dataclasses (`internal/models/types.go`)
+- ✅ **T-437:** Implement IPC client: process spawn, NDJSON stream, health ping, crash detection (`internal/ipc/`)
+- ✅ **T-438:** Implement TUI layout + panel rendering: Sessions, Exchanges, Analysis Engine (`internal/ui/panels/`)
+- ✅ **T-439:** Implement keybindings + modal system (help, export, raw view, finding detail, quit confirm) — _Ref: FR-507_
+- ✅ **T-440:** Implement status bar + toast notifications + clipboard strategy — _Ref: FR-510_
+- ✅ **T-441:** Implement state machine lifecycle (LAUNCH → LOADING → BROWSING → ANALYZING → EXPORTING → EXIT → ERROR)
+- ✅ **T-442:** Write TUI integration tests (Go ↔ Python IPC round-trip)
 
 ---
 
