@@ -216,10 +216,10 @@
 
 ### 6.2 Documentation
 
-- ⬜ **T-611:** Write `docs/USER_GUIDE.md`
-- ⬜ **T-612:** Write `docs/API_REFERENCE.md`
-- ⬜ **T-613:** Ensure all public functions have docstrings — _Ref: NFR-402_
-- ⬜ **T-614:** Update `README.md` with installation and usage instructions
+- ✅ **T-611:** Write `docs/guides/USER_GUIDE.md`
+- ✅ **T-612:** Write `docs/guides/API_REFERENCE.md`
+- ✅ **T-613:** Ensure all public functions have docstrings — _Ref: NFR-402_
+- ✅ **T-614:** Update `README.md` with installation and usage instructions
 
 ### 6.3 Deliverables
 

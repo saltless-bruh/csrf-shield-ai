@@ -57,10 +57,12 @@ class PipelineResult:
 
     @property
     def total_findings(self) -> int:
+        """Get the total number of findings across all flows."""
         return sum(len(fr.findings) for fr in self.flow_results)
 
     @property
     def highest_risk(self) -> Optional[RiskResult]:
+        """Get the highest risk result among all analyzed flows."""
         if not self.flow_results:
             return None
         return max(
@@ -91,6 +93,7 @@ class CsrfPipeline:
         model_path: Optional[Path] = None,
         columns_path: Optional[Path] = None,
     ) -> None:
+        """Initialize the CSRF pipeline with optional model paths."""
         self._analyzer = StaticAnalyzer()
         self._predictor = CsrfPredictor(
             **(

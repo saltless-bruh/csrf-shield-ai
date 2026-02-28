@@ -93,6 +93,7 @@ class ReportGenerator:
         self,
         templates_dir: Path = _TEMPLATES_DIR,
     ) -> None:
+        """Initialize the report generator."""
         self._env = Environment(
             loader=FileSystemLoader(str(templates_dir)),
             autoescape=True,

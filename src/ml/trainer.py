@@ -303,6 +303,7 @@ class CsrfTrainer:
         test_path: Path = DEFAULT_TEST,
         model_dir: Path = DEFAULT_MODEL_DIR,
     ) -> None:
+        """Initialize the ML trainer with dataset and output directories."""
         self.train_path = train_path
         self.val_path = val_path
         self.test_path = test_path

@@ -15,14 +15,34 @@ An automated security analysis tool that detects Cross-Site Request Forgery (CSR
 - 💻 **Interactive TUI** — Go-based terminal interface with Vim-style navigation and real-time analysis
 - 📝 **Reports** — JSON & HTML reports with remediation recommendations
 
-## Quick Start
+## Installation
+
+### Prerequisites
+
+- **Python:** 3.10+
+- **Go:** 1.21+ (for TUI)
+
+### Setup
 
 ```bash
+# Clone the repository
+git clone https://github.com/your-org/csrf-shield-ai.git
+cd csrf-shield-ai
+
 # Install Python backend
 pip install -e .
 
+# Build interactive TUI
+cd cmd/tui
+go build -o ../../csrf-shield-tui main.go
+cd ../..
+```
+
+## Usage
+
+```bash
 # Launch interactive TUI (Flagship Interface)
-csrf-shield tui --input traffic.har
+./csrf-shield-tui --input traffic.har
 
 # Analyze a HAR file non-interactively (CI/CD)
 csrf-shield analyze --input traffic.har --output report.json --format json
@@ -30,6 +50,8 @@ csrf-shield analyze --input traffic.har --output report.json --format json
 # Train ML model
 csrf-shield train --data data/training/ --output src/ml/models/csrf_rf_model.pkl
 ```
+
+For more detailed usage instructions, please refer to the [User Guide](docs/guides/USER_GUIDE.md).
 
 ## Project Structure
 
@@ -39,14 +61,21 @@ See [`docs/proposal/PROPOSAL.md`](docs/proposal/PROPOSAL.md) §11.1 for the Pyth
 
 The tool uses a **two-process architecture** communicating via NDJSON over stdin/stdout:
 
-| Component | Technology | Role |
-| --- | --- | --- |
-| **Backend** | Python 3.10+ | Heavy lifting: ML, static analysis, parsing |
-| **Frontend** | Go 1.21+ / gocui | Fast, responsive, single-binary Terminal UI |
-| **ML Models** | scikit-learn, XGBoost | Classical ML for tabular HTTP data |
-| **Testing** | pytest (Py), `go test` | Cross-language unit/integration testing |
+| Component     | Technology             | Role                                        |
+| ------------- | ---------------------- | ------------------------------------------- |
+| **Backend**   | Python 3.10+           | Heavy lifting: ML, static analysis, parsing |
+| **Frontend**  | Go 1.21+ / gocui       | Fast, responsive, single-binary Terminal UI |
+| **ML Models** | scikit-learn, XGBoost  | Classical ML for tabular HTTP data          |
+| **Testing**   | pytest (Py), `go test` | Cross-language unit/integration testing     |
 
 ## Documentation
+
+### Guides
+
+- [User Guide](docs/guides/USER_GUIDE.md)
+- [API Reference](docs/guides/API_REFERENCE.md)
+
+### Specifications
 
 - [Project Proposal](docs/proposal/PROPOSAL.md)
 - [TUI Extension Spec](docs/proposal/CLI_TUI_PROPOSAL.md)
@@ -61,4 +90,4 @@ Academic project — FPT University, IAW Course, Group 9.
 
 ---
 
-> **Status:** Phase 2 — Static Analysis (Pre-coding Setup Complete)
+> **Status:** Phase 6 — Testing, Polish & Documentation

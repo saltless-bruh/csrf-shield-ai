@@ -169,6 +169,7 @@ class IpcServer:
     """
 
     def __init__(self) -> None:
+        """Initialize the IPC server with analysis components."""
         self._flows: List[SessionFlow] = []
         self._results: Dict[str, Dict[str, Any]] = {}
         self._analyzer = StaticAnalyzer()
