@@ -125,7 +125,7 @@
 - [x] Risk scorer with Base Score + Modifier formula
 - [x] JSON and HTML report generation
 - [x] Remediation recommendations
-- [ ] Full end-to-end integration test
+- [x] Full end-to-end integration test
 
 ### Key Deliverables — IPC Server _(Ref: CLI_TUI_PROPOSAL.md §3.2)_
 

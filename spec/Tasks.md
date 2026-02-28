@@ -163,9 +163,9 @@
 
 ### 4.3 End-to-End Integration
 
-- ⬜ **T-421:** Implement full pipeline: HAR → parse → analyze → score → report
-- ⬜ **T-422:** Write integration test with sample HAR file
-- ⬜ **T-423:** Validate output against manually calculated expected scores
+- ✅ **T-421:** Implement full pipeline: HAR → parse → analyze → score → report
+- ✅ **T-422:** Write integration test with sample HAR file
+- ✅ **T-423:** Validate output against manually calculated expected scores
 
 ### 4.4 IPC Server _(Ref: CLI_TUI_PROPOSAL.md §3.2)_
 
