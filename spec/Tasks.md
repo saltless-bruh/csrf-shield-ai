@@ -147,11 +147,11 @@
 
 ### 4.1 Risk Scoring
 
-- ⬜ **T-401:** Implement `risk_scorer.py` — Base Score + Modifier formula — _Ref: FR-401_
-- ⬜ **T-402:** Implement static score normalization (severity → 0.0–1.0 mapping)
-- ⬜ **T-403:** Implement context modifier detection and application — _Ref: FR-403_
-- ⬜ **T-404:** Implement risk level classification (LOW/MEDIUM/HIGH/CRITICAL) — _Ref: FR-402_
-- ⬜ **T-405:** Write unit tests for scoring (verify math with proposal examples)
+- ✅ **T-401:** Implement `risk_scorer.py` — Base Score + Modifier formula — _Ref: FR-401_
+- ✅ **T-402:** Implement static score normalization (severity → 0.0–1.0 mapping)
+- ✅ **T-403:** Implement context modifier detection and application — _Ref: FR-403_
+- ✅ **T-404:** Implement risk level classification (LOW/MEDIUM/HIGH/CRITICAL) — _Ref: FR-402_
+- ✅ **T-405:** Write unit tests for scoring (verify math with proposal examples)
 
 ### 4.2 Report Generation
 

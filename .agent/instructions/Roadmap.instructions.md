@@ -101,11 +101,11 @@
 
 ### Key Deliverables
 
-- [ ] Merged training dataset from all sources
-- [ ] Random Forest + XGBoost trained and evaluated
-- [ ] Heuristic boost logic
-- [ ] Model metrics meet targets (≥80% accuracy, ≥85% recall)
-- [ ] Model serialized to `.pkl`
+- [x] Merged training dataset from all sources
+- [x] Random Forest + XGBoost trained and evaluated
+- [x] Heuristic boost logic
+- [x] Model metrics meet targets (≥80% accuracy, ≥85% recall)
+- [x] Model serialized to `.pkl`
 
 ### ✅ Phase 3 Exit Criteria
 
@@ -122,7 +122,7 @@
 
 ### Key Deliverables — Scoring & Reports
 
-- [ ] Risk scorer with Base Score + Modifier formula
+- [x] Risk scorer with Base Score + Modifier formula
 - [ ] JSON and HTML report generation
 - [ ] Remediation recommendations
 - [ ] Full end-to-end integration test
