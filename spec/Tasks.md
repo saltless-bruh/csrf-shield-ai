@@ -169,10 +169,10 @@
 
 ### 4.4 IPC Server _(Ref: CLI_TUI_PROPOSAL.md §3.2)_
 
-- ⬜ **T-431:** Implement `src/ipc_server.py` — NDJSON server over stdin/stdout wrapping Phases 1–4 — _Ref: FR-506_
-- ⬜ **T-432:** Implement IPC serialization (enum `.value` strings, `Finding.exchange` compact refs, `static_score` on-the-fly computation)
-- ⬜ **T-433:** Create IPC golden fixtures in `tests/fixtures/ipc/` for cross-language testing
-- ⬜ **T-434:** Write unit tests for `ipc_server.py` (all 8 methods + error responses + progress events)
+- ✅ **T-431:** Implement `src/ipc_server.py` — NDJSON server over stdin/stdout wrapping Phases 1–4 — _Ref: FR-506_
+- ✅ **T-432:** Implement IPC serialization (enum `.value` strings, `Finding.exchange` compact refs, `static_score` on-the-fly computation)
+- ✅ **T-433:** Create IPC golden fixtures in `tests/fixtures/ipc/` for cross-language testing
+- ✅ **T-434:** Write unit tests for `ipc_server.py` (all 8 methods + error responses + progress events)
 
 ### 4.5 Go TUI _(Ref: CLI_TUI_PROPOSAL.md §4–8)_
 

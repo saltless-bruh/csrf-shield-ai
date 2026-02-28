@@ -1,0 +1,7 @@
+{
+  "id": 2,
+  "error": {
+    "code": "FILE_NOT_FOUND",
+    "message": "File does not exist: /bad/path.har"
+  }
+}

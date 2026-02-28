@@ -1,0 +1,38 @@
+{
+  "id": 4,
+  "result": {
+    "session_id": "abc123",
+    "summary": {
+      "risk_score": 87,
+      "risk_level": "CRITICAL",
+      "ml_probability_max": 0.85,
+      "static_score_max": 0.7
+    },
+    "results": [
+      {
+        "endpoint": "/api/transfer",
+        "http_method": "POST",
+        "risk_score": 92,
+        "risk_level": "CRITICAL",
+        "findings": [
+          {
+            "rule_id": "CSRF-001",
+            "rule_name": "Missing Form Token",
+            "severity": "HIGH",
+            "description": "No CSRF token found in form",
+            "evidence": "param 'amount', 'account_to'",
+            "exchange": {
+              "method": "POST",
+              "url": "/api/transfer",
+              "status": 200
+            }
+          }
+        ],
+        "ml_probability": 0.85,
+        "static_score": 0.75,
+        "feature_vector": {},
+        "recommendations": ["Add CSRF Token to Forms: ..."]
+      }
+    ]
+  }
+}

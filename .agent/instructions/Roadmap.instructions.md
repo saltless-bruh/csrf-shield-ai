@@ -129,9 +129,9 @@
 
 ### Key Deliverables — IPC Server _(Ref: CLI_TUI_PROPOSAL.md §3.2)_
 
-- [ ] `src/ipc_server.py` — NDJSON server wrapping Phases 1–4 pipeline
-- [ ] IPC serialization: enum `.value` strings, `Finding.exchange` compact refs, `static_score` on-the-fly
-- [ ] IPC golden fixtures in `tests/fixtures/ipc/` for cross-language testing
+- [x] `src/ipc_server.py` — NDJSON server wrapping Phases 1–4 pipeline
+- [x] IPC serialization: enum `.value` strings, `Finding.exchange` compact refs, `static_score` on-the-fly
+- [x] IPC golden fixtures in `tests/fixtures/ipc/` for cross-language testing
 
 ### Key Deliverables — Go TUI _(Ref: CLI_TUI_PROPOSAL.md §4–8)_
 
