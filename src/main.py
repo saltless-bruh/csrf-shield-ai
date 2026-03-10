@@ -33,6 +33,8 @@ from src.input.auth_detector import (  # noqa: E402
 from src.input.flow_reconstructor import reconstruct_flows  # noqa: E402
 from src.input.har_parser import HarParseError, parse_har_file  # noqa: E402
 from src.input.models import AuthMechanism  # noqa: E402
+from src.pipeline import CsrfPipeline  # noqa: E402
+from src.ml.trainer import CsrfTrainer  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Logging Setup
@@ -111,82 +113,46 @@ def main(ctx: click.Context, verbosity: str) -> None:
 def analyze(ctx: click.Context, input_file: str, output_file: str, output_format: str) -> None:
     """Analyze a HAR file for CSRF vulnerabilities.
 
-    Runs the Phase 1 pipeline: parse → reconstruct flows → detect auth.
-    Static analysis and ML scoring added in Phases 2–3.
+    Runs the full Phase 1-4 pipeline: parse → static analysis → ML inference → scoring → reporting.
     """
     click.echo(f"🔍 Analyzing: {input_file}")
 
-    # --- Phase 1 Pipeline ---
-
-    # Step 1: Parse HAR file → List[HttpExchange]
-    try:
-        click.echo("📥 Parsing HAR file...")
-        exchanges = parse_har_file(Path(input_file))
-        click.echo(f"  ✓ Parsed {len(exchanges)} exchange(s)")
-    except HarParseError as e:
-        click.echo(f"❌ HAR parse error: {e}", err=True)
-        sys.exit(1)
-    except FileNotFoundError:
+    # Check if file exists first
+    input_path = Path(input_file)
+    if not input_path.exists():
         click.echo(f"❌ File not found: {input_file}", err=True)
         sys.exit(1)
 
-    if not exchanges:
-        click.echo("⚠️  No exchanges found in HAR file.")
-        sys.exit(0)
+    try:
+        pipeline = CsrfPipeline()
+        output_dir = Path(output_file).parent if output_file else None
+        
+        # In a real environment we would conditionally suppress logs here based on verbosity,
+        # but CsrfPipeline handles the heavy lifting
+        result = pipeline.analyze_har(input_path, output_dir=output_dir)
 
-    # Step 2: Reconstruct session flows → List[SessionFlow]
-    click.echo("🔗 Reconstructing session flows...")
-    flows = reconstruct_flows(exchanges)
-    click.echo(f"  ✓ Reconstructed {len(flows)} session flow(s)")
+        # Output logic
+        click.echo(f"\n✅ Analysis complete. Flow results: {len(result.flow_results)}")
+        click.echo(f"📄 Output format: {output_format}")
+        if output_format == 'json' and result.json_report_path:
+             click.echo(f"💾 Report saved to: {result.json_report_path}")
+             # If user specified a specific file, rename it
+             if output_file and str(result.json_report_path) != output_file:
+                 import shutil
+                 shutil.move(str(result.json_report_path), output_file)
+                 click.echo(f"💾 Report moved to: {output_file}")
+        elif output_format == 'html' and result.html_report_path:
+             click.echo(f"💾 Report saved to: {result.html_report_path}")
+             if output_file and str(result.html_report_path) != output_file:
+                 import shutil
+                 shutil.move(str(result.html_report_path), output_file)
+                 click.echo(f"💾 Report moved to: {output_file}")
+        elif not output_file:
+             click.echo("⚠️  No output file specified, no report generated")
 
-    # Step 3: Detect auth mechanisms
-    click.echo("🔐 Detecting auth mechanisms...")
-    updated_flows = [update_flow_auth(flow) for flow in flows]
-
-    results = []
-    for flow in updated_flows:
-        mechanism = flow.auth_mechanism
-        click.echo(
-            f"  Session '{flow.session_id[:20]}...' → "
-            f"{mechanism.value} ({len(flow.exchanges)} requests)"
-        )
-
-        if mechanism == AuthMechanism.HEADER_ONLY:
-            # Short-circuit: CSRF not applicable
-            result = build_short_circuit_result(flow)
-            results.append({
-                "session_id": flow.session_id,
-                "short_circuited": True,
-                "risk_score": result.risk_score,
-                "risk_level": result.risk_level.value,
-                "finding": result.findings[0].rule_id if result.findings else None,
-            })
-            click.echo(f"    ⚡ Short-circuited → score={result.risk_score} (CSRF N/A)")
-        else:
-            # TODO: Phase 2 static analysis + Phase 3 ML scoring
-            results.append({
-                "session_id": flow.session_id,
-                "short_circuited": False,
-                "auth_mechanism": mechanism.value,
-                "exchanges": len(flow.exchanges),
-                "status": "awaiting_phase2",
-            })
-            click.echo("    ⏳ Queued for analysis (Phase 2 not yet implemented)")
-
-    # Step 4: Output results
-    click.echo(f"\n📄 Output format: {output_format}")
-
-    if output_format == "json":
-        output_path = Path(output_file)
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(output_path, "w", encoding="utf-8") as f:
-            json.dump({"flows": results, "total_flows": len(results)}, f, indent=2)
-        click.echo(f"💾 Report saved to: {output_file}")
-    else:
-        # TODO: HTML report generation (Phase 4)
-        click.echo("⚠️  HTML format not yet implemented — use JSON.")
-
-    click.echo("✅ Analysis complete.")
+    except Exception as e:
+        click.echo(f"❌ Pipeline error: {e}", err=True)
+        sys.exit(1)
 
 
 # ---------------------------------------------------------------------------
@@ -213,8 +179,19 @@ def train(ctx: click.Context, data_dir: str, model_output: str) -> None:
     """
     click.echo(f"🧠 Training data: {data_dir}")
     click.echo(f"💾 Model output: {model_output}")
-    # TODO: Wire up trainer once Phase 3 is complete
-    click.echo("⚠️  Trainer not yet implemented — skeleton only (Phase 1)")
+    
+    try:
+        trainer = CsrfTrainer(
+            train_path=Path(data_dir) / "train.csv",
+            val_path=Path(data_dir) / "val.csv",
+            test_path=Path(data_dir) / "test.csv",
+            model_dir=Path(model_output).parent
+        )
+        result = trainer.run()
+        click.echo(f"✅ Training complete. Best model: {result.best_model_name}")
+    except Exception as e:
+        click.echo(f"❌ Training error: {e}", err=True)
+        sys.exit(1)
 
 
 # ---------------------------------------------------------------------------
