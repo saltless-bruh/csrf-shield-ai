@@ -230,11 +230,13 @@ func (a *App) layout(g *gocui.Gui) error {
 	}
 
 	// Status bar (bottom, full width)
-	if v, err := g.SetView(PanelStatus, 0, statusY+1, maxX-1, maxY-1, 0); err != nil {
+	if v, err := g.SetView(PanelStatus, -1, statusY, maxX, maxY, 0); err != nil {
 		if err != gocui.ErrUnknownView {
 			return err
 		}
 		v.Frame = false
+                v.BgColor = gocui.ColorBlue
+		v.FgColor = gocui.ColorWhite
 	}
 
 	// Update active panel borders.
