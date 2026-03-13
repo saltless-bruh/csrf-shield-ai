@@ -3,8 +3,8 @@
 Provides the main command-line interface for the tool.
 
 Usage:
-    csrf-shield analyze --input traffic.har --output report.json --format json
-    csrf-shield train --data data/training/ --output src/ml/models/csrf_rf_model.pkl
+    csrf-shield analyze -i traffic.har -o report.json
+    csrf-shield train -d data/training/ -o models/
 
 Ref:
     - spec/Design.md §6.1 (CLI Interface)
@@ -14,31 +14,24 @@ Ref:
 
 from __future__ import annotations
 
-import json
 import logging
+import shutil
 import sys
 from pathlib import Path
 
-# Add project root to sys.path so 'src.X' imports work when run directly
+# Add project root to sys.path so 'src.X' imports work
 project_root = Path(__file__).resolve().parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
 import click  # noqa: E402
 
-from src.input.auth_detector import (  # noqa: E402
-    build_short_circuit_result,
-    update_flow_auth,
-)
-from src.input.flow_reconstructor import reconstruct_flows  # noqa: E402
-from src.input.har_parser import HarParseError, parse_har_file  # noqa: E402
-from src.input.models import AuthMechanism  # noqa: E402
-from src.pipeline import CsrfPipeline  # noqa: E402
 from src.ml.trainer import CsrfTrainer  # noqa: E402
+from src.pipeline import CsrfPipeline  # noqa: E402
 
-# ---------------------------------------------------------------------------
+# -------------------------------------------------------------------
 # Logging Setup
-# ---------------------------------------------------------------------------
+# -------------------------------------------------------------------
 
 LOG_FORMAT = "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
 logger = logging.getLogger("csrf_shield")
@@ -59,17 +52,19 @@ def _configure_logging(verbosity: str) -> None:
     logging.basicConfig(level=level, format=LOG_FORMAT)
 
 
-# ---------------------------------------------------------------------------
+# -------------------------------------------------------------------
 # CLI Group
-# ---------------------------------------------------------------------------
+# -------------------------------------------------------------------
 
 
 @click.group(invoke_without_command=True)
 @click.version_option(version="0.1.0", prog_name="csrf-shield")
 @click.option(
-    "--verbosity",
-    "-v",
-    type=click.Choice(["quiet", "normal", "verbose"], case_sensitive=False),
+    "--verbosity", "-v",
+    type=click.Choice(
+        ["quiet", "normal", "verbose"],
+        case_sensitive=False,
+    ),
     default="normal",
     help="Logging verbosity level.",
 )
@@ -77,7 +72,7 @@ def _configure_logging(verbosity: str) -> None:
 def main(ctx: click.Context, verbosity: str) -> None:
     """🛡️ CSRF Shield AI — AI-Powered CSRF Risk Scoring Tool.
 
-    Analyze HTTP traffic captures for Cross-Site Request Forgery vulnerabilities
+    Analyze HTTP traffic captures for CSRF vulnerabilities
     using static rules and machine learning classification.
     """
     ctx.ensure_object(dict)
@@ -88,9 +83,9 @@ def main(ctx: click.Context, verbosity: str) -> None:
         click.echo(ctx.get_help())
 
 
-# ---------------------------------------------------------------------------
+# -------------------------------------------------------------------
 # Analyze Subcommand (T-162)
-# ---------------------------------------------------------------------------
+# -------------------------------------------------------------------
 
 
 @main.command()
@@ -105,59 +100,68 @@ def main(ctx: click.Context, verbosity: str) -> None:
 )
 @click.option(
     "--format", "-f", "output_format",
-    type=click.Choice(["json", "html"], case_sensitive=False),
+    type=click.Choice(
+        ["json", "html"], case_sensitive=False,
+    ),
     default="json",
     help="Report format.",
 )
 @click.pass_context
-def analyze(ctx: click.Context, input_file: str, output_file: str, output_format: str) -> None:
+def analyze(
+    ctx: click.Context,
+    input_file: str,
+    output_file: str,
+    output_format: str,
+) -> None:
     """Analyze a HAR file for CSRF vulnerabilities.
 
-    Runs the full Phase 1-4 pipeline: parse → static analysis → ML inference → scoring → reporting.
+    Runs the full pipeline: parse → static analysis
+    → ML inference → risk scoring → reporting.
     """
     click.echo(f"🔍 Analyzing: {input_file}")
 
-    # Check if file exists first
     input_path = Path(input_file)
     if not input_path.exists():
-        click.echo(f"❌ File not found: {input_file}", err=True)
+        click.echo(
+            f"❌ File not found: {input_file}", err=True,
+        )
         sys.exit(1)
 
     try:
         pipeline = CsrfPipeline()
-        output_dir = Path(output_file).parent if output_file else None
-        
-        # In a real environment we would conditionally suppress logs here based on verbosity,
-        # but CsrfPipeline handles the heavy lifting
-        result = pipeline.analyze_har(input_path, output_dir=output_dir)
+        out_dir = (
+            Path(output_file).parent if output_file
+            else None
+        )
+        result = pipeline.analyze_har(
+            input_path, output_dir=out_dir,
+        )
 
-        # Output logic
-        click.echo(f"\n✅ Analysis complete. Flow results: {len(result.flow_results)}")
+        n = len(result.flow_results)
+        click.echo(f"\n✅ Analysis complete. Flows: {n}")
         click.echo(f"📄 Output format: {output_format}")
-        if output_format == 'json' and result.json_report_path:
-             click.echo(f"💾 Report saved to: {result.json_report_path}")
-             # If user specified a specific file, rename it
-             if output_file and str(result.json_report_path) != output_file:
-                 import shutil
-                 shutil.move(str(result.json_report_path), output_file)
-                 click.echo(f"💾 Report moved to: {output_file}")
-        elif output_format == 'html' and result.html_report_path:
-             click.echo(f"💾 Report saved to: {result.html_report_path}")
-             if output_file and str(result.html_report_path) != output_file:
-                 import shutil
-                 shutil.move(str(result.html_report_path), output_file)
-                 click.echo(f"💾 Report moved to: {output_file}")
-        elif not output_file:
-             click.echo("⚠️  No output file specified, no report generated")
 
-    except Exception as e:
-        click.echo(f"❌ Pipeline error: {e}", err=True)
+        report = (
+            result.json_report_path
+            if output_format == "json"
+            else result.html_report_path
+        )
+        if report:
+            click.echo(f"💾 Report: {report}")
+            if output_file and str(report) != output_file:
+                shutil.move(str(report), output_file)
+                click.echo(f"💾 Moved to: {output_file}")
+        elif not output_file:
+            click.echo("⚠️  No output path; report skipped")
+
+    except Exception as exc:
+        click.echo(f"❌ Pipeline error: {exc}", err=True)
         sys.exit(1)
 
 
-# ---------------------------------------------------------------------------
+# -------------------------------------------------------------------
 # Train Subcommand (T-163)
-# ---------------------------------------------------------------------------
+# -------------------------------------------------------------------
 
 
 @main.command()
@@ -172,31 +176,40 @@ def analyze(ctx: click.Context, input_file: str, output_file: str, output_format
     help="Path to save trained model.",
 )
 @click.pass_context
-def train(ctx: click.Context, data_dir: str, model_output: str) -> None:
+def train(
+    ctx: click.Context,
+    data_dir: str,
+    model_output: str,
+) -> None:
     """Train the ML classifier on labeled data.
 
-    Trains a Random Forest model using feature vectors from the data directory.
+    Trains a Random Forest model using feature vectors
+    from the data directory.
     """
     click.echo(f"🧠 Training data: {data_dir}")
     click.echo(f"💾 Model output: {model_output}")
-    
+
     try:
         trainer = CsrfTrainer(
             train_path=Path(data_dir) / "train.csv",
             val_path=Path(data_dir) / "val.csv",
             test_path=Path(data_dir) / "test.csv",
-            model_dir=Path(model_output).parent
+            model_dir=Path(model_output).parent,
         )
         result = trainer.run()
-        click.echo(f"✅ Training complete. Best model: {result.best_model_name}")
-    except Exception as e:
-        click.echo(f"❌ Training error: {e}", err=True)
+        click.echo(
+            f"✅ Done. Best: {result.best_model_name}",
+        )
+    except Exception as exc:
+        click.echo(
+            f"❌ Training error: {exc}", err=True,
+        )
         sys.exit(1)
 
 
-# ---------------------------------------------------------------------------
+# -------------------------------------------------------------------
 # Entry Point
-# ---------------------------------------------------------------------------
+# -------------------------------------------------------------------
 
 if __name__ == "__main__":
     main()

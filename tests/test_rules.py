@@ -6,7 +6,7 @@ negative (no finding) tests, plus edge cases.
 Ref:
     - src/analysis/rules/
     - spec/Tasks.md T-221
-    - .agent/instructions/testing_strategy.instructions.md §6
+    - .github/instructions/testing_strategy.instructions.md §6
 """
 
 from __future__ import annotations
@@ -179,7 +179,7 @@ class TestCsrf002:
         """POST without anti-CSRF header → finding."""
         ex = _make_exchange(
             method="POST",
-            request_headers={"Content-Type": "application/json"},
+            request_headers={"content-type": "application/json"},
         )
         findings = self.rule.analyze(ex, _make_flow(ex))
         assert len(findings) == 1
@@ -191,7 +191,7 @@ class TestCsrf002:
         ex = _make_exchange(
             method="POST",
             request_headers={
-                "Content-Type": "application/json",
+                "content-type": "application/json",
                 "X-CSRF-Token": "abc123",
             },
         )
@@ -331,7 +331,7 @@ class TestCsrf005:
         """Session cookie without SameSite → finding."""
         ex = _make_exchange(
             response_headers={
-                "Set-Cookie": "session_id=abc123; Path=/; HttpOnly"
+                "set-cookie": "session_id=abc123; Path=/; HttpOnly"
             },
         )
         findings = self.rule.analyze(ex, _make_flow(ex))
@@ -343,7 +343,7 @@ class TestCsrf005:
         """Session cookie with SameSite=Lax → no finding."""
         ex = _make_exchange(
             response_headers={
-                "Set-Cookie": "session_id=abc123; Path=/; SameSite=Lax"
+                "set-cookie": "session_id=abc123; Path=/; SameSite=Lax"
             },
         )
         findings = self.rule.analyze(ex, _make_flow(ex))
@@ -353,7 +353,7 @@ class TestCsrf005:
         """Non-session cookie (e.g., 'theme') → not checked."""
         ex = _make_exchange(
             response_headers={
-                "Set-Cookie": "theme=dark; Path=/"
+                "set-cookie": "theme=dark; Path=/"
             },
         )
         findings = self.rule.analyze(ex, _make_flow(ex))
@@ -380,7 +380,7 @@ class TestCsrf006:
         """SameSite=None without Secure flag → finding."""
         ex = _make_exchange(
             response_headers={
-                "Set-Cookie": "session_id=abc; SameSite=None; Path=/"
+                "set-cookie": "session_id=abc; SameSite=None; Path=/"
             },
         )
         findings = self.rule.analyze(ex, _make_flow(ex))
@@ -392,7 +392,7 @@ class TestCsrf006:
         """SameSite=None with Secure → no finding."""
         ex = _make_exchange(
             response_headers={
-                "Set-Cookie": "session_id=abc; SameSite=None; Secure; Path=/"
+                "set-cookie": "session_id=abc; SameSite=None; Secure; Path=/"
             },
         )
         findings = self.rule.analyze(ex, _make_flow(ex))
@@ -402,7 +402,7 @@ class TestCsrf006:
         """SameSite=Lax — not None, so no finding."""
         ex = _make_exchange(
             response_headers={
-                "Set-Cookie": "session_id=abc; SameSite=Lax; Path=/"
+                "set-cookie": "session_id=abc; SameSite=Lax; Path=/"
             },
         )
         findings = self.rule.analyze(ex, _make_flow(ex))
@@ -424,8 +424,8 @@ class TestCsrf007:
         ex = _make_exchange(
             method="POST",
             request_headers={
-                "Origin": "https://evil.com",
-                "Content-Type": "application/json",
+                "origin": "https://evil.com",
+                "content-type": "application/json",
             },
             response_status=200,
         )
@@ -437,7 +437,7 @@ class TestCsrf007:
         """POST with Origin + 403 → server rejected → no finding."""
         ex = _make_exchange(
             method="POST",
-            request_headers={"Origin": "https://evil.com"},
+            request_headers={"origin": "https://evil.com"},
             response_status=403,
         )
         findings = self.rule.analyze(ex, _make_flow(ex))
@@ -447,9 +447,9 @@ class TestCsrf007:
         """POST with Vary: Origin → server is Origin-aware."""
         ex = _make_exchange(
             method="POST",
-            request_headers={"Origin": "https://evil.com"},
+            request_headers={"origin": "https://evil.com"},
             response_status=200,
-            response_headers={"Vary": "Origin"},
+            response_headers={"vary": "origin"},
         )
         findings = self.rule.analyze(ex, _make_flow(ex))
         assert len(findings) == 0
@@ -464,7 +464,7 @@ class TestCsrf007:
         """GET requests are skipped."""
         ex = _make_exchange(
             method="GET",
-            request_headers={"Origin": "https://evil.com"},
+            request_headers={"origin": "https://evil.com"},
         )
         findings = self.rule.analyze(ex, _make_flow(ex))
         assert len(findings) == 0
@@ -553,7 +553,7 @@ class TestCsrf009:
         ex = _make_exchange(
             method="POST",
             response_status=200,
-            response_headers={"Vary": "Referer"},
+            response_headers={"vary": "Referer"},
         )
         findings = self.rule.analyze(ex, _make_flow(ex))
         assert len(findings) == 0
@@ -588,7 +588,7 @@ class TestCsrf010:
         ex = _make_exchange(
             method="POST",
             response_headers={
-                "Content-Type": "application/json; charset=utf-8"
+                "content-type": "application/json; charset=utf-8"
             },
         )
         findings = self.rule.analyze(ex, _make_flow(ex))
@@ -601,8 +601,8 @@ class TestCsrf010:
         ex = _make_exchange(
             method="POST",
             response_headers={
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "*",
+                "content-type": "application/json",
+                "access-control-allow-origin": "*",
             },
         )
         findings = self.rule.analyze(ex, _make_flow(ex))
@@ -613,8 +613,8 @@ class TestCsrf010:
         ex = _make_exchange(
             method="POST",
             response_headers={
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "https://trusted.com",
+                "content-type": "application/json",
+                "access-control-allow-origin": "https://trusted.com",
             },
         )
         findings = self.rule.analyze(ex, _make_flow(ex))
@@ -625,7 +625,7 @@ class TestCsrf010:
         ex = _make_exchange(
             method="POST",
             response_headers={
-                "Content-Type": "text/html"
+                "content-type": "text/html"
             },
         )
         findings = self.rule.analyze(ex, _make_flow(ex))
@@ -636,7 +636,7 @@ class TestCsrf010:
         ex = _make_exchange(
             method="GET",
             response_headers={
-                "Content-Type": "application/json"
+                "content-type": "application/json"
             },
         )
         findings = self.rule.analyze(ex, _make_flow(ex))

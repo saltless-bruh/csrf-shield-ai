@@ -8,7 +8,7 @@ and implements :meth:`analyze`.  The static analyzer orchestrator
 Ref:
     - spec/Design.md §2.2 (Phase 2 responsibilities)
     - spec/Tasks.md T-211–T-220
-    - .agent/instructions/coding_standards.instructions.md §3.1
+    - .github/instructions/coding_standards.instructions.md §3.1
 """
 
 from __future__ import annotations

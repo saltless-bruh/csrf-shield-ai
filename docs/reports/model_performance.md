@@ -22,4 +22,4 @@
 - XGBoost: **PASS** ✅
 
 
-Serialized to: `/home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl`
+Serialized to: `/home/laz/Documents/csrf-shield-ai_vscode/models/csrf_model.pkl`

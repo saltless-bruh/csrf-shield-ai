@@ -1,6 +1,7 @@
 package ipc
 
 import (
+	"bufio"
 	"fmt"
 	"io"
 	"log"
@@ -22,6 +23,11 @@ type Client struct {
 	done       chan struct{}
 	onProgress func(Progress)
 	onCrash    func(error)
+
+	// stderr observability
+	stderrMu      sync.Mutex
+	stderrLines   []string // last 50 lines, for ERROR state display
+	stderrLogFile *os.File // ~/.csrf-shield/backend.log
 }
 
 // NewClient creates a new IPC client. pythonPath should be the
@@ -77,6 +83,20 @@ func (c *Client) Start() error {
 
 	c.stream = NewStream(stdout, stdin)
 
+	// Open ~/.csrf-shield/backend.log for stderr capture (create dir if needed).
+	if home, err := os.UserHomeDir(); err == nil {
+		logDir := filepath.Join(home, ".csrf-shield")
+		if mkErr := os.MkdirAll(logDir, 0700); mkErr == nil {
+			logPath := filepath.Join(logDir, "backend.log")
+			if info, statErr := os.Stat(logPath); statErr == nil && info.Size() > 1<<20 {
+				_ = os.Truncate(logPath, 0)
+			}
+			if f, openErr := os.OpenFile(logPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0600); openErr == nil {
+				c.stderrLogFile = f
+			}
+		}
+	}
+
 	// Background reader goroutine.
 	go c.readLoop()
 
@@ -126,6 +146,12 @@ func (c *Client) Stop() {
 		_ = c.cmd.Process.Kill()
 	}
 	_ = c.cmd.Wait()
+	c.stderrMu.Lock()
+	if c.stderrLogFile != nil {
+		_ = c.stderrLogFile.Close()
+		c.stderrLogFile = nil
+	}
+	c.stderrMu.Unlock()
 }
 
 func (c *Client) readLoop() {
@@ -178,14 +204,27 @@ func (c *Client) logStderr() {
 	if c.stderr == nil {
 		return
 	}
-	buf := make([]byte, 4096)
-	for {
-		n, err := c.stderr.Read(buf)
-		if n > 0 {
-			log.Printf("[python stderr] %s", string(buf[:n]))
+	scanner := bufio.NewScanner(c.stderr)
+	for scanner.Scan() {
+		line := scanner.Text()
+		log.Printf("[python stderr] %s", line)
+
+		c.stderrMu.Lock()
+		c.stderrLines = append(c.stderrLines, line)
+		if len(c.stderrLines) > 50 {
+			c.stderrLines = c.stderrLines[len(c.stderrLines)-50:]
 		}
-		if err != nil {
-			return
+		if c.stderrLogFile != nil {
+			_, _ = fmt.Fprintln(c.stderrLogFile, line)
 		}
+		c.stderrMu.Unlock()
 	}
+}
+
+// LastStderrLines returns a copy of the last 50 lines of backend stderr.
+// Safe to call from any goroutine.
+func (c *Client) LastStderrLines() []string {
+	c.stderrMu.Lock()
+	defer c.stderrMu.Unlock()
+	return append([]string{}, c.stderrLines...)
 }

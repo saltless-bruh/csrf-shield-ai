@@ -5,7 +5,7 @@ HAR fixtures in data/sample_har/.
 
 Ref:
     - spec/Tasks.md T-127
-    - .agent/instructions/testing_strategy.instructions.md §2.1
+    - .github/instructions/testing_strategy.instructions.md §2.1
 """
 
 from __future__ import annotations
@@ -48,8 +48,8 @@ class TestParseHarFileValid:
         """Headers are extracted as a flat dict."""
         exchanges = parse_har_file(SAMPLE_DIR / "minimal.har")
         ex = exchanges[0]
-        assert ex.request_headers["Host"] == "example.com"
-        assert ex.request_headers["Accept"] == "text/html"
+        assert ex.request_headers["host"] == "example.com"
+        assert ex.request_headers["accept"] == "text/html"
 
     def test_minimal_har_response_body(self) -> None:
         """Response body is extracted from content.text."""
@@ -75,7 +75,7 @@ class TestParseHarFileValid:
         """Response Set-Cookie appears in response_headers."""
         exchanges = parse_har_file(SAMPLE_DIR / "minimal.har")
         ex = exchanges[0]
-        assert "Set-Cookie" in ex.response_headers
+        assert "set-cookie" in ex.response_headers
 
 
 # ---------------------------------------------------------------------------
@@ -211,8 +211,8 @@ class TestBearerAuthHar:
         """Authorization header is extracted."""
         exchanges = parse_har_file(SAMPLE_DIR / "bearer_auth.har")
         ex = exchanges[0]
-        assert "Authorization" in ex.request_headers
-        assert ex.request_headers["Authorization"].startswith("Bearer ")
+        assert "authorization" in ex.request_headers
+        assert ex.request_headers["authorization"].startswith("Bearer ")
 
     def test_bearer_auth_no_cookies(self) -> None:
         """No cookies in a Bearer-only request."""

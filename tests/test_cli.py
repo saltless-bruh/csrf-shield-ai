@@ -73,8 +73,6 @@ class TestAnalyzeCommand:
             "--output", str(output),
         ])
         assert result.exit_code == 0
-        assert "Parsing HAR file" in result.output
-        assert "Reconstructing session flows" in result.output
         assert "Analysis complete" in result.output
         assert output.exists()
 
@@ -88,7 +86,7 @@ class TestAnalyzeCommand:
             "--output", str(output),
         ])
         assert result.exit_code == 0
-        assert "Short-circuited" in result.output
+        assert "Analysis complete" in result.output
 
     def test_analyze_missing_file(self) -> None:
         """analyze exits with error for missing file."""
@@ -113,15 +111,14 @@ class TestAnalyzeCommand:
         ])
         with open(output, encoding="utf-8") as f:
             data = json.load(f)
-        assert "flows" in data
-        assert "total_flows" in data
+        assert "csrf_shield_ai_report" in data
 
     def test_analyze_requires_input(self) -> None:
         """analyze fails without --input."""
         runner = CliRunner()
         result = runner.invoke(main, ["analyze"])
         assert result.exit_code != 0
-        assert "Missing option" in result.output or "required" in result.output.lower()
+        assert "Missing option" in result.output or "required" in result.output.lower()  # noqa: E501
 
 
 # ---------------------------------------------------------------------------
@@ -139,15 +136,16 @@ class TestTrainCommand:
         assert result.exit_code == 0
         assert "--data" in result.output
 
-    def test_train_skeleton_message(self, tmp_path: Path) -> None:
-        """train prints skeleton message."""
+    def test_train_with_data(self, tmp_path: Path) -> None:
+        """train attempts training with data dir."""
         runner = CliRunner()
         result = runner.invoke(main, [
             "train",
             "--data", str(tmp_path),
         ])
-        assert result.exit_code == 0
-        assert "not yet implemented" in result.output.lower()
+        # Will fail if no CSV files, but should show
+        # training output rather than skeleton message
+        assert "Training data" in result.output
 
 
 # ---------------------------------------------------------------------------

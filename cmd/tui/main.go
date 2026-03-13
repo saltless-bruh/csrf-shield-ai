@@ -66,6 +66,11 @@ func main() {
 	}
 
 	log.SetFlags(log.Ltime | log.Lshortfile)
+	f, err := os.OpenFile("tui.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err == nil {
+		log.SetOutput(f)
+		defer f.Close()
+	}
 
 	app := ui.NewApp(absInput, projectRoot, pythonPath)
 	if err := app.Run(); err != nil {

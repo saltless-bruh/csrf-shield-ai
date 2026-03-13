@@ -799,7 +799,7 @@ csrf-shield-ai/
 │   ├── Design.md               # Architecture & design decisions
 │   ├── Requirements.md         # Functional & non-functional requirements
 │   └── Tasks.md                # Task breakdown & assignments
-└── .agent/instructions
+└── .github/instructions
     ├── Roadmap.instructions.md                      # Development roadmap & milestones
     ├── coding_standards.instructions.md             # Code style, naming, conventions
     ├── git_workflow.instructions.md                 # Git branching & commit conventions

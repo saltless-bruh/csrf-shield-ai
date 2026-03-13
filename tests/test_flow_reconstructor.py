@@ -5,7 +5,7 @@ and edge cases.
 
 Ref:
     - spec/Tasks.md T-134
-    - .agent/instructions/testing_strategy.instructions.md §2.1
+    - .github/instructions/testing_strategy.instructions.md §2.1
 """
 
 from __future__ import annotations
@@ -123,8 +123,10 @@ class TestReconstructFlows:
     def test_single_session(self) -> None:
         """Exchanges with the same session cookie form one flow."""
         exchanges = [
-            _make_exchange(cookies={"session_id": "s1"}, timestamp=datetime(2026, 1, 1, 12, 0)),
-            _make_exchange(cookies={"session_id": "s1"}, timestamp=datetime(2026, 1, 1, 12, 1)),
+            _make_exchange(cookies={"session_id": "s1"},
+                           timestamp=datetime(2026, 1, 1, 12, 0)),
+            _make_exchange(cookies={"session_id": "s1"},
+                           timestamp=datetime(2026, 1, 1, 12, 1)),
         ]
         flows = reconstruct_flows(exchanges)
         assert len(flows) == 1
@@ -134,9 +136,12 @@ class TestReconstructFlows:
     def test_multiple_sessions(self) -> None:
         """Different session cookies produce separate flows."""
         exchanges = [
-            _make_exchange(cookies={"session_id": "s1"}, timestamp=datetime(2026, 1, 1, 12, 0)),
-            _make_exchange(cookies={"session_id": "s2"}, timestamp=datetime(2026, 1, 1, 12, 1)),
-            _make_exchange(cookies={"session_id": "s1"}, timestamp=datetime(2026, 1, 1, 12, 2)),
+            _make_exchange(cookies={"session_id": "s1"},
+                           timestamp=datetime(2026, 1, 1, 12, 0)),
+            _make_exchange(cookies={"session_id": "s2"},
+                           timestamp=datetime(2026, 1, 1, 12, 1)),
+            _make_exchange(cookies={"session_id": "s1"},
+                           timestamp=datetime(2026, 1, 1, 12, 2)),
         ]
         flows = reconstruct_flows(exchanges)
         assert len(flows) == 2
@@ -171,9 +176,11 @@ class TestReconstructFlows:
     def test_mixed_cookie_and_no_cookie(self) -> None:
         """Mix of session-cookied and cookieless exchanges."""
         exchanges = [
-            _make_exchange(cookies={"session_id": "s1"}, timestamp=datetime(2026, 1, 1, 12, 0)),
+            _make_exchange(cookies={"session_id": "s1"},
+                           timestamp=datetime(2026, 1, 1, 12, 0)),
             _make_exchange(cookies={}, timestamp=datetime(2026, 1, 1, 12, 1)),
-            _make_exchange(cookies={"session_id": "s1"}, timestamp=datetime(2026, 1, 1, 12, 2)),
+            _make_exchange(cookies={"session_id": "s1"},
+                           timestamp=datetime(2026, 1, 1, 12, 2)),
         ]
         flows = reconstruct_flows(exchanges)
         # 1 flow for s1 + 1 flow for the no-cookie exchange
@@ -185,7 +192,8 @@ class TestReconstructFlows:
     def test_custom_cookie_patterns(self) -> None:
         """Custom cookie patterns can be passed to reconstruct_flows."""
         exchanges = [
-            _make_exchange(cookies={"my_token": "tok_1"}, timestamp=datetime(2026, 1, 1)),
+            _make_exchange(cookies={"my_token": "tok_1"},
+                           timestamp=datetime(2026, 1, 1)),
         ]
         flows = reconstruct_flows(exchanges, cookie_patterns=["token"])
         assert len(flows) == 1
@@ -232,8 +240,10 @@ class TestChronologicalSorting:
     def test_flows_sorted_by_first_exchange(self) -> None:
         """Multiple flows are sorted by their first exchange timestamp."""
         exchanges = [
-            _make_exchange(cookies={"session_id": "late"}, timestamp=datetime(2026, 1, 2)),
-            _make_exchange(cookies={"session_id": "early"}, timestamp=datetime(2026, 1, 1)),
+            _make_exchange(cookies={"session_id": "late"},
+                           timestamp=datetime(2026, 1, 2)),
+            _make_exchange(cookies={"session_id": "early"},
+                           timestamp=datetime(2026, 1, 1)),
         ]
         flows = reconstruct_flows(exchanges)
         assert flows[0].session_id == "early"

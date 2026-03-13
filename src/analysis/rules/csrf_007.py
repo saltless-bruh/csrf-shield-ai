@@ -48,7 +48,7 @@ class Csrf007(BaseRule):
         if not self.is_state_changing(exchange.request_method):
             return []
 
-        origin = exchange.request_headers.get("Origin", "")
+        origin = exchange.request_headers.get("origin", "")
         if not origin:
             return []  # Can't tell without an Origin header
 
@@ -60,7 +60,7 @@ class Csrf007(BaseRule):
 
         # Check for ``Vary: Origin`` which indicates server is
         # Origin-aware.
-        vary = exchange.response_headers.get("Vary", "")
+        vary = exchange.response_headers.get("vary", "")
         if "origin" in vary.lower():
             return []
 

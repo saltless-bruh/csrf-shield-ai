@@ -163,6 +163,33 @@ class TestStaticAnalyzer:
 
         assert len(output.feature_vectors) == 2
 
+    def test_get_exchanges_no_feature_vectors(self) -> None:
+        """GET exchanges must not produce feature vectors (B3 regression).
+
+        Rules still run for all exchanges (some rules need GETs), but
+        feature extraction + ML prediction only applies to state-changing
+        methods (POST, PUT, DELETE, PATCH).
+        """
+        get_ex = _ex(
+            method="GET",
+            url="https://example.com/profile",
+            request_body=None,
+        )
+        post_ex = _ex(
+            method="POST",
+            url="https://example.com/update",
+            request_body="field=value",
+        )
+        analyzer = StaticAnalyzer()
+        output = analyzer.analyze_flow(_flow(get_ex, post_ex))
+
+        keys = list(output.feature_vectors.keys())
+        # Only the POST exchange should have a feature vector.
+        assert len(keys) == 1
+        assert keys[0].startswith("POST "), (
+            f"Expected POST key only, got: {keys}"
+        )
+
     def test_short_circuit_header_only_auth(self) -> None:
         """HEADER_ONLY auth → CSRF-011 finding, rules skipped."""
         ex = _ex(
@@ -260,8 +287,12 @@ class TestIntegration:
         assert len(output.findings) > 0
         assert not output.short_circuited
 
-        # Feature vectors extracted for each exchange
-        assert len(output.feature_vectors) == len(exchanges)
+        # Feature vectors extracted only for state-changing exchanges.
+        state_changing = [
+            ex for ex in exchanges
+            if BaseRule.is_state_changing(ex.request_method)
+        ]
+        assert len(output.feature_vectors) == len(state_changing)
 
         # Should detect missing CSRF tokens (CSRF-001 or CSRF-002)
         rule_ids = {f.rule_id for f in output.findings}

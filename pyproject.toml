@@ -42,7 +42,7 @@ csrf-shield = "src.main:main"
 include = ["src*"]
 
 # --- Tool Configuration ---
-# Ref: .agent/instructions/coding_standards.instructions.md
+# Ref: .gitHub/instructions/coding_standards.instructions.md
 
 [tool.black]
 line-length = 100

@@ -31,23 +31,30 @@ from src.input.models import (
     SessionFlow,
     Severity,
 )
+from src.config import SETTINGS
 
 logger = logging.getLogger(__name__)
 
 # Default auth headers — matches settings.yaml auth_detection.custom_headers
-DEFAULT_AUTH_HEADERS: List[str] = [
-    "Authorization",
-    "X-API-Key",
-    "X-Auth-Token",
-    "Api-Key",
-    "X-Access-Token",
-]
+DEFAULT_AUTH_HEADERS: List[str] = SETTINGS.get("auth_detection", {}).get(
+    "custom_headers",
+    [
+        "Authorization",
+        "X-API-Key",
+        "X-Auth-Token",
+        "Api-Key",
+        "X-Access-Token",
+    ]
+)
 
 # Default session cookie patterns — matches settings.yaml
-DEFAULT_SESSION_COOKIE_PATTERNS: List[str] = ["session", "sid", "auth"]
+DEFAULT_SESSION_COOKIE_PATTERNS: List[str] = SETTINGS.get("auth_detection", {}).get(  # noqa: E501
+    "session_cookie_patterns", ["session", "sid", "auth"]
+)
 
 # Short-circuit score — matches settings.yaml scoring.short_circuit_score
-SHORT_CIRCUIT_SCORE: int = 5
+SHORT_CIRCUIT_SCORE: int = SETTINGS.get(
+    "scoring", {}).get("short_circuit_score", 5)
 
 
 # ---------------------------------------------------------------------------
@@ -172,7 +179,11 @@ def build_short_circuit_result(flow: SessionFlow) -> AnalysisResult:
         risk_score=SHORT_CIRCUIT_SCORE,
         risk_level=RiskLevel.LOW,
         findings=[csrf_011],
-        recommendations=["No action needed — CSRF is not applicable to header-only auth."],
+        recommendations=[
+            "No action needed "
+            "— CSRF is not applicable "
+            "to header-only auth.",
+        ],
         ml_probability=None,
         feature_vector=None,
     )
@@ -217,9 +228,13 @@ def _has_auth_header(
     Returns:
         True if any auth header is present (case-insensitive).
     """
-    request_headers_lower = {k.lower(): v for k, v in exchange.request_headers.items()}
+    # Lowercase both sides so detection works regardless of
+    # whether headers were pre-lowercased by the HAR parser.
+    exchange_headers_lower = {
+        k.lower() for k in exchange.request_headers
+    }
     for header in auth_headers:
-        if header.lower() in request_headers_lower:
+        if header.lower() in exchange_headers_lower:
             return True
     return False
 
@@ -241,13 +256,24 @@ def _build_csrf_011_finding(
     evidence_parts: List[str] = []
     if exchange:
         for header_name in DEFAULT_AUTH_HEADERS:
-            for req_header, req_value in exchange.request_headers.items():
-                if req_header.lower() == header_name.lower():
-                    # Truncate long values (e.g., JWT tokens)
-                    display_value = req_value[:50] + "..." if len(req_value) > 50 else req_value
-                    evidence_parts.append(f"{req_header}: {display_value}")
+            header_lower = header_name.lower()
+            if header_lower in exchange.request_headers:
+                req_value = exchange.request_headers[header_lower]
+                # Truncate long values (e.g., JWT tokens)
+                display_value = (
+                    req_value[:50] + "..."
+                    if len(req_value) > 50
+                    else req_value
+                )
+                evidence_parts.append(
+                    f"{header_name}: {display_value}"
+                )
 
-    evidence = "; ".join(evidence_parts) if evidence_parts else "Header-only auth detected"
+    evidence = (
+        "; ".join(evidence_parts)
+        if evidence_parts
+        else "Header-only auth detected"
+    )
 
     # Create a minimal exchange if none provided
     if exchange is None:

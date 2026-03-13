@@ -49,7 +49,7 @@ class Csrf009(BaseRule):
         if not (200 <= exchange.response_status < 300):
             return []
 
-        vary = exchange.response_headers.get("Vary", "")
+        vary = exchange.response_headers.get("vary", "")
         if "referer" in vary.lower():
             return []  # Server is Referer-aware
 

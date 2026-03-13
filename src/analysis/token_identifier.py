@@ -31,6 +31,7 @@ from __future__ import annotations
 import logging
 import math
 from dataclasses import dataclass
+from functools import lru_cache
 from typing import Dict, Final, FrozenSet, Optional, Tuple
 
 logger = logging.getLogger(__name__)
@@ -160,8 +161,8 @@ def shannon_entropy(value: str) -> float:
 def identify_csrf_token(
     params: Dict[str, str],
     *,
-    entropy_threshold: float = 3.5,
-    min_token_length: int = 16,
+    entropy_threshold: Optional[float] = None,
+    min_token_length: Optional[int] = None,
 ) -> Optional[TokenMatch]:
     """Identify the CSRF token parameter from form body parameters.
 
@@ -208,6 +209,13 @@ def identify_csrf_token(
     if not params:
         return None
 
+    from src.config import SETTINGS
+    token_settings = SETTINGS.get("token_identification", {})
+    if entropy_threshold is None:
+        entropy_threshold = token_settings.get("entropy_threshold", 3.5)
+    if min_token_length is None:
+        min_token_length = token_settings.get("min_token_length", 16)
+
     # ------------------------------------------------------------------
     # Tier 1: Exact name match
     # ------------------------------------------------------------------
@@ -229,7 +237,8 @@ def identify_csrf_token(
     # Tier 3: High-entropy string detection
     # ------------------------------------------------------------------
     for name, value in params.items():
-        if len(value) >= min_token_length and shannon_entropy(value) >= entropy_threshold:
+        if (len(value) >= min_token_length
+                and shannon_entropy(value) >= entropy_threshold):
             logger.debug(
                 "Token identified via Tier 3 (entropy=%.2f): %s",
                 shannon_entropy(value),
@@ -270,6 +279,25 @@ def identify_csrf_header(headers: Dict[str, str]) -> Optional[TokenMatch]:
 
 
 # ---------------------------------------------------------------------------
+# Convenience: cached parsing for performance
+# ---------------------------------------------------------------------------
+
+
+@lru_cache(maxsize=2048)
+def extract_token_from_body(body: Optional[str]) -> Optional[TokenMatch]:
+    """Extract a CSRF token from a raw request body with caching.
+
+    Solves the O(N^2) performance issue in cross-exchange rules (CSRF-004)
+    and feature extraction by caching the (expensive) entropy calculation and
+    parsing for identical request bodies.
+    """
+    if not body:
+        return None
+    params = parse_form_params(body)
+    return identify_csrf_token(params)
+
+
+# ---------------------------------------------------------------------------
 # Convenience: parse form body into params dict
 # ---------------------------------------------------------------------------
 
@@ -282,7 +310,8 @@ def parse_form_params(body: Optional[str]) -> Dict[str, str]:
     overwritten by the last occurrence (consistent with HTML form behaviour).
 
     Args:
-        body: Raw URL-encoded body string (e.g., ``"name=test&csrf_token=abc"``).
+        body: Raw URL-encoded body string
+            (e.g., ``"name=test&csrf_token=abc"``).
 
     Returns:
         Dict mapping parameter names to their decoded values.

@@ -72,16 +72,18 @@ class TestStaticNormalization:
     def test_single_critical(self) -> None:
         findings = [_finding("CSRF-001", Severity.CRITICAL)]
         score = normalize_static_score(findings)
-        assert score == pytest.approx(1.0 / 11.0, abs=0.01)
+        # CRITICAL=1.0; MAX_POSSIBLE_SEVERITY=6.25 (sum of all 11 rule severities).
+        assert score == pytest.approx(1.0 / 6.25, abs=0.01)
 
     def test_multiple_findings(self) -> None:
-        """HIGH + MEDIUM → (0.75 + 0.5) / 11.0."""
+        """HIGH + MEDIUM → (0.75 + 0.5) / MAX_POSSIBLE_SEVERITY."""
         findings = [
             _finding("CSRF-001", Severity.HIGH),
             _finding("CSRF-005", Severity.MEDIUM),
         ]
         score = normalize_static_score(findings)
-        expected = (0.75 + 0.5) / 11.0
+        # MAX_POSSIBLE_SEVERITY = 6.25 (sum of all 11 rule severities).
+        expected = (0.75 + 0.5) / 6.25
         assert score == pytest.approx(expected, abs=0.01)
 
     def test_capped_at_one(self) -> None:

@@ -293,5 +293,6 @@ class TestHeuristicHelpers:
 
     def test_count_protections_none(self) -> None:
         """All protection-absence findings → 0 protections."""
-        all_rules = {"CSRF-001", "CSRF-002", "CSRF-005", "CSRF-007", "CSRF-009"}
+        all_rules = {"CSRF-001", "CSRF-002",
+                     "CSRF-005", "CSRF-007", "CSRF-009"}
         assert _count_protections(all_rules) == 0

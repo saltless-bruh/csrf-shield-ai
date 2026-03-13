@@ -75,6 +75,7 @@ rules:
         - "action"
         - "op"
         - "do"
+        - "cmd"
 
   - id: "CSRF-009"
     name: "Missing Referer Validation"

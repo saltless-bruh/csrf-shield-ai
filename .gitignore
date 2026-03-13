@@ -44,3 +44,9 @@ data/synthetic/*.csv
 data/training/vulnerable/*.json
 data/training/protected/*.json
 tui
+
+# Ignored Spec/Workflow assets
+.github/
+artifacts/
+spec/
+spec_tui_v2/

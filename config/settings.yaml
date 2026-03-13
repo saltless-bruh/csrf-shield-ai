@@ -66,7 +66,7 @@ output:
 
 # --- Model ---
 model:
-  path: src/ml/models/csrf_rf_model.pkl
+  path: models/csrf_model.pkl
   type: random_forest # random_forest | xgboost
 
 # --- Logging ---

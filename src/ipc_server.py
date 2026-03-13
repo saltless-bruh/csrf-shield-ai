@@ -22,6 +22,7 @@ from urllib.parse import urlparse
 
 from src.analysis.static_analyzer import StaticAnalyzer, StaticAnalysisOutput
 from src.input.flow_reconstructor import reconstruct_flows
+from src.input.auth_detector import update_flow_auth
 from src.input.har_parser import parse_har_file
 from src.input.models import (
     AnalysisResult,
@@ -34,7 +35,7 @@ from src.ml.heuristics import apply_heuristics
 from src.ml.predictor import CsrfPredictor
 from src.output.remediation import get_remediation
 from src.output.report_generator import (
-    AnalysisResult as ReportAnalysisResult,
+    ReportAnalysisResult,
     ReportGenerator,
 )
 from src.scoring.risk_scorer import (
@@ -43,9 +44,10 @@ from src.scoring.risk_scorer import (
     RiskScorer,
 )
 
-# Configure logging to stderr only (stdout reserved for IPC).
+# Configure logging to file (backend.log) so it doesn't corrupt stdout/stderr TUI buffers.
 logging.basicConfig(
-    stream=sys.stderr,
+    filename='backend.log',
+    filemode='a',
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 )
@@ -53,15 +55,8 @@ logger = logging.getLogger(__name__)
 
 VERSION = "1.0"
 
-# Severity numeric map for static_score computation (PROPOSAL §10.1).
-_SEVERITY_MAP: Dict[Severity, float] = {
-    Severity.CRITICAL: 1.0,
-    Severity.HIGH: 0.75,
-    Severity.MEDIUM: 0.5,
-    Severity.LOW: 0.25,
-    Severity.INFO: 0.0,
-}
-_MAX_SEVERITY = 11 * 1.0
+# Reuse normalization from risk_scorer (DRY).
+from src.scoring.risk_scorer import normalize_static_score  # noqa: E402
 
 
 # ------------------------------------------------------------------
@@ -97,12 +92,10 @@ def serialize_finding(finding: Finding) -> Dict[str, Any]:
 def compute_static_score(findings: List[Finding]) -> float:
     """Compute static_score on-the-fly (PROPOSAL §10.1).
 
-    static_score = sum(triggered_rule_severities) / max_possible_severity
+    Delegates to risk_scorer.normalize_static_score() to stay
+    in sync with settings.yaml severity weights.
     """
-    if not findings:
-        return 0.0
-    total = sum(_SEVERITY_MAP.get(f.severity, 0.0) for f in findings)
-    return round(min(total / _MAX_SEVERITY, 1.0), 4)
+    return round(normalize_static_score(findings), 4)
 
 
 def serialize_flow_summary(flow: SessionFlow) -> Dict[str, Any]:
@@ -225,6 +218,7 @@ class IpcServer:
             "get_results": self._handle_get_results,
             "cancel": self._handle_cancel,
             "export_report": self._handle_export_report,
+            "get_flow_exchanges": self._handle_get_flow_exchanges,
         }.get(method)
 
         if handler is None:
@@ -261,6 +255,36 @@ class IpcServer:
     # Method handlers
     # ---------------------------------------------------------------
 
+    def _handle_get_flow_exchanges(
+        self,
+        params: Dict[str, Any],
+        req_id: Any,
+    ) -> List[Dict[str, Any]]:
+        """Return raw HTTP exchanges for a given session."""
+        session_id = params.get("session_id")
+        if not session_id:
+            raise ValueError("session_id is required")
+
+        flow = self._find_flow(session_id)
+        if not flow:
+            raise ValueError(f"Session not found: {session_id}")
+
+        result = []
+        for ex in flow.exchanges:
+            result.append({
+                "request_method": ex.request_method,
+                "request_url": ex.request_url,
+                "request_headers": ex.request_headers,
+                "request_cookies": ex.request_cookies,
+                "request_body": ex.request_body,
+                "request_content_type": ex.request_content_type,
+                "response_status": ex.response_status,
+                "response_headers": ex.response_headers,
+                "response_body": ex.response_body,
+                "timestamp": ex.timestamp.isoformat() if ex.timestamp else None,
+            })
+        return result
+
     def _handle_ping(
         self,
         params: Dict[str, Any],
@@ -282,7 +306,8 @@ class IpcServer:
             )
 
         exchanges = parse_har_file(path)
-        self._flows = reconstruct_flows(exchanges)
+        raw_flows = reconstruct_flows(exchanges)
+        self._flows = [update_flow_auth(f) for f in raw_flows]
         self._results.clear()
 
         return {
@@ -388,35 +413,64 @@ class IpcServer:
         session_id = params.get("session_id", "")
         path = Path(params.get("path", f"report.{fmt}"))
 
-        # Gather findings.
+        # Gather findings and best ML probability.
         all_findings: List[Finding] = []
-
         best_ml: float = 0.0
+
+        def _collect_from_cached(
+            cached: Dict[str, Any],
+            flow: SessionFlow,
+        ) -> None:
+            """Extract findings + best_ml from a cached result."""
+            nonlocal best_ml
+            for r_data in cached.get("results", []):
+                # Track best ML probability.
+                ml_p = r_data.get("ml_probability", 0.0)
+                if isinstance(ml_p, (int, float)):
+                    best_ml = max(best_ml, float(ml_p))
+
+                # Find matching exchange for this result.
+                endpoint = r_data.get("endpoint", "")
+                method = r_data.get("http_method", "")
+                match_ex = None
+                for ex in flow.exchanges:
+                    if (
+                        urlparse(ex.request_url).path == endpoint
+                        and ex.request_method == method
+                    ):
+                        match_ex = ex
+                        break
+                # Fallback to first exchange if no match.
+                if match_ex is None and flow.exchanges:
+                    match_ex = flow.exchanges[0]
+
+                if match_ex is not None:
+                    for fd in r_data.get("findings", []):
+                        all_findings.append(
+                            self._reconstruct_finding(fd, match_ex)
+                        )
 
         if scope == "selected" and session_id:
             cached = self._results.get(session_id)
             if cached and "results" in cached:
                 flow = self._find_flow(session_id)
                 if flow:
-                    for ex in flow.exchanges:
-                        for f_data in cached.get("results", []):
-                            for fd in f_data.get("findings", []):
-                                # Reconstruct minimal finding.
-                                all_findings.append(
-                                    self._reconstruct_finding(fd, ex)
-                                )
+                    _collect_from_cached(cached, flow)
         else:
             for flow in self._flows:
                 cached = self._results.get(flow.session_id)
                 if cached and "results" in cached:
-                    for ex in flow.exchanges:
-                        for f_data in cached.get("results", []):
-                            for fd in f_data.get("findings", []):
-                                all_findings.append(
-                                    self._reconstruct_finding(
-                                        fd, ex
-                                    )
-                                )
+                    _collect_from_cached(cached, flow)
+
+        # Also extract best_ml from summary if available.
+        if scope == "selected" and session_id:
+            cached = self._results.get(session_id)
+            if cached and "summary" in cached:
+                summary_ml = cached["summary"].get(
+                    "ml_probability_max", 0.0
+                )
+                if isinstance(summary_ml, (int, float)):
+                    best_ml = max(best_ml, float(summary_ml))
 
         # Use the scorer for the report.
         risk = RiskResult(
@@ -554,27 +608,43 @@ class IpcServer:
             method = parts[0] if len(parts) > 1 else "GET"
             url = parts[1] if len(parts) > 1 else key
 
+            # Resolve the HttpExchange object for this key so findings
+            # can be scoped to this exchange only (not the whole session).
+            exchange_obj = next(
+                (
+                    ex
+                    for ex in flow.exchanges
+                    if f"{ex.request_method} {ex.request_url}" == key
+                ),
+                None,
+            )
+            exchange_findings = (
+                [f for f in static_output.findings if f.exchange is exchange_obj]
+                if exchange_obj is not None
+                else list(static_output.findings)
+            )
+
             prob = self._predictor.predict(features)
             adjusted = apply_heuristics(
-                prob, static_output.findings, url, method
+                prob, exchange_findings, url, method
             )
 
             # Step 4: Risk scoring.
             risk = self._scorer.calculate_risk(
                 ml_probability=adjusted,
-                findings=static_output.findings,
+                findings=exchange_findings,
                 url=url,
                 http_method=method,
             )
 
             static_score = compute_static_score(
-                static_output.findings
+                exchange_findings
             )
 
             # Build recommendations.
             seen_rules: set[str] = set()
             recs: List[str] = []
-            for f in static_output.findings:
+            for f in exchange_findings:
                 if f.rule_id not in seen_rules:
                     seen_rules.add(f.rule_id)
                     title, rec = get_remediation(f.rule_id)
@@ -587,7 +657,7 @@ class IpcServer:
                 "risk_level": risk.level.value,
                 "findings": [
                     serialize_finding(f)
-                    for f in static_output.findings
+                    for f in exchange_findings
                 ],
                 "ml_probability": round(adjusted, 4),
                 "static_score": static_score,

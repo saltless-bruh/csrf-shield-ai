@@ -7,6 +7,8 @@
 // Ref: spec/Tasks.md T-436
 package models
 
+import "strings"
+
 // Severity levels — UPPERCASE values matching Python Severity enum.
 const (
 	SevCritical = "CRITICAL"
@@ -40,6 +42,20 @@ type ExchangeRef struct {
 	Status int    `json:"status"`
 }
 
+// HttpExchange represents the full raw HTTP exchange.
+type HttpExchange struct {
+	RequestMethod      string            `json:"request_method"`
+	RequestURL         string            `json:"request_url"`
+	RequestHeaders     map[string]string `json:"request_headers"`
+	RequestCookies     map[string]string `json:"request_cookies"`
+	RequestBody        *string           `json:"request_body"`
+	RequestContentType string            `json:"request_content_type"`
+	ResponseStatus     int               `json:"response_status"`
+	ResponseHeaders    map[string]string `json:"response_headers"`
+	ResponseBody       *string           `json:"response_body"`
+	Timestamp          *string           `json:"timestamp"`
+}
+
 // Finding represents a single static analysis finding.
 type Finding struct {
 	RuleID      string      `json:"rule_id"`
@@ -60,10 +76,10 @@ type FlowSummary struct {
 
 // AnalysisResultSummary is the session-level aggregate from analyze_flow.
 type AnalysisResultSummary struct {
-	RiskScore        int     `json:"risk_score"`
-	RiskLevel        string  `json:"risk_level"`
-	MLProbabilityMax float64 `json:"ml_probability_max"`
-	StaticScoreMax   float64 `json:"static_score_max"`
+	RiskScore        int      `json:"risk_score"`
+	RiskLevel        string   `json:"risk_level"`
+	MLProbabilityMax *float64 `json:"ml_probability_max"`
+	StaticScoreMax   float64  `json:"static_score_max"`
 }
 
 // ExchangeResult is the per-exchange analysis result.
@@ -73,7 +89,7 @@ type ExchangeResult struct {
 	RiskScore       int                    `json:"risk_score"`
 	RiskLevel       string                 `json:"risk_level"`
 	Findings        []Finding              `json:"findings"`
-	MLProbability   float64                `json:"ml_probability"`
+	MLProbability   *float64               `json:"ml_probability"`
 	StaticScore     float64                `json:"static_score"`
 	FeatureVector   map[string]interface{} `json:"feature_vector"`
 	Recommendations []string               `json:"recommendations"`
@@ -173,28 +189,15 @@ func AuthBadge(auth string) string {
 // BodyTypeBadge derives the body type badge from content type.
 func BodyTypeBadge(contentType string) string {
 	switch {
-	case contains(contentType, "form-urlencoded"):
+	case strings.Contains(contentType, "form-urlencoded"):
 		return "[Form]"
-	case contains(contentType, "multipart"):
+	case strings.Contains(contentType, "multipart"):
 		return "[Multi]"
-	case contains(contentType, "json"):
+	case strings.Contains(contentType, "json"):
 		return "[JSON]"
-	case contains(contentType, "text/plain"):
+	case strings.Contains(contentType, "text/plain"):
 		return "[Text]"
 	default:
 		return "[None]"
 	}
-}
-
-func contains(s, substr string) bool {
-	return len(s) >= len(substr) && searchString(s, substr)
-}
-
-func searchString(s, substr string) bool {
-	for i := 0; i <= len(s)-len(substr); i++ {
-		if s[i:i+len(substr)] == substr {
-			return true
-		}
-	}
-	return false
 }

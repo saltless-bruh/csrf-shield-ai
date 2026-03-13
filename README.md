@@ -15,21 +15,21 @@ An automated security analysis tool that detects Cross-Site Request Forgery (CSR
 - 💻 **Interactive TUI** — Go-based terminal interface with Vim-style navigation and real-time analysis
 - 📝 **Reports** — JSON & HTML reports with remediation recommendations
 
-## Installation
+## How to download
 
 ### Prerequisites
 
 - **Python:** 3.10+
-- **Go:** 1.21+ (for TUI)
+- **Go:** 1.21+ (for building the TUI)
 
 ### Setup
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/csrf-shield-ai.git
+git clone https://github.com/saltless-bruh/csrf-shield-ai.git
 cd csrf-shield-ai
 
-# Install Python backend
+# Install Python backend dependencies
 pip install -e .
 
 # Build interactive TUI
@@ -38,7 +38,7 @@ go build -o ../../csrf-shield-tui main.go
 cd ../..
 ```
 
-## Usage
+## How to use
 
 ```bash
 # Launch interactive TUI (Flagship Interface)

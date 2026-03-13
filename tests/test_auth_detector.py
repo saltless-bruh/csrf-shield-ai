@@ -5,7 +5,7 @@ and flow auth updating.
 
 Ref:
     - spec/Tasks.md T-144
-    - .agent/instructions/testing_strategy.instructions.md §2.1
+    - .github/instructions/testing_strategy.instructions.md §2.1
 """
 
 from __future__ import annotations
@@ -83,35 +83,35 @@ class TestDetectAuthMechanism:
     def test_bearer_token_no_cookies(self) -> None:
         """Session with Authorization header, no cookies → HEADER_ONLY."""
         flow = _make_flow([
-            _make_exchange(headers={"Authorization": "Bearer eyJ..."}),
+            _make_exchange(headers={"authorization": "Bearer eyJ..."}),
         ])
         assert detect_auth_mechanism(flow) == AuthMechanism.HEADER_ONLY
 
     def test_api_key_no_cookies(self) -> None:
         """Session with X-API-Key header, no cookies → HEADER_ONLY."""
         flow = _make_flow([
-            _make_exchange(headers={"X-API-Key": "key_abc123"}),
+            _make_exchange(headers={"x-api-key": "key_abc123"}),
         ])
         assert detect_auth_mechanism(flow) == AuthMechanism.HEADER_ONLY
 
     def test_x_auth_token_no_cookies(self) -> None:
         """Session with X-Auth-Token header → HEADER_ONLY."""
         flow = _make_flow([
-            _make_exchange(headers={"X-Auth-Token": "tok_xyz"}),
+            _make_exchange(headers={"x-auth-token": "tok_xyz"}),
         ])
         assert detect_auth_mechanism(flow) == AuthMechanism.HEADER_ONLY
 
     def test_api_key_alt_no_cookies(self) -> None:
         """Session with Api-Key header → HEADER_ONLY."""
         flow = _make_flow([
-            _make_exchange(headers={"Api-Key": "ak_123"}),
+            _make_exchange(headers={"api-key": "ak_123"}),
         ])
         assert detect_auth_mechanism(flow) == AuthMechanism.HEADER_ONLY
 
     def test_x_access_token_no_cookies(self) -> None:
         """Session with X-Access-Token header → HEADER_ONLY."""
         flow = _make_flow([
-            _make_exchange(headers={"X-Access-Token": "at_456"}),
+            _make_exchange(headers={"x-access-token": "at_456"}),
         ])
         assert detect_auth_mechanism(flow) == AuthMechanism.HEADER_ONLY
 
@@ -120,7 +120,7 @@ class TestDetectAuthMechanism:
         flow = _make_flow([
             _make_exchange(
                 cookies={"session_id": "abc123"},
-                headers={"Authorization": "Bearer eyJ..."},
+                headers={"authorization": "Bearer eyJ..."},
             ),
         ])
         assert detect_auth_mechanism(flow) == AuthMechanism.MIXED
@@ -143,7 +143,7 @@ class TestDetectAuthMechanism:
         """Cookie in one exchange, auth header in another → MIXED."""
         flow = _make_flow([
             _make_exchange(cookies={"session_id": "abc123"}),
-            _make_exchange(headers={"Authorization": "Bearer eyJ..."}),
+            _make_exchange(headers={"authorization": "Bearer eyJ..."}),
         ])
         assert detect_auth_mechanism(flow) == AuthMechanism.MIXED
 
@@ -169,7 +169,8 @@ class TestDetectAuthMechanism:
         # Default patterns won't match 'my_token'
         assert detect_auth_mechanism(flow) == AuthMechanism.NONE
         # Custom pattern matches
-        assert detect_auth_mechanism(flow, cookie_patterns=["token"]) == AuthMechanism.COOKIE
+        assert detect_auth_mechanism(flow, cookie_patterns=[
+                                     "token"]) == AuthMechanism.COOKIE
 
 
 # ---------------------------------------------------------------------------
@@ -183,7 +184,7 @@ class TestBuildShortCircuitResult:
     def test_risk_score_is_5(self) -> None:
         """Short-circuit result has fixed risk score of 5."""
         flow = _make_flow([
-            _make_exchange(headers={"Authorization": "Bearer eyJ..."}),
+            _make_exchange(headers={"authorization": "Bearer eyJ..."}),
         ])
         result = build_short_circuit_result(flow)
         assert result.risk_score == 5
@@ -191,7 +192,7 @@ class TestBuildShortCircuitResult:
     def test_risk_level_is_low(self) -> None:
         """Short-circuit result has LOW risk level."""
         flow = _make_flow([
-            _make_exchange(headers={"Authorization": "Bearer eyJ..."}),
+            _make_exchange(headers={"authorization": "Bearer eyJ..."}),
         ])
         result = build_short_circuit_result(flow)
         assert result.risk_level == RiskLevel.LOW
@@ -204,7 +205,7 @@ class TestBuildShortCircuitResult:
         The risk scorer must handle this gracefully without TypeError.
         """
         flow = _make_flow([
-            _make_exchange(headers={"Authorization": "Bearer eyJ..."}),
+            _make_exchange(headers={"authorization": "Bearer eyJ..."}),
         ])
         result = build_short_circuit_result(flow)
         assert result.ml_probability is None
@@ -212,7 +213,7 @@ class TestBuildShortCircuitResult:
     def test_feature_vector_is_none(self) -> None:
         """Feature vector is None (feature extraction skipped)."""
         flow = _make_flow([
-            _make_exchange(headers={"Authorization": "Bearer eyJ..."}),
+            _make_exchange(headers={"authorization": "Bearer eyJ..."}),
         ])
         result = build_short_circuit_result(flow)
         assert result.feature_vector is None
@@ -220,7 +221,7 @@ class TestBuildShortCircuitResult:
     def test_csrf_011_finding_present(self) -> None:
         """Result contains exactly one CSRF-011 finding."""
         flow = _make_flow([
-            _make_exchange(headers={"Authorization": "Bearer eyJ..."}),
+            _make_exchange(headers={"authorization": "Bearer eyJ..."}),
         ])
         result = build_short_circuit_result(flow)
         assert len(result.findings) == 1
@@ -230,7 +231,7 @@ class TestBuildShortCircuitResult:
     def test_finding_has_evidence(self) -> None:
         """CSRF-011 finding includes auth header as evidence."""
         flow = _make_flow([
-            _make_exchange(headers={"Authorization": "Bearer eyJtoken"}),
+            _make_exchange(headers={"authorization": "Bearer eyJtoken"}),
         ])
         result = build_short_circuit_result(flow)
         assert "Authorization" in result.findings[0].evidence
@@ -238,7 +239,7 @@ class TestBuildShortCircuitResult:
     def test_recommendation_present(self) -> None:
         """Result has a recommendation about CSRF not applicable."""
         flow = _make_flow([
-            _make_exchange(headers={"Authorization": "Bearer eyJ..."}),
+            _make_exchange(headers={"authorization": "Bearer eyJ..."}),
         ])
         result = build_short_circuit_result(flow)
         assert len(result.recommendations) == 1
@@ -248,7 +249,7 @@ class TestBuildShortCircuitResult:
         """Endpoint is taken from the first exchange's URL."""
         flow = _make_flow([
             _make_exchange(
-                headers={"Authorization": "Bearer eyJ..."},
+                headers={"authorization": "Bearer eyJ..."},
                 url="https://api.example.com/users/me",
             ),
         ])

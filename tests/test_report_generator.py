@@ -18,7 +18,7 @@ import pytest
 from src.input.models import Finding, HttpExchange, Severity
 from src.output.remediation import REMEDIATIONS, get_remediation
 from src.output.report_generator import (
-    AnalysisResult,
+    ReportAnalysisResult,
     ReportGenerator,
 )
 from src.scoring.risk_scorer import RiskLevel, RiskResult
@@ -45,8 +45,8 @@ def _ex() -> HttpExchange:
     )
 
 
-def _sample_result() -> AnalysisResult:
-    """Build a sample AnalysisResult for testing."""
+def _sample_result() -> ReportAnalysisResult:
+    """Build a sample ReportAnalysisResult for testing."""
     findings = [
         Finding(
             rule_id="CSRF-001",
@@ -74,7 +74,7 @@ def _sample_result() -> AnalysisResult:
             "Uses HTTPS (-5)",
         ],
     )
-    return AnalysisResult(
+    return ReportAnalysisResult(
         findings=findings,
         risk=risk,
         ml_probability=0.78,

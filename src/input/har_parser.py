@@ -117,7 +117,11 @@ def _validate_har(data: dict) -> None:
 
     version = log.get("version", "")
     if version and not version.startswith("1."):
-        logger.warning("HAR version %s may not be fully supported (expected 1.x)", version)
+        logger.warning(
+            "HAR version %s may not be fully supported"
+            " (expected 1.x)",
+            version,
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -148,11 +152,10 @@ def _parse_entry(entry: dict) -> HttpExchange:
     # Extract body via postData (handles all content types + fallback)
     post_data = request.get("postData")
     request_body = _parse_body(post_data)
+    # Defaults
     request_content_type = ""
-    if post_data:
-        request_content_type = post_data.get("mimeType", "")
-    elif "Content-Type" in request_headers:
-        request_content_type = request_headers["Content-Type"]
+    if "content-type" in request_headers:
+        request_content_type = request_headers["content-type"]
 
     # Extract response body
     response_content = response.get("content", {})
@@ -194,10 +197,11 @@ def _extract_headers(headers_list: list) -> Dict[str, str]:
     """
     result: Dict[str, str] = {}
     for item in headers_list:
-        name = item.get("name", "")
+        name = item.get("name", "").lower()
         value = item.get("value", "")
         if name in result:
-            result[name] = f"{result[name]}, {value}"
+            joiner = "\n" if name == "set-cookie" else ", "
+            result[name] = f"{result[name]}{joiner}{value}"
         else:
             result[name] = value
     return result
@@ -307,5 +311,9 @@ def _parse_timestamp(iso_str: str) -> datetime:
             cleaned = iso_str.replace("Z", "+00:00")
             return datetime.fromisoformat(cleaned)
         except ValueError:
-            logger.warning("Could not parse timestamp '%s', using now()", iso_str)
+            logger.warning(
+                "Could not parse timestamp '%s',"
+                " using now()",
+                iso_str,
+            )
             return datetime.now()

@@ -216,7 +216,11 @@ class StaticAnalyzer:
                         exc,
                     )
 
-            # Step 2: Extract feature vector
+            # Step 2: Extract feature vector (state-changing only).
+            # GET/HEAD/OPTIONS requests are not CSRF targets; extracting
+            # features for them would produce spurious ML predictions.
+            if not BaseRule.is_state_changing(exchange.request_method):
+                continue
             try:
                 features = extract_features(exchange, flow)
                 key = (

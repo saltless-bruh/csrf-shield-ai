@@ -50,13 +50,18 @@ func TestIPCPingRoundTrip(t *testing.T) {
 		t.Fatalf("Ping error: %s", resp.Error.Message)
 	}
 
-	status, ok := resp.Result["status"].(string)
-	if !ok || status != "ok" {
-		t.Errorf("Expected status 'ok', got %v", resp.Result["status"])
+	resultMap, ok := resp.Result.(map[string]interface{})
+	if !ok {
+		t.Fatalf("Expected map[string]interface{}, got %T", resp.Result)
 	}
-	version, ok := resp.Result["version"].(string)
+
+	status, ok := resultMap["status"].(string)
+	if !ok || status != "ok" {
+		t.Errorf("Expected status 'ok', got %v", resultMap["status"])
+	}
+	version, ok := resultMap["version"].(string)
 	if !ok || version != "1.0" {
-		t.Errorf("Expected version '1.0', got %v", resp.Result["version"])
+		t.Errorf("Expected version '1.0', got %v", resultMap["version"])
 	}
 }
 
@@ -87,9 +92,14 @@ func TestIPCLoadHarRoundTrip(t *testing.T) {
 		t.Fatalf("load_har error: %s", resp.Error.Message)
 	}
 
-	totalFlows, ok := resp.Result["total_flows"].(float64)
+	resultMap, ok := resp.Result.(map[string]interface{})
+	if !ok {
+		t.Fatalf("Expected map[string]interface{}, got %T", resp.Result)
+	}
+
+	totalFlows, ok := resultMap["total_flows"].(float64)
 	if !ok || totalFlows < 1 {
-		t.Errorf("Expected at least 1 flow, got %v", resp.Result["total_flows"])
+		t.Errorf("Expected at least 1 flow, got %v", resultMap["total_flows"])
 	}
 }
 

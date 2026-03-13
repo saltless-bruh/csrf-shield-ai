@@ -17,8 +17,7 @@ from typing import List
 
 from src.analysis.rules.base_rule import BaseRule
 from src.analysis.token_identifier import (
-    identify_csrf_token,
-    parse_form_params,
+    extract_token_from_body,
 )
 from src.input.models import Finding, HttpExchange, SessionFlow, Severity
 
@@ -52,8 +51,7 @@ class Csrf004(BaseRule):
         if not exchange.request_body:
             return []
 
-        params = parse_form_params(exchange.request_body)
-        token = identify_csrf_token(params)
+        token = extract_token_from_body(exchange.request_body)
         if token is None:
             return []
 
@@ -67,8 +65,7 @@ class Csrf004(BaseRule):
                 continue
             if not other.request_body:
                 continue
-            other_params = parse_form_params(other.request_body)
-            other_token = identify_csrf_token(other_params)
+            other_token = extract_token_from_body(other.request_body)
             if other_token and other_token.value == token.value:
                 reuse_count += 1
 

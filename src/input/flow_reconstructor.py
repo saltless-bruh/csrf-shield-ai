@@ -20,8 +20,10 @@ from src.input.models import AuthMechanism, HttpExchange, SessionFlow
 
 logger = logging.getLogger(__name__)
 
-# Default patterns — matches settings.yaml auth_detection.session_cookie_patterns
-DEFAULT_SESSION_COOKIE_PATTERNS: List[str] = ["session", "sid", "auth"]
+# Default patterns (settings.yaml session_cookie_patterns)
+DEFAULT_SESSION_COOKIE_PATTERNS: List[str] = [
+    "session", "sid", "auth",
+]
 
 
 # ---------------------------------------------------------------------------

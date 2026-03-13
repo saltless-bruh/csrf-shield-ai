@@ -6,7 +6,7 @@ the analysis pipeline.
 Ref:
     - spec/Design.md §3.1 (Core Entities)
     - docs/proposal/PROPOSAL.md §8.1 (Data Model)
-    - .agent/instructions/coding_standards.instructions.md §2.4 (Data Models)
+    - .github/instructions/coding_standards.instructions.md §2.4 (Data Models)
 """
 
 from __future__ import annotations
@@ -56,7 +56,7 @@ class RiskLevel(str, Enum):
 class AuthMechanism(str, Enum):
     """Authentication mechanism detected in a session flow.
 
-    Ref: coding_standards.instructions.md §1.3
+    Ref: .github/instructions/coding_standards.instructions.md §1.3
         - COOKIE:      Session relies on cookies (CSRF-relevant)
         - HEADER_ONLY: Bearer / API-key only (triggers short-circuit)
         - MIXED:       Both cookies and auth headers present

@@ -6,11 +6,14 @@
 //	Linux Wayland: wl-copy
 //	macOS:        pbcopy
 //	WSL:          clip.exe
+//	OSC 52:       terminal escape sequence (iTerm2, Alacritty, kitty, …)
 //	Fallback:     write to /tmp/csrf-shield-curl.txt
 package clipboard
 
 import (
+	"encoding/base64"
 	"fmt"
+	"io"
 	"os"
 	"os/exec"
 	"runtime"
@@ -30,14 +33,16 @@ func Copy(text string) string {
 		} else if _, err := exec.LookPath("xclip"); err == nil {
 			cmd = exec.Command("xclip", "-selection", "clipboard")
 		} else {
-			return writeToFile(text)
+			// OSC 52 works in modern terminals (kitty, Alacritty, iTerm2).
+			return osc52Write(text)
 		}
 	default:
 		// Try clip.exe for WSL.
 		if _, err := exec.LookPath("clip.exe"); err == nil {
 			cmd = exec.Command("clip.exe")
 		} else {
-			return writeToFile(text)
+			// OSC 52 works in modern terminals.
+			return osc52Write(text)
 		}
 	}
 
@@ -46,6 +51,18 @@ func Copy(text string) string {
 		return writeToFile(text)
 	}
 	return "Copied to clipboard"
+}
+
+// osc52Write copies text via the OSC 52 terminal escape sequence.
+// Supported by iTerm2, Alacritty, kitty, foot, and others.
+// Falls back to a temp file if writing to stdout fails.
+func osc52Write(text string) string {
+	b64 := base64.StdEncoding.EncodeToString([]byte(text))
+	_, err := fmt.Fprintf(os.Stdout, "\033]52;c;%s\007", b64)
+	if err != nil {
+		return writeToFile(text)
+	}
+	return "Copied via OSC 52 (check terminal clipboard)"
 }
 
 func writeToFile(text string) string {
@@ -67,7 +84,7 @@ func stringReader(s string) *stringReaderImpl {
 
 func (r *stringReaderImpl) Read(p []byte) (int, error) {
 	if r.pos >= len(r.data) {
-		return 0, fmt.Errorf("EOF")
+		return 0, io.EOF
 	}
 	n := copy(p, r.data[r.pos:])
 	r.pos += n

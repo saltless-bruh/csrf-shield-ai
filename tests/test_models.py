@@ -4,7 +4,7 @@ Tests all 3 Enums and 4 dataclasses in src/input/models.py.
 
 Ref:
     - spec/Design.md §3.1
-    - .agent/instructions/testing_strategy.instructions.md §2.1
+    - .github/instructions/testing_strategy.instructions.md §2.1
 """
 
 from __future__ import annotations
@@ -34,13 +34,13 @@ class TestSeverity:
     """Tests for the Severity enum."""
 
     def test_all_members_exist(self) -> None:
-        """Severity has exactly 5 members: CRITICAL, HIGH, MEDIUM, LOW, INFO."""
+        """Severity has exactly 5 members: CRITICAL, HIGH, MEDIUM, LOW, INFO."""  # noqa: E501
         assert len(Severity) == 5
         expected = {"CRITICAL", "HIGH", "MEDIUM", "LOW", "INFO"}
         assert {s.value for s in Severity} == expected
 
     def test_string_comparison(self) -> None:
-        """Severity members compare equal to their string values (str mixin)."""
+        """Severity members compare equal to their string values (str mixin)."""  # noqa: E501
         assert Severity.HIGH == "HIGH"
         assert Severity.INFO == "INFO"
 
@@ -79,7 +79,7 @@ class TestAuthMechanism:
         assert {a.value for a in AuthMechanism} == expected
 
     def test_string_comparison(self) -> None:
-        """AuthMechanism members compare equal to their lowercase string values."""
+        """AuthMechanism members compare equal to their lowercase string values."""  # noqa: E501
         assert AuthMechanism.COOKIE == "cookie"
         assert AuthMechanism.HEADER_ONLY == "header_only"
         assert AuthMechanism.NONE == "none"
@@ -100,7 +100,7 @@ class TestHttpExchange:
     def test_basic_construction(self, sample_exchange: HttpExchange) -> None:
         """HttpExchange can be constructed with all required fields."""
         assert sample_exchange.request_method == "POST"
-        assert sample_exchange.request_url == "https://example.com/profile/update"
+        assert sample_exchange.request_url == "https://example.com/profile/update"  # noqa: E501
         assert sample_exchange.response_status == 200
 
     def test_frozen_immutability(self, sample_exchange: HttpExchange) -> None:
@@ -168,18 +168,18 @@ class TestHttpExchange:
 class TestSessionFlow:
     """Tests for the SessionFlow dataclass."""
 
-    def test_basic_construction(self, sample_session_flow: SessionFlow) -> None:
+    def test_basic_construction(self, sample_session_flow: SessionFlow) -> None:  # noqa: E501
         """SessionFlow can be constructed with required fields."""
         assert sample_session_flow.session_id == "test-session"
         assert sample_session_flow.auth_mechanism == AuthMechanism.COOKIE
         assert len(sample_session_flow.exchanges) == 1
 
-    def test_frozen_immutability(self, sample_session_flow: SessionFlow) -> None:
+    def test_frozen_immutability(self, sample_session_flow: SessionFlow) -> None:  # noqa: E501
         """SessionFlow fields cannot be modified after construction."""
         with pytest.raises(FrozenInstanceError):
             sample_session_flow.session_id = "hacked"  # type: ignore[misc]
 
-    def test_auth_mechanism_is_enum(self, sample_session_flow: SessionFlow) -> None:
+    def test_auth_mechanism_is_enum(self, sample_session_flow: SessionFlow) -> None:  # noqa: E501
         """auth_mechanism field is an AuthMechanism enum instance."""
         assert isinstance(sample_session_flow.auth_mechanism, AuthMechanism)
 
@@ -224,7 +224,7 @@ class TestFinding:
         with pytest.raises(FrozenInstanceError):
             finding.severity = Severity.LOW  # type: ignore[misc]
 
-    def test_info_severity_for_csrf_011(self, bearer_exchange: HttpExchange) -> None:
+    def test_info_severity_for_csrf_011(self, bearer_exchange: HttpExchange) -> None:  # noqa: E501
         """CSRF-011 finding uses INFO severity (short-circuit)."""
         finding = Finding(
             rule_id="CSRF-011",

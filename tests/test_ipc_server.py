@@ -14,7 +14,7 @@ from __future__ import annotations
 import json
 from datetime import datetime
 from pathlib import Path
-
+from unittest.mock import patch, MagicMock
 
 import pytest
 
@@ -32,6 +32,7 @@ from src.ipc_server import (
     serialize_finding,
     serialize_flow_summary,
 )
+from src.analysis.static_analyzer import StaticAnalysisOutput
 
 
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -59,7 +60,7 @@ def _ex() -> HttpExchange:
     )
 
 
-def _finding(rule_id: str = "CSRF-001", severity: Severity = Severity.HIGH) -> Finding:
+def _finding(rule_id: str = "CSRF-001", severity: Severity = Severity.HIGH) -> Finding:  # noqa: E501
     return Finding(
         rule_id=rule_id,
         rule_name="Test Rule",
@@ -103,13 +104,15 @@ class TestSerialization:
         assert "request_headers" not in data["exchange"]
 
     def test_static_score_computation(self) -> None:
-        """static_score = sum(severities) / max_possible."""
+        """static_score = sum(severities) / max_possible_severity."""
         findings = [
             _finding("CSRF-001", Severity.HIGH),
             _finding("CSRF-005", Severity.MEDIUM),
         ]
         score = compute_static_score(findings)
-        expected = (0.75 + 0.5) / 11.0
+        # HIGH=0.75, MEDIUM=0.5; MAX_POSSIBLE_SEVERITY=6.25 (sum of all 11
+        # rule severities per risk_scorer.py).
+        expected = (0.75 + 0.5) / 6.25
         assert abs(score - expected) < 0.01
 
     def test_static_score_empty(self) -> None:
@@ -243,6 +246,97 @@ class TestAnalyzeFlow:
         assert result["summary"]["risk_score"] >= 0
         assert result["summary"]["risk_level"] in (
             "LOW", "MEDIUM", "HIGH", "CRITICAL"
+        )
+
+    def test_analyze_per_exchange_findings_isolation(
+        self, loaded_server: IpcServer
+    ) -> None:
+        """Findings in each exchange result must be scoped to that exchange.
+
+        Regression test for B1: previously all session-level findings were
+        duplicated into every exchange result.
+        """
+        ex_a = HttpExchange(
+            request_method="POST",
+            request_url="https://example.com/api/transfer",
+            request_headers={},
+            request_cookies={"session_id": "abc"},
+            request_body="amount=100",
+            request_content_type="application/x-www-form-urlencoded",
+            response_status=200,
+            response_headers={},
+            response_body='{"ok": true}',
+            timestamp=datetime(2026, 2, 28),
+        )
+        ex_b = HttpExchange(
+            request_method="POST",
+            request_url="https://example.com/api/settings",
+            request_headers={},
+            request_cookies={"session_id": "abc"},
+            request_body="theme=dark",
+            request_content_type="application/x-www-form-urlencoded",
+            response_status=200,
+            response_headers={},
+            response_body='{"ok": true}',
+            timestamp=datetime(2026, 2, 28),
+        )
+        finding_a = Finding(
+            rule_id="CSRF-001",
+            rule_name="Missing CSRF Token",
+            severity=Severity.HIGH,
+            description="No CSRF token on /api/transfer",
+            evidence="",
+            exchange=ex_a,
+        )
+        finding_b = Finding(
+            rule_id="CSRF-002",
+            rule_name="SameSite absent",
+            severity=Severity.MEDIUM,
+            description="No SameSite on /api/settings",
+            evidence="",
+            exchange=ex_b,
+        )
+        # Minimal feature vector with all required columns filled to 0.
+        import json
+        from pathlib import Path as _P
+        _cols_path = _P(__file__).resolve().parent.parent / "models" / "feature_columns.json"
+        _zero_vec = {c: 0 for c in json.load(_cols_path.open())}
+        fake_output = StaticAnalysisOutput(
+            findings=[finding_a, finding_b],
+            feature_vectors={
+                "POST https://example.com/api/transfer": _zero_vec,
+                "POST https://example.com/api/settings": _zero_vec,
+            },
+        )
+        flow = SessionFlow(
+            session_id="test-isolation",
+            exchanges=[ex_a, ex_b],
+            auth_mechanism=AuthMechanism.COOKIE,
+        )
+        loaded_server._flows.append(flow)
+        loaded_server._write = lambda data: None
+
+        with patch.object(loaded_server._analyzer, "analyze_flow", return_value=fake_output):
+            resp = loaded_server.handle_request({
+                "id": 99,
+                "method": "analyze_flow",
+                "params": {"session_id": "test-isolation"},
+            })
+
+        results = resp["result"]["results"]
+        assert len(results) == 2
+
+        # Build a map from endpoint path to findings rule_ids.
+        findings_by_path = {
+            r["endpoint"]: [f["rule_id"] for f in r["findings"]]
+            for r in results
+        }
+        # Each endpoint must contain only its own finding.
+        assert findings_by_path.get("/api/transfer") == ["CSRF-001"], (
+            "/api/transfer should only have CSRF-001"
+        )
+        assert findings_by_path.get("/api/settings") == ["CSRF-002"], (
+            "/api/settings should only have CSRF-002"
         )
 
     def test_analyze_flow_not_found(

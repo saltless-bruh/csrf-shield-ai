@@ -49,13 +49,13 @@ class Csrf010(BaseRule):
 
         # Check if this is a JSON endpoint
         resp_ct = exchange.response_headers.get(
-            "Content-Type", ""
+            "content-type", ""
         ).lower()
         if "application/json" not in resp_ct:
             return []
 
         acao = exchange.response_headers.get(
-            "Access-Control-Allow-Origin", ""
+            "access-control-allow-origin", ""
         )
 
         # A specific origin is considered safe

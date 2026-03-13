@@ -8,7 +8,7 @@ pipeline compatibility.
 Features:
     1.  has_csrf_token_in_form      (0/1)
     2.  has_csrf_token_in_header    (0/1)
-    3.  has_samesite_cookie         (str: None/Lax/Strict/absent)
+    3.  has_samesite_cookie         (str: None/Lax/Strict/absent)  # "absent" when not set
     4.  has_origin_check            (0/1)
     5.  has_referer_check           (0/1)
     6.  http_method                 (str: GET/POST/PUT/DELETE/PATCH)
@@ -36,9 +36,8 @@ from urllib.parse import urlparse
 from src.analysis.rules.base_rule import BaseRule
 from src.analysis.token_identifier import (
     TokenMatch,
+    extract_token_from_body,
     identify_csrf_header,
-    identify_csrf_token,
-    parse_form_params,
     shannon_entropy,
 )
 from src.input.models import HttpExchange, SessionFlow
@@ -123,8 +122,7 @@ def extract_features(
     Ref: PROPOSAL.md §9.3.2, FR-301, T-231
     """
     # -- Token identification --
-    params = parse_form_params(exchange.request_body)
-    form_token = identify_csrf_token(params)
+    form_token = extract_token_from_body(exchange.request_body)
     header_token = identify_csrf_header(
         exchange.request_headers
     )
@@ -154,7 +152,10 @@ def extract_features(
     # -- Auth / cookies --
     requires_auth = _detect_requires_auth(exchange)
     response_sets_cookie = int(
-        "Set-Cookie" in exchange.response_headers
+        any(
+            k.lower() == "set-cookie"
+            for k in exchange.response_headers
+        )
     )
 
     # -- Endpoint sensitivity --
@@ -299,10 +300,15 @@ def _extract_samesite(exchange: HttpExchange) -> str:
     """Extract SameSite value from Set-Cookie response header.
 
     Returns one of: ``"None"``, ``"Lax"``, ``"Strict"``,
-    ``"absent"``.  Only inspects session cookies.
+    ``"absent"`` (when the SameSite attribute is not present).
+    Only inspects session cookies.
+
+    Note:
+        ``"absent"`` matches the training data column name
+        ``has_samesite_cookie_absent`` in ``models/feature_columns.json``.
     """
     set_cookie = exchange.response_headers.get(
-        "Set-Cookie", ""
+        "set-cookie", ""
     )
     if not set_cookie:
         return "absent"
@@ -332,11 +338,11 @@ def _detect_origin_check(exchange: HttpExchange) -> int:
     Heuristic: ``Vary: Origin`` present, or response is 4xx
     when Origin header is present.
     """
-    vary = exchange.response_headers.get("Vary", "")
+    vary = exchange.response_headers.get("vary", "")
     if "origin" in vary.lower():
         return 1
 
-    origin = exchange.request_headers.get("Origin", "")
+    origin = exchange.request_headers.get("origin", "")
     if origin and 400 <= exchange.response_status < 500:
         return 1
 
@@ -345,7 +351,7 @@ def _detect_origin_check(exchange: HttpExchange) -> int:
 
 def _detect_referer_check(exchange: HttpExchange) -> int:
     """Detect if the server validates the Referer header."""
-    vary = exchange.response_headers.get("Vary", "")
+    vary = exchange.response_headers.get("vary", "")
     return int("referer" in vary.lower())
 
 
@@ -370,8 +376,7 @@ def _detect_token_changes(
         if not other.request_body:
             continue
 
-        other_params = parse_form_params(other.request_body)
-        other_token = identify_csrf_token(other_params)
+        other_token = extract_token_from_body(other.request_body)
 
         if other_token is None:
             continue
@@ -382,9 +387,10 @@ def _detect_token_changes(
         else:
             return 0  # Same token — static
 
-    # Only one state-changing exchange — can't determine;
-    # assume rotating (benefit of doubt).
-    return 1
+    # Only one state-changing exchange — can't determine
+    # rotation. Return 0 (conservative — treat unknown as
+    # potentially static rather than giving false confidence).
+    return 0
 
 
 def _simplify_content_type(raw: str) -> str:

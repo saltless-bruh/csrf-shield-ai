@@ -12,25 +12,31 @@ Ref:
 from __future__ import annotations
 
 import logging
-from typing import FrozenSet, List, Tuple
+from typing import FrozenSet, List, Tuple, Dict, Any
 from urllib.parse import parse_qs, urlparse
 
 from src.analysis.rules.base_rule import BaseRule
+from src.config import SETTINGS
 from src.input.models import Finding, HttpExchange, SessionFlow, Severity
 
 logger = logging.getLogger(__name__)
 
-# From config/rules.yaml CSRF-008 detection_patterns.
-_DANGEROUS_URL_PATTERNS: Tuple[str, ...] = (
-    "/delete",
-    "/update",
-    "/add",
-    "/remove",
-    "/transfer",
+# Pull configuration rules dynamically from config/rules.yaml
+_RULE_CONFIG: Dict[str, Any] = next(
+    (r for r in SETTINGS.get("rules", []) if r.get("id") == "CSRF-008"), {}
+)
+_DETECTION_PATTERNS = _RULE_CONFIG.get("detection_patterns", {})
+
+_DANGEROUS_URL_PATTERNS: Tuple[str, ...] = tuple(
+    _DETECTION_PATTERNS.get("url_patterns", [
+        "/delete", "/update", "/add", "/remove", "/transfer"
+    ])
 )
 
 _DANGEROUS_QUERY_PARAMS: FrozenSet[str] = frozenset(
-    {"action", "op", "do"}
+    _DETECTION_PATTERNS.get("query_params", [
+        "action", "op", "do", "cmd"
+    ])
 )
 
 

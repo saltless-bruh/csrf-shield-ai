@@ -7,7 +7,7 @@ Ref:
     - src/analysis/token_identifier.py
     - docs/proposal/PROPOSAL.md §9.3.1
     - spec/Tasks.md T-204
-    - .agent/instructions/testing_strategy.instructions.md §6
+    - .github/instructions/testing_strategy.instructions.md §6
 """
 
 from __future__ import annotations
@@ -100,7 +100,8 @@ class TestIdentifyCsrfTokenTier1:
 
     def test_identify_token_rails_name(self) -> None:
         """authenticity_token (Rails) → Tier 1 match."""
-        params = {"user[name]": "Bob", "authenticity_token": "railstokenvalue123456"}
+        params = {"user[name]": "Bob",
+                  "authenticity_token": "railstokenvalue123456"}
         match = identify_csrf_token(params)
         assert match is not None
         assert match.name == "authenticity_token"
@@ -196,7 +197,7 @@ class TestIdentifyCsrfTokenTier3:
         assert match is None
 
     def test_identify_token_short_high_entropy_no_tier3_match(self) -> None:
-        """Short value (< 16 chars) is NOT picked up by Tier 3, even if high-entropy."""
+        """Short value (< 16 chars) is NOT picked up by Tier 3, even if high-entropy."""  # noqa: E501
         params = {"tok": "Ab1Cd2Ef3"}  # < 16 chars
         match = identify_csrf_token(params)
         assert match is None
@@ -214,7 +215,7 @@ class TestIdentifyCsrfTokenPriority:
     """Tier priority: Tier 1 wins over Tier 2 wins over Tier 3."""
 
     def test_tier1_wins_over_tier3(self) -> None:
-        """When a param matches Tier 1 by name, Tier 3 entropy is irrelevant."""
+        """When a param matches Tier 1 by name, Tier 3 entropy is irrelevant."""  # noqa: E501
         params = {
             # Tier 1 candidate
             "csrf_token": "short",
@@ -247,7 +248,8 @@ class TestIdentifyCsrfTokenEdgeCases:
 
     def test_identify_token_ordinary_form_fields_returns_none(self) -> None:
         """Regular form fields with no CSRF signals → None."""
-        params = {"username": "alice", "password": "secret", "remember_me": "1"}
+        params = {"username": "alice",
+                  "password": "secret", "remember_me": "1"}
         assert identify_csrf_token(params) is None
 
     def test_identify_token_returns_token_match_type(self) -> None:
@@ -269,8 +271,10 @@ class TestIdentifyCsrfTokenEdgeCases:
     def test_identify_token_custom_min_length(self) -> None:
         """Custom min_token_length kwarg affects Tier 3 triggering."""
         params = {"fld": "abcdefgh"}  # 8 chars, 8 unique → H = 3.0
-        default_match = identify_csrf_token(params)  # default min_length=16 → None
-        short_match = identify_csrf_token(params, min_token_length=8, entropy_threshold=2.0)
+        default_match = identify_csrf_token(
+            params)  # default min_length=16 → None
+        short_match = identify_csrf_token(
+            params, min_token_length=8, entropy_threshold=2.0)
         assert default_match is None
         assert short_match is not None
 

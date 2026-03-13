@@ -20,9 +20,10 @@ from src.analysis.static_analyzer import StaticAnalyzer, StaticAnalysisOutput
 from src.input.flow_reconstructor import reconstruct_flows
 from src.input.har_parser import parse_har_file
 from src.input.models import Finding, SessionFlow
+from src.input.auth_detector import update_flow_auth
 from src.ml.heuristics import apply_heuristics
 from src.ml.predictor import CsrfPredictor
-from src.output.report_generator import AnalysisResult, ReportGenerator
+from src.output.report_generator import ReportAnalysisResult, ReportGenerator
 from src.scoring.risk_scorer import RiskResult, RiskScorer
 
 logger = logging.getLogger(__name__)
@@ -127,7 +128,8 @@ class CsrfPipeline:
         """
         # Phase 1: Parse HAR → exchanges → flows.
         exchanges = parse_har_file(str(har_path))
-        flows = reconstruct_flows(exchanges)
+        raw_flows = reconstruct_flows(exchanges)
+        flows = [update_flow_auth(f) for f in raw_flows]
 
         logger.info(
             "Parsed %s: %d exchanges → %d flows",
@@ -188,7 +190,7 @@ class CsrfPipeline:
             )
 
         # Phase 3: ML prediction + heuristics for each exchange.
-        ml_probabilities: List[float] = []
+        ml_probabilities: List[tuple[float, str, str]] = []
 
         for key, features in static_output.feature_vectors.items():
             # Predict.
@@ -199,37 +201,57 @@ class CsrfPipeline:
             method = parts[0] if len(parts) > 1 else "GET"
             url = parts[1] if len(parts) > 1 else key
 
+            # Scope findings to this exchange only.
+            exchange_obj = next(
+                (
+                    ex
+                    for ex in flow.exchanges
+                    if f"{ex.request_method} {ex.request_url}" == key
+                ),
+                None,
+            )
+            exchange_findings = (
+                [f for f in static_output.findings if f.exchange is exchange_obj]
+                if exchange_obj is not None
+                else list(static_output.findings)
+            )
+
             # Apply heuristics.
             adjusted = apply_heuristics(
                 prob,
-                static_output.findings,
+                exchange_findings,
                 url,
                 method,
             )
-            ml_probabilities.append(adjusted)
+            ml_probabilities.append((adjusted, url, method))
 
         # Use max probability across exchanges (worst case).
-        ml_probability = (
-            max(ml_probabilities) if ml_probabilities else 0.0
-        )
+        # Also use the URL/method of the worst-case exchange
+        # for context modifier evaluation.
+        if ml_probabilities:
+            best = max(ml_probabilities, key=lambda t: t[0])
+            ml_probability = best[0]
+            worst_url = best[1]
+            worst_method = best[2]
+        else:
+            ml_probability = 0.0
+            worst_url = (
+                flow.exchanges[0].request_url
+                if flow.exchanges
+                else ""
+            )
+            worst_method = (
+                flow.exchanges[0].request_method
+                if flow.exchanges
+                else "GET"
+            )
 
         # Phase 4: Risk scoring.
-        url = (
-            flow.exchanges[0].request_url
-            if flow.exchanges
-            else ""
-        )
-        method = (
-            flow.exchanges[0].request_method
-            if flow.exchanges
-            else "GET"
-        )
-
         risk = self._scorer.calculate_risk(
             ml_probability=ml_probability,
             findings=static_output.findings,
-            url=url,
-            http_method=method,
+            url=worst_url,
+            http_method=worst_method,
         )
 
         return FlowResult(
@@ -258,7 +280,7 @@ class CsrfPipeline:
             key=lambda fr: fr.risk.score,
         )
 
-        analysis_result = AnalysisResult(
+        analysis_result = ReportAnalysisResult(
             findings=all_findings,
             risk=best.risk,
             ml_probability=best.ml_probability,

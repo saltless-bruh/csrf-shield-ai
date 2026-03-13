@@ -13,8 +13,8 @@ type Request struct {
 
 // Response is a successful response from the Python backend.
 type Response struct {
-	ID     int                    `json:"id"`
-	Result map[string]interface{} `json:"result,omitempty"`
+	ID     int         `json:"id"`
+	Result interface{} `json:"result,omitempty"`
 }
 
 // ErrorDetail is the error payload in an error response.
@@ -49,8 +49,8 @@ type Progress struct {
 
 // RawMessage is used for initial parsing to determine message type.
 type RawMessage struct {
-	ID       int                    `json:"id"`
-	Result   map[string]interface{} `json:"result,omitempty"`
-	Error    *ErrorDetail           `json:"error,omitempty"`
-	Progress *Progress              `json:"progress,omitempty"`
+	ID       int          `json:"id"`
+	Result   interface{}  `json:"result,omitempty"`
+	Error    *ErrorDetail `json:"error,omitempty"`
+	Progress *Progress    `json:"progress,omitempty"`
 }

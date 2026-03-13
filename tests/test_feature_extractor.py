@@ -127,7 +127,7 @@ class TestExtractFeatures:
 
     def test_csrf_token_in_header_absent(self) -> None:
         """No anti-CSRF header → has_csrf_token_in_header = 0."""
-        ex = _ex(request_headers={"Content-Type": "text/html"})
+        ex = _ex(request_headers={"content-type": "text/html"})
         f = extract_features(ex, _flow(ex))
         assert f["has_csrf_token_in_header"] == 0
 
@@ -176,7 +176,7 @@ class TestExtractFeatures:
     def test_response_sets_cookie(self) -> None:
         """Set-Cookie in response → response_sets_cookie = 1."""
         ex = _ex(
-            response_headers={"Set-Cookie": "sid=xyz; Path=/"},
+            response_headers={"set-cookie": "sid=xyz; Path=/"},
         )
         f = extract_features(ex, _flow(ex))
         assert f["response_sets_cookie"] == 1
@@ -199,7 +199,7 @@ class TestSameSiteDetection:
     def test_samesite_lax(self) -> None:
         ex = _ex(
             response_headers={
-                "Set-Cookie": "session_id=abc; SameSite=Lax"
+                "set-cookie": "session_id=abc; SameSite=Lax"
             },
         )
         f = extract_features(ex, _flow(ex))
@@ -208,7 +208,7 @@ class TestSameSiteDetection:
     def test_samesite_strict(self) -> None:
         ex = _ex(
             response_headers={
-                "Set-Cookie": "session_id=abc; SameSite=Strict"
+                "set-cookie": "session_id=abc; SameSite=Strict"
             },
         )
         f = extract_features(ex, _flow(ex))
@@ -217,22 +217,23 @@ class TestSameSiteDetection:
     def test_samesite_none(self) -> None:
         ex = _ex(
             response_headers={
-                "Set-Cookie": "session_id=abc; SameSite=None; Secure"
+                "set-cookie": "session_id=abc; SameSite=None; Secure"
             },
         )
         f = extract_features(ex, _flow(ex))
         assert f["has_samesite_cookie"] == "None"
 
-    def test_samesite_absent(self) -> None:
+    def test_samesite_missing(self) -> None:
         ex = _ex(
             response_headers={
-                "Set-Cookie": "session_id=abc; Path=/"
+                "set-cookie": "session_id=abc; Path=/"
             },
         )
         f = extract_features(ex, _flow(ex))
+        # "absent" matches training data and feature_columns.json
         assert f["has_samesite_cookie"] == "absent"
 
-    def test_no_set_cookie_returns_absent(self) -> None:
+    def test_no_set_cookie_returns_missing(self) -> None:
         ex = _ex(response_headers={})
         f = extract_features(ex, _flow(ex))
         assert f["has_samesite_cookie"] == "absent"
@@ -294,13 +295,13 @@ class TestOriginRefererChecks:
     """has_origin_check and has_referer_check features."""
 
     def test_vary_origin_detected(self) -> None:
-        ex = _ex(response_headers={"Vary": "Origin"})
+        ex = _ex(response_headers={"vary": "origin"})
         f = extract_features(ex, _flow(ex))
         assert f["has_origin_check"] == 1
 
     def test_origin_403_detected(self) -> None:
         ex = _ex(
-            request_headers={"Origin": "https://evil.com"},
+            request_headers={"origin": "https://evil.com"},
             response_status=403,
         )
         f = extract_features(ex, _flow(ex))
@@ -312,7 +313,7 @@ class TestOriginRefererChecks:
         assert f["has_origin_check"] == 0
 
     def test_vary_referer_detected(self) -> None:
-        ex = _ex(response_headers={"Vary": "Referer"})
+        ex = _ex(response_headers={"vary": "Referer"})
         f = extract_features(ex, _flow(ex))
         assert f["has_referer_check"] == 1
 

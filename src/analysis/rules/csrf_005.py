@@ -48,14 +48,19 @@ class Csrf005(BaseRule):
         """Check Set-Cookie headers for missing SameSite."""
         findings: List[Finding] = []
 
-        set_cookie = exchange.response_headers.get("Set-Cookie", "")
-        if not set_cookie:
+        set_cookie_value = ""
+        for k, v in exchange.response_headers.items():
+            if k.lower() == "set-cookie":
+                set_cookie_value = v
+                break
+
+        if not set_cookie_value:
             return []
 
         # A response may set multiple cookies via comma-separated
         # or multiple Set-Cookie headers; HAR parser joins them.
         # We also handle the single-cookie case.
-        for cookie_str in _split_set_cookies(set_cookie):
+        for cookie_str in _split_set_cookies(set_cookie_value):
             cookie_name = _extract_cookie_name(cookie_str)
             if not _is_session_cookie(cookie_name):
                 continue
@@ -99,11 +104,16 @@ class Csrf006(BaseRule):
         """Check for SameSite=None without Secure flag."""
         findings: List[Finding] = []
 
-        set_cookie = exchange.response_headers.get("Set-Cookie", "")
-        if not set_cookie:
+        set_cookie_value = ""
+        for k, v in exchange.response_headers.items():
+            if k.lower() == "set-cookie":
+                set_cookie_value = v
+                break
+                
+        if not set_cookie_value:
             return []
 
-        for cookie_str in _split_set_cookies(set_cookie):
+        for cookie_str in _split_set_cookies(set_cookie_value):
             cookie_name = _extract_cookie_name(cookie_str)
             if not _is_session_cookie(cookie_name):
                 continue
@@ -132,24 +142,15 @@ class Csrf006(BaseRule):
 def _split_set_cookies(header_value: str) -> List[str]:
     """Split a Set-Cookie header value into individual cookie strings.
 
-    HAR files may join multiple Set-Cookie headers with ', '.
-    We split on ', ' only where it separates cookie definitions
-    (heuristic: split on ', ' followed by a key=value pair).
-    For simplicity, we also handle newline-separated values.
+    har_parser.py separates multiple Set-Cookie headers with a newline.
     """
-    # Simple approach: split on newline first, then on ', ' only
-    # if the next segment looks like a cookie name (contains '=').
     parts: List[str] = []
     for line in header_value.split("\n"):
         line = line.strip()
         if line:
             parts.append(line)
 
-    if len(parts) <= 1 and ", " in header_value:
-        # Try comma splitting as fallback
-        parts = [p.strip() for p in header_value.split(", ")]
-
-    return [p for p in parts if p]
+    return parts
 
 
 def _extract_cookie_name(cookie_str: str) -> str:

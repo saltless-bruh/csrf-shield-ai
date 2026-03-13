@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analysis Results - CSRF Shield AI</title>
+</head>
+<body>
+    <h1>Session Analysis: {{ filename }}</h1>
+    <a href="/">← Go Back</a>
+    
+    <hr>
+    
+    <h2>Overall Risk</h2>
+    <p><strong>Score:</strong> {{ result.risk.score }} / 100</p>
+    <p><strong>Classification:</strong> {{ result.risk.level.value }}</p>
+    <p><strong>Exchanges Evaluated:</strong> {{ exchange_count }}</p>
+
+    <h3>Vulnerability Factors (ML Probability = {{ "%.2f"|format(result.ml_probability) }})</h3>
+    <ul>
+        {% for modifier in result.risk.modifiers_applied %}
+            <li>{{ modifier }}</li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+
+    <h2>Static Findings</h2>
+    {% if result.findings %}
+        <ul>
+        {% for finding in result.findings %}
+            <li>
+                <strong>{{ finding.rule_id }} ({{ finding.severity.name }})</strong>: {{ finding.rule_name }} <br>
+                <em>{{ finding.description }}</em><br>
+                Evidence: <code>{{ finding.evidence }}</code>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No static analysis findings detected. All core protections appear intact.</p>
+    {% endif %}
+
+    <h2>Recommendations</h2>
+    <ul>
+    <!-- In real practice we'd fetch get_remediation here, but simplicity for MVP -->
+    <li>Enable strict CSRF Token checks on state-changing endpoints.</li>
+    <li>Migrate session cookies to explicitly use `SameSite=Lax`.</li>
+    </ul>
+
+</body>
+</html>

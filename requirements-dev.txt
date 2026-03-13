@@ -1,5 +1,5 @@
 # CSRF Shield AI — Dev Dependencies
-# Ref: .agent/instructions/coding_standards.instructions.md
+# Ref: .github/instructions/coding_standards.instructions.md
 
 -r requirements.txt
 

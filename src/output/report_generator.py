@@ -43,7 +43,7 @@ class RemediationItem:
 
 
 @dataclass
-class AnalysisResult:
+class ReportAnalysisResult:
     """Aggregated analysis result for a single session/flow.
 
     This is the input to the report generator — it aggregates
@@ -100,7 +100,7 @@ class ReportGenerator:
         )
 
     def _prepare_data(
-        self, result: AnalysisResult
+        self, result: ReportAnalysisResult
     ) -> ReportData:
         """Transform AnalysisResult into render-ready data."""
         # Build findings list with remediation.
@@ -155,7 +155,7 @@ class ReportGenerator:
 
     def generate_json(
         self,
-        result: AnalysisResult,
+        result: ReportAnalysisResult,
         output_path: Path,
     ) -> Path:
         """Generate a JSON analysis report.
@@ -199,7 +199,7 @@ class ReportGenerator:
 
     def generate_html(
         self,
-        result: AnalysisResult,
+        result: ReportAnalysisResult,
         output_path: Path,
     ) -> Path:
         """Generate an HTML analysis report.

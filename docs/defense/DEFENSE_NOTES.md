@@ -16,6 +16,7 @@
 6. [Ethical Considerations](#6-ethical-considerations)
 7. [Scalability & Performance](#7-scalability--performance)
 8. [Comparison with Commercial Tools](#8-comparison-with-commercial-tools)
+9. [Go TUI Flat Package Layout](#9-go-tui-flat-package-layout)
 
 ---
 
@@ -341,3 +342,54 @@ If pressed for time, remember these **three core differentiators**:
 ---
 
 > **Tip:** Practice answering each question in **under 60 seconds**. If the supervisor wants more detail, they'll ask follow-ups — don't over-explain unprompted.
+
+---
+
+## 9. Go TUI Flat Package Layout
+
+### 9.1 Likely Question
+
+> *"Your proposal (§11) describes `panels/` and `modals/` subdirectories inside `internal/ui/`. Your code uses a flat layout with all files in `internal/ui/`. Why the deviation?"*
+
+### 9.2 The Short Answer
+
+> *"Go requires that all methods on a type live in the same package. Subdirectories create separate packages, which means `*App` methods defined in `internal/ui/panels/` cannot access unexported fields from `internal/ui/`. The flat layout is the Go-idiomatic solution and is functionally identical to the proposal's intent."*
+
+### 9.3 Technical Detail
+
+The proposal (CLI_TUI_PROPOSAL.md §11) envisioned:
+
+```
+internal/ui/
+  panels/
+    sessions.go
+    results.go
+  modals/
+    raw_modal.go
+```
+
+In Go, each directory is a distinct package. If `panels/` is a separate package, it cannot call unexported `*App` receiver methods or access private fields. This forces every cross-component interaction through exported APIs, which adds unnecessary boilerplate for a single-binary TUI.
+
+**The implemented flat layout:**
+
+```
+internal/ui/
+  app.go          ← *App struct + wiring
+  sessions_panel.go
+  results_panel.go
+  raw_modal.go
+  ...             ← 14 files total, all package `ui`
+```
+
+All 14 files share `package ui`, so panel and modal code can call `a.renderResults()`, access `a.state`, etc., with no exported surface area bloat.
+
+### 9.4 Risk Assessment
+
+| Risk | Likelihood | Mitigation |
+|------|-----------|------------|
+| Namespace pollution | LOW | Files are named by concern (`sessions_panel.go`, `raw_modal.go`) |
+| Merge conflicts | LOW | Each concern lives in its own file |
+| Testability | LOW | `_test.go` files in same package have full access |
+
+**Verdict:** Accepted deviation. Flat layout is Go-idiomatic, passes `go vet ./...` and `go build ./...`, and matches the proposal's component decomposition intent at the file level rather than the directory level.
+

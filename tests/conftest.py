@@ -1,6 +1,6 @@
 """Shared pytest fixtures for CSRF Shield AI test suite.
 
-Ref: .agent/instructions/testing_strategy.instructions.md §2.2
+Ref: .github/instructions/testing_strategy.instructions.md §2.2
 
 Provides reusable test data objects used across unit and integration tests.
 All fixtures return real dataclass instances from src.input.models.
@@ -33,12 +33,12 @@ def sample_exchange() -> HttpExchange:
     return HttpExchange(
         request_method="POST",
         request_url="https://example.com/profile/update",
-        request_headers={"Content-Type": "application/x-www-form-urlencoded"},
+        request_headers={"content-type": "application/x-www-form-urlencoded"},
         request_cookies={"session_id": "abc123"},
         request_body="name=test&csrf_token=randomtoken123456",
         request_content_type="application/x-www-form-urlencoded",
         response_status=200,
-        response_headers={"Set-Cookie": "session_id=abc123; SameSite=Lax"},
+        response_headers={"set-cookie": "session_id=abc123; SameSite=Lax"},
         response_body="<html>OK</html>",
         timestamp=datetime(2026, 2, 24, 12, 0, 0),
     )
@@ -64,14 +64,14 @@ def bearer_exchange() -> HttpExchange:
         request_method="GET",
         request_url="https://api.example.com/users/me",
         request_headers={
-            "Content-Type": "application/json",
-            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+            "content-type": "application/json",
+            "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
         },
         request_cookies={},
         request_body=None,
         request_content_type="application/json",
         response_status=200,
-        response_headers={"Content-Type": "application/json"},
+        response_headers={"content-type": "application/json"},
         response_body='{"id": 1, "name": "Test User"}',
         timestamp=datetime(2026, 2, 24, 12, 0, 0),
     )
@@ -94,7 +94,7 @@ def sample_finding(sample_exchange: HttpExchange) -> Finding:
         rule_id="CSRF-001",
         rule_name="Missing CSRF Token in Form",
         severity=Severity.HIGH,
-        description="State-changing POST request without CSRF token in form body.",
+        description="State-changing POST request without CSRF token in form body.",  # noqa: E501
         evidence="Body contains no known CSRF token parameter.",
         exchange=sample_exchange,
     )

@@ -5,7 +5,7 @@ reproducibility of the generated dataset.
 
 Ref:
     - spec/Tasks.md T-155
-    - .agent/instructions/testing_strategy.instructions.md §2.1
+    - .github/instructions/testing_strategy.instructions.md §2.1
 """
 
 from __future__ import annotations
@@ -79,7 +79,8 @@ class TestSchema:
             for col, val in sample.items():
                 assert val is not None, f"NaN in column {col}"
                 if isinstance(val, float):
-                    assert val == val, f"NaN float in column {col}"  # NaN != NaN
+                    # NaN != NaN
+                    assert val == val, f"NaN float in column {col}"
 
 
 # ---------------------------------------------------------------------------
@@ -154,7 +155,7 @@ class TestValueRanges:
         samples = generate_dataset(100, 100, seed=42)
         for sample in samples:
             assert 0.0 <= sample["endpoint_sensitivity"] <= 1.0, (
-                f"endpoint_sensitivity={sample['endpoint_sensitivity']} out of range"
+                f"endpoint_sensitivity={sample['endpoint_sensitivity']} out of range"  # noqa: E501
             )
 
     def test_samesite_values(self) -> None:
@@ -253,7 +254,8 @@ class TestFeatureDistributions:
         """Most vulnerable samples have no CSRF token in form."""
         rng = random.Random(42)
         samples = [generate_vulnerable_sample(rng) for _ in range(200)]
-        n_no_token = sum(1 for s in samples if s["has_csrf_token_in_form"] == 0)
+        n_no_token = sum(
+            1 for s in samples if s["has_csrf_token_in_form"] == 0)
         # ~90% should have no token (with ~10% noise)
         assert n_no_token >= 160, f"Only {n_no_token}/200 vuln have no token"
 
@@ -261,18 +263,21 @@ class TestFeatureDistributions:
         """Most protected samples have CSRF token in form."""
         rng = random.Random(42)
         samples = [generate_protected_sample(rng) for _ in range(200)]
-        n_has_token = sum(1 for s in samples if s["has_csrf_token_in_form"] == 1)
+        n_has_token = sum(
+            1 for s in samples if s["has_csrf_token_in_form"] == 1)
         # ~90% should have token (with ~10% noise)
         assert n_has_token >= 160, f"Only {n_has_token}/200 prot have token"
 
     def test_protected_higher_entropy(self) -> None:
         """Protected samples have higher mean token entropy than vulnerable."""
         samples = generate_dataset(200, 200, seed=42)
-        vuln_ent = [s["token_entropy"] for s in samples if s[LABEL_COLUMN] == 1]
-        prot_ent = [s["token_entropy"] for s in samples if s[LABEL_COLUMN] == 0]
+        vuln_ent = [s["token_entropy"]
+                    for s in samples if s[LABEL_COLUMN] == 1]
+        prot_ent = [s["token_entropy"]
+                    for s in samples if s[LABEL_COLUMN] == 0]
 
         avg_vuln = sum(vuln_ent) / len(vuln_ent)
         avg_prot = sum(prot_ent) / len(prot_ent)
         assert avg_prot > avg_vuln, (
-            f"Protected entropy ({avg_prot:.2f}) should be > vulnerable ({avg_vuln:.2f})"
+            f"Protected entropy ({avg_prot:.2f}) should be > vulnerable ({avg_vuln:.2f})"  # noqa: E501
         )
