@@ -1,0 +1,328 @@
+{
+  "generated_at": "2026-03-15 21:48:02",
+  "cases": [
+    {
+      "source": "haralyzer",
+      "har_file": "/tmp/csrf_irl_har/haralyzer/tests/data/chrome.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:03,727 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-20 final=0 (LOW)\n2026-03-15 21:48:03,727 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-d09fc6a4: 1 exchanges, 0 findings\n2026-03-15 21:48:03,727 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-20 final=0 (LOW)\n2026-03-15 21:48:03,727 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/chrome_report.json\n2026-03-15 21:48:03,732 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/chrome_report.html\n2026-03-15 21:48:03,732 [INFO] src.pipeline: Pipeline complete: 44 flows, 9 findings, highest=20",
+      "ok": true
+    },
+    {
+      "source": "haralyzer",
+      "har_file": "/tmp/csrf_irl_har/haralyzer/tests/data/cnn-chrome.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:04,589 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-15 final=0 (LOW)\n2026-03-15 21:48:04,589 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-0954a607: 1 exchanges, 0 findings\n2026-03-15 21:48:04,589 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=+0 final=0 (LOW)\n2026-03-15 21:48:04,589 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/cnn-chrome_report.json\n2026-03-15 21:48:04,594 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/cnn-chrome_report.html\n2026-03-15 21:48:04,594 [INFO] src.pipeline: Pipeline complete: 292 flows, 25 findings, highest=20",
+      "ok": true
+    },
+    {
+      "source": "haralyzer",
+      "har_file": "/tmp/csrf_irl_har/haralyzer/tests/data/cnn.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:05,321 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-15 final=0 (LOW)\n2026-03-15 21:48:05,322 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-7c3fb9c1: 1 exchanges, 0 findings\n2026-03-15 21:48:05,322 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-15 final=0 (LOW)\n2026-03-15 21:48:05,322 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/cnn_report.json\n2026-03-15 21:48:05,326 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/cnn_report.html\n2026-03-15 21:48:05,326 [INFO] src.pipeline: Pipeline complete: 145 flows, 1 findings, highest=11",
+      "ok": true
+    },
+    {
+      "source": "haralyzer",
+      "har_file": "/tmp/csrf_irl_har/haralyzer/tests/data/firefox.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:06,219 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-20 final=0 (LOW)\n2026-03-15 21:48:06,219 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-d4c8da04: 1 exchanges, 0 findings\n2026-03-15 21:48:06,219 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-20 final=0 (LOW)\n2026-03-15 21:48:06,220 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/firefox_report.json\n2026-03-15 21:48:06,224 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/firefox_report.html\n2026-03-15 21:48:06,224 [INFO] src.pipeline: Pipeline complete: 50 flows, 33 findings, highest=20",
+      "ok": true
+    },
+    {
+      "source": "haralyzer",
+      "har_file": "/tmp/csrf_irl_har/haralyzer/tests/data/humanssuck.net_duplicate_url.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:06,924 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-15 final=0 (LOW)\n2026-03-15 21:48:06,924 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-282d452f: 1 exchanges, 0 findings\n2026-03-15 21:48:06,924 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-15 final=0 (LOW)\n2026-03-15 21:48:06,924 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/humanssuck.net_duplicate_url_report.json\n2026-03-15 21:48:06,928 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/humanssuck.net_duplicate_url_report.html\n2026-03-15 21:48:06,928 [INFO] src.pipeline: Pipeline complete: 5 flows, 0 findings, highest=0",
+      "ok": true
+    },
+    {
+      "source": "haralyzer",
+      "har_file": "/tmp/csrf_irl_har/haralyzer/tests/data/humanssuck.net.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:07,649 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-15 final=0 (LOW)\n2026-03-15 21:48:07,649 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-57a4b91c: 1 exchanges, 0 findings\n2026-03-15 21:48:07,649 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-15 final=0 (LOW)\n2026-03-15 21:48:07,650 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/humanssuck.net_report.json\n2026-03-15 21:48:07,654 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/humanssuck.net_report.html\n2026-03-15 21:48:07,654 [INFO] src.pipeline: Pipeline complete: 4 flows, 0 findings, highest=0",
+      "ok": true
+    },
+    {
+      "source": "haralyzer",
+      "har_file": "/tmp/csrf_irl_har/haralyzer/tests/data/missing_page.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:08,341 [INFO] src.input.har_parser: Parsed 0 exchanges from missing_page.har\n2026-03-15 21:48:08,341 [INFO] src.pipeline: Parsed missing_page.har: 0 exchanges \u2192 0 flows\n2026-03-15 21:48:08,341 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-15 final=0 (LOW)\n2026-03-15 21:48:08,341 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/missing_page_report.json\n2026-03-15 21:48:08,345 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/missing_page_report.html\n2026-03-15 21:48:08,345 [INFO] src.pipeline: Pipeline complete: 0 flows, 0 findings, highest=N/A",
+      "ok": true
+    },
+    {
+      "source": "haralyzer",
+      "har_file": "/tmp/csrf_irl_har/haralyzer/tests/data/missing_pageref.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:09,042 [INFO] src.input.har_parser: Parsed 0 exchanges from missing_pageref.har\n2026-03-15 21:48:09,042 [INFO] src.pipeline: Parsed missing_pageref.har: 0 exchanges \u2192 0 flows\n2026-03-15 21:48:09,042 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-15 final=0 (LOW)\n2026-03-15 21:48:09,042 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/missing_pageref_report.json\n2026-03-15 21:48:09,046 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/missing_pageref_report.html\n2026-03-15 21:48:09,046 [INFO] src.pipeline: Pipeline complete: 0 flows, 0 findings, highest=N/A",
+      "ok": true
+    },
+    {
+      "source": "haralyzer",
+      "har_file": "/tmp/csrf_irl_har/haralyzer/tests/data/multi_test_1.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:09,726 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-15 final=0 (LOW)\n2026-03-15 21:48:09,726 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-bf10ed42: 1 exchanges, 0 findings\n2026-03-15 21:48:09,726 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-15 final=0 (LOW)\n2026-03-15 21:48:09,726 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/multi_test_1_report.json\n2026-03-15 21:48:09,730 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/multi_test_1_report.html\n2026-03-15 21:48:09,730 [INFO] src.pipeline: Pipeline complete: 4 flows, 0 findings, highest=0",
+      "ok": true
+    },
+    {
+      "source": "haralyzer",
+      "har_file": "/tmp/csrf_irl_har/haralyzer/tests/data/multi_test_2.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:10,418 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-15 final=0 (LOW)\n2026-03-15 21:48:10,418 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-aa4aac9e: 1 exchanges, 0 findings\n2026-03-15 21:48:10,418 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-15 final=0 (LOW)\n2026-03-15 21:48:10,419 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/multi_test_2_report.json\n2026-03-15 21:48:10,423 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/multi_test_2_report.html\n2026-03-15 21:48:10,423 [INFO] src.pipeline: Pipeline complete: 4 flows, 0 findings, highest=0",
+      "ok": true
+    },
+    {
+      "source": "haralyzer",
+      "har_file": "/tmp/csrf_irl_har/haralyzer/tests/data/multi_test_3.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:11,101 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-15 final=0 (LOW)\n2026-03-15 21:48:11,102 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-c0486aca: 1 exchanges, 0 findings\n2026-03-15 21:48:11,102 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-15 final=0 (LOW)\n2026-03-15 21:48:11,102 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/multi_test_3_report.json\n2026-03-15 21:48:11,106 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/multi_test_3_report.html\n2026-03-15 21:48:11,106 [INFO] src.pipeline: Pipeline complete: 4 flows, 0 findings, highest=0",
+      "ok": true
+    },
+    {
+      "source": "haralyzer",
+      "har_file": "/tmp/csrf_irl_har/haralyzer/tests/data/multi_test_4.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:11,790 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-15 final=0 (LOW)\n2026-03-15 21:48:11,790 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-28fe3d3e: 1 exchanges, 0 findings\n2026-03-15 21:48:11,790 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-15 final=0 (LOW)\n2026-03-15 21:48:11,790 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/multi_test_4_report.json\n2026-03-15 21:48:11,794 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/multi_test_4_report.html\n2026-03-15 21:48:11,794 [INFO] src.pipeline: Pipeline complete: 4 flows, 0 findings, highest=0",
+      "ok": true
+    },
+    {
+      "source": "haralyzer",
+      "har_file": "/tmp/csrf_irl_har/haralyzer/tests/data/no_title.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:12,464 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-15 final=0 (LOW)\n2026-03-15 21:48:12,464 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-dbb66cb7: 1 exchanges, 0 findings\n2026-03-15 21:48:12,464 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-15 final=0 (LOW)\n2026-03-15 21:48:12,464 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/no_title_report.json\n2026-03-15 21:48:12,468 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/no_title_report.html\n2026-03-15 21:48:12,468 [INFO] src.pipeline: Pipeline complete: 4 flows, 0 findings, highest=0",
+      "ok": true
+    },
+    {
+      "source": "haralyzer",
+      "har_file": "/tmp/csrf_irl_har/haralyzer/tests/data/single_entry.har",
+      "exit_code": 1,
+      "report_exists": false,
+      "report_parsed": false,
+      "stderr_tail": "2026-03-15 21:48:13,129 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai_vscode/config/rules.yaml\n2026-03-15 21:48:13,143 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai_vscode/models/csrf_model.pkl (26 features)\n\u274c Pipeline error: Missing required 'log' key in HAR data",
+      "ok": false
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/application-form-encoded.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:13,851 [INFO] src.pipeline: Parsed application-form-encoded.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:13,851 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-2be07e18: 1 exchanges, 4 findings\n2026-03-15 21:48:13,867 [INFO] src.scoring.risk_scorer: Risk: base=45.9 modifiers=-20 final=26 (MEDIUM)\n2026-03-15 21:48:13,868 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/application-form-encoded_report.json\n2026-03-15 21:48:13,872 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/application-form-encoded_report.html\n2026-03-15 21:48:13,872 [INFO] src.pipeline: Pipeline complete: 1 flows, 4 findings, highest=26",
+      "ok": true
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/application-json.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:14,582 [INFO] src.pipeline: Parsed application-json.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:14,582 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-3cc7e892: 1 exchanges, 3 findings\n2026-03-15 21:48:14,598 [INFO] src.scoring.risk_scorer: Risk: base=39.8 modifiers=-20 final=20 (LOW)\n2026-03-15 21:48:14,598 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/application-json_report.json\n2026-03-15 21:48:14,603 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/application-json_report.html\n2026-03-15 21:48:14,603 [INFO] src.pipeline: Pipeline complete: 1 flows, 3 findings, highest=20",
+      "ok": true
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/application-zip.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:15,319 [INFO] src.pipeline: Parsed application-zip.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:15,320 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-69ec12d2: 1 exchanges, 3 findings\n2026-03-15 21:48:15,336 [INFO] src.scoring.risk_scorer: Risk: base=15.6 modifiers=-20 final=0 (LOW)\n2026-03-15 21:48:15,337 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/application-zip_report.json\n2026-03-15 21:48:15,342 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/application-zip_report.html\n2026-03-15 21:48:15,342 [INFO] src.pipeline: Pipeline complete: 1 flows, 3 findings, highest=0",
+      "ok": true
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/cookies.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:16,066 [INFO] src.pipeline: Parsed cookies.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:16,066 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-ef036bec: 1 exchanges, 0 findings\n2026-03-15 21:48:16,066 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-20 final=0 (LOW)\n2026-03-15 21:48:16,066 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/cookies_report.json\n2026-03-15 21:48:16,070 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/cookies_report.html\n2026-03-15 21:48:16,070 [INFO] src.pipeline: Pipeline complete: 1 flows, 0 findings, highest=0",
+      "ok": true
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/full.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:16,806 [INFO] src.pipeline: Parsed full.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:16,806 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-1a05d5ad: 1 exchanges, 4 findings\n2026-03-15 21:48:16,823 [INFO] src.scoring.risk_scorer: Risk: base=45.9 modifiers=-20 final=26 (MEDIUM)\n2026-03-15 21:48:16,825 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/full_report.json\n2026-03-15 21:48:16,829 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/full_report.html\n2026-03-15 21:48:16,829 [INFO] src.pipeline: Pipeline complete: 1 flows, 4 findings, highest=26",
+      "ok": true
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/headers.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:17,574 [INFO] src.pipeline: Parsed headers.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:17,574 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-23e7c37d: 1 exchanges, 0 findings\n2026-03-15 21:48:17,574 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-20 final=0 (LOW)\n2026-03-15 21:48:17,574 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/headers_report.json\n2026-03-15 21:48:17,578 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/headers_report.html\n2026-03-15 21:48:17,578 [INFO] src.pipeline: Pipeline complete: 1 flows, 0 findings, highest=0",
+      "ok": true
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/https.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:18,305 [INFO] src.pipeline: Parsed https.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:18,305 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-0800be89: 1 exchanges, 0 findings\n2026-03-15 21:48:18,305 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-20 final=0 (LOW)\n2026-03-15 21:48:18,306 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/https_report.json\n2026-03-15 21:48:18,310 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/https_report.html\n2026-03-15 21:48:18,310 [INFO] src.pipeline: Pipeline complete: 1 flows, 0 findings, highest=0",
+      "ok": true
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/image-png.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:19,033 [INFO] src.pipeline: Parsed image-png.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:19,033 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-f1f00622: 1 exchanges, 3 findings\n2026-03-15 21:48:19,049 [INFO] src.scoring.risk_scorer: Risk: base=15.6 modifiers=-20 final=0 (LOW)\n2026-03-15 21:48:19,049 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/image-png_report.json\n2026-03-15 21:48:19,054 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/image-png_report.html\n2026-03-15 21:48:19,054 [INFO] src.pipeline: Pipeline complete: 1 flows, 3 findings, highest=0",
+      "ok": true
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/image-png-no-filename.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:19,770 [INFO] src.pipeline: Parsed image-png-no-filename.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:19,770 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-2a78b714: 1 exchanges, 3 findings\n2026-03-15 21:48:19,787 [INFO] src.scoring.risk_scorer: Risk: base=39.5 modifiers=-20 final=20 (LOW)\n2026-03-15 21:48:19,787 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/image-png-no-filename_report.json\n2026-03-15 21:48:19,792 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/image-png-no-filename_report.html\n2026-03-15 21:48:19,792 [INFO] src.pipeline: Pipeline complete: 1 flows, 3 findings, highest=20",
+      "ok": true
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/jsonObj-multiline.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:20,514 [INFO] src.pipeline: Parsed jsonObj-multiline.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:20,514 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-0d8d4795: 1 exchanges, 3 findings\n2026-03-15 21:48:20,531 [INFO] src.scoring.risk_scorer: Risk: base=39.8 modifiers=-20 final=20 (LOW)\n2026-03-15 21:48:20,531 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/jsonObj-multiline_report.json\n2026-03-15 21:48:20,538 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/jsonObj-multiline_report.html\n2026-03-15 21:48:20,538 [INFO] src.pipeline: Pipeline complete: 1 flows, 3 findings, highest=20",
+      "ok": true
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/jsonObj-null-value.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:21,286 [INFO] src.pipeline: Parsed jsonObj-null-value.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:21,286 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-a5e631e8: 1 exchanges, 3 findings\n2026-03-15 21:48:21,302 [INFO] src.scoring.risk_scorer: Risk: base=39.8 modifiers=-20 final=20 (LOW)\n2026-03-15 21:48:21,303 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/jsonObj-null-value_report.json\n2026-03-15 21:48:21,307 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/jsonObj-null-value_report.html\n2026-03-15 21:48:21,307 [INFO] src.pipeline: Pipeline complete: 1 flows, 3 findings, highest=20",
+      "ok": true
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/multipart-data-dataurl.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:22,051 [INFO] src.pipeline: Parsed multipart-data-dataurl.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:22,051 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-01e848ae: 1 exchanges, 3 findings\n2026-03-15 21:48:22,067 [INFO] src.scoring.risk_scorer: Risk: base=15.6 modifiers=-20 final=0 (LOW)\n2026-03-15 21:48:22,068 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/multipart-data-dataurl_report.json\n2026-03-15 21:48:22,072 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/multipart-data-dataurl_report.html\n2026-03-15 21:48:22,072 [INFO] src.pipeline: Pipeline complete: 1 flows, 3 findings, highest=0",
+      "ok": true
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/multipart-data.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:22,812 [INFO] src.pipeline: Parsed multipart-data.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:22,812 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-b8280bee: 1 exchanges, 4 findings\n2026-03-15 21:48:22,828 [INFO] src.scoring.risk_scorer: Risk: base=45.7 modifiers=-20 final=26 (MEDIUM)\n2026-03-15 21:48:22,829 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/multipart-data_report.json\n2026-03-15 21:48:22,833 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/multipart-data_report.html\n2026-03-15 21:48:22,833 [INFO] src.pipeline: Pipeline complete: 1 flows, 4 findings, highest=26",
+      "ok": true
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/multipart-file.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:23,553 [INFO] src.pipeline: Parsed multipart-file.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:23,553 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-77d99d00: 1 exchanges, 4 findings\n2026-03-15 21:48:23,569 [INFO] src.scoring.risk_scorer: Risk: base=45.7 modifiers=-20 final=26 (MEDIUM)\n2026-03-15 21:48:23,569 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/multipart-file_report.json\n2026-03-15 21:48:23,573 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/multipart-file_report.html\n2026-03-15 21:48:23,573 [INFO] src.pipeline: Pipeline complete: 1 flows, 4 findings, highest=26",
+      "ok": true
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/multipart-form-data.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:24,288 [INFO] src.pipeline: Parsed multipart-form-data.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:24,288 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-9354dbba: 1 exchanges, 4 findings\n2026-03-15 21:48:24,304 [INFO] src.scoring.risk_scorer: Risk: base=45.7 modifiers=-20 final=26 (MEDIUM)\n2026-03-15 21:48:24,305 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/multipart-form-data_report.json\n2026-03-15 21:48:24,309 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/multipart-form-data_report.html\n2026-03-15 21:48:24,309 [INFO] src.pipeline: Pipeline complete: 1 flows, 4 findings, highest=26",
+      "ok": true
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/query-encoded.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:25,033 [INFO] src.pipeline: Parsed query-encoded.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:25,033 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-09b87842: 1 exchanges, 0 findings\n2026-03-15 21:48:25,034 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-20 final=0 (LOW)\n2026-03-15 21:48:25,034 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/query-encoded_report.json\n2026-03-15 21:48:25,038 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/query-encoded_report.html\n2026-03-15 21:48:25,038 [INFO] src.pipeline: Pipeline complete: 1 flows, 0 findings, highest=0",
+      "ok": true
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/query.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:25,762 [INFO] src.pipeline: Parsed query.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:25,763 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-65886388: 1 exchanges, 0 findings\n2026-03-15 21:48:25,763 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-20 final=0 (LOW)\n2026-03-15 21:48:25,763 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/query_report.json\n2026-03-15 21:48:25,767 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/query_report.html\n2026-03-15 21:48:25,767 [INFO] src.pipeline: Pipeline complete: 1 flows, 0 findings, highest=0",
+      "ok": true
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/short.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:26,530 [INFO] src.pipeline: Parsed short.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:26,530 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-84d49ccc: 1 exchanges, 0 findings\n2026-03-15 21:48:26,530 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-20 final=0 (LOW)\n2026-03-15 21:48:26,530 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/short_report.json\n2026-03-15 21:48:26,534 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/short_report.html\n2026-03-15 21:48:26,534 [INFO] src.pipeline: Pipeline complete: 1 flows, 0 findings, highest=0",
+      "ok": true
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/text-plain.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:27,309 [INFO] src.pipeline: Parsed text-plain.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:27,309 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-f20fd1bf: 1 exchanges, 3 findings\n2026-03-15 21:48:27,325 [INFO] src.scoring.risk_scorer: Risk: base=39.5 modifiers=-20 final=20 (LOW)\n2026-03-15 21:48:27,326 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/text-plain_report.json\n2026-03-15 21:48:27,331 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/text-plain_report.html\n2026-03-15 21:48:27,331 [INFO] src.pipeline: Pipeline complete: 1 flows, 3 findings, highest=20",
+      "ok": true
+    },
+    {
+      "source": "oas_converted",
+      "har_file": "/tmp/csrf_irl_har/oas_converted/xml.har",
+      "exit_code": 0,
+      "report_exists": true,
+      "report_parsed": true,
+      "stderr_tail": "2026-03-15 21:48:28,047 [INFO] src.pipeline: Parsed xml.har: 1 exchanges \u2192 1 flows\n2026-03-15 21:48:28,047 [INFO] src.analysis.static_analyzer: Analyzed flow no-session-0eb63898: 1 exchanges, 0 findings\n2026-03-15 21:48:28,047 [INFO] src.scoring.risk_scorer: Risk: base=0.0 modifiers=-20 final=0 (LOW)\n2026-03-15 21:48:28,047 [INFO] src.output.report_generator: JSON report written to /tmp/csrf_irl_har/out_reports_retest/xml_report.json\n2026-03-15 21:48:28,051 [INFO] src.output.report_generator: HTML report written to /tmp/csrf_irl_har/out_reports_retest/xml_report.html\n2026-03-15 21:48:28,051 [INFO] src.pipeline: Pipeline complete: 1 flows, 0 findings, highest=0",
+      "ok": true
+    }
+  ],
+  "summary": {
+    "total": 34,
+    "ok": 33,
+    "failed": 1,
+    "by_source": {
+      "haralyzer": {
+        "total": 14,
+        "ok": 13,
+        "failed": 1
+      },
+      "oas_converted": {
+        "total": 20,
+        "ok": 20,
+        "failed": 0
+      }
+    }
+  }
+}

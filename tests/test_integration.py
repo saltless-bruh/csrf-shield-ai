@@ -175,3 +175,37 @@ class TestManualScoreValidation:
             result.flow_results, key=lambda fr: fr.risk.score
         )
         assert report["risk_score"] == highest.risk.score
+
+
+class TestPipelineEmptyFlowReport:
+    """Regression tests for empty-flow HAR handling."""
+
+    def test_empty_flow_har_still_generates_reports(self, tmp_path: Path) -> None:
+        """HAR files with skipped entries should still emit JSON/HTML reports."""
+        har_path = tmp_path / "empty_flow.har"
+        har_path.write_text(
+            json.dumps(
+                {
+                    "log": {
+                        "version": "1.2",
+                        "creator": {"name": "pytest", "version": "1.0"},
+                        "entries": [{"startedDateTime": "2026-03-15T00:00:00.000Z"}],
+                    }
+                }
+            ),
+            encoding="utf-8",
+        )
+
+        pipeline = CsrfPipeline()
+        result = pipeline.analyze_har(har_path, tmp_path)
+
+        assert len(result.flow_results) == 0
+        assert result.json_report_path is not None
+        assert result.html_report_path is not None
+        assert result.json_report_path.exists()
+        assert result.html_report_path.exists()
+
+        data = json.loads(result.json_report_path.read_text(encoding="utf-8"))
+        report = data["csrf_shield_ai_report"]
+        assert report["summary"]["total_findings"] == 0
+        assert report["risk_score"] == 0

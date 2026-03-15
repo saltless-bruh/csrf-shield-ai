@@ -249,16 +249,31 @@ func (a *App) layout(g *gocui.Gui) error {
 	a.renderAnalysis(g)
 	a.renderStatusBar(g)
 
-	// Set initial focus.
-	panelName := PanelSessions
-	switch a.activePanel {
-	case PanelIDExchanges:
-		panelName = PanelExchanges
-	case PanelIDAnalysis:
-		panelName = PanelAnalysis
-	}
-	if _, err := g.SetCurrentView(panelName); err != nil {
-		log.Printf("SetCurrentView(%s): %v", panelName, err)
+	// Keep modal focus stable when any modal is open.
+	if a.isAnyModalOpen(g) {
+		for _, modalName := range []string{"exportmodal", "filtermodal", "quitmodal", "findingmodal", "help", "rawmodal_resp", "rawmodal_req"} {
+			if _, err := g.View(modalName); err == nil {
+				if current := g.CurrentView(); current == nil || current.Name() != modalName {
+					if _, err := g.SetCurrentView(modalName); err != nil {
+						log.Printf("SetCurrentView(%s): %v", modalName, err)
+					}
+				}
+				break
+			}
+		}
+	} else {
+		panelName := PanelSessions
+		switch a.activePanel {
+		case PanelIDExchanges:
+			panelName = PanelExchanges
+		case PanelIDAnalysis:
+			panelName = PanelAnalysis
+		}
+		if current := g.CurrentView(); current == nil || current.Name() != panelName {
+			if _, err := g.SetCurrentView(panelName); err != nil {
+				log.Printf("SetCurrentView(%s): %v", panelName, err)
+			}
+		}
 	}
 
 	return nil

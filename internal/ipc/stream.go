@@ -8,6 +8,12 @@ import (
 	"sync"
 )
 
+const (
+	// maxIPCMessageSize caps a single NDJSON message size exchanged with the
+	// Python backend. Large HAR-derived payloads can exceed 1MB.
+	maxIPCMessageSize = 16 * 1024 * 1024 // 16MB
+)
+
 // Stream provides buffered NDJSON read/write over io pipes.
 type Stream struct {
 	writer  io.Writer
@@ -18,7 +24,7 @@ type Stream struct {
 // NewStream creates a new NDJSON stream.
 func NewStream(reader io.Reader, writer io.Writer) *Stream {
 	scanner := bufio.NewScanner(reader)
-	scanner.Buffer(make([]byte, 1024*1024), 1024*1024) // 1MB buffer
+	scanner.Buffer(make([]byte, 1024*1024), maxIPCMessageSize)
 	return &Stream{
 		writer:  writer,
 		scanner: scanner,

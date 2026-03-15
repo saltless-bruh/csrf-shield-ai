@@ -272,20 +272,32 @@ class CsrfPipeline:
     ) -> PipelineResult:
         """Generate JSON and HTML reports."""
         # Use the highest-risk flow for the main report.
-        if not pipeline_result.flow_results:
-            return pipeline_result
-
-        best = max(
-            pipeline_result.flow_results,
-            key=lambda fr: fr.risk.score,
-        )
-
-        analysis_result = ReportAnalysisResult(
-            findings=all_findings,
-            risk=best.risk,
-            ml_probability=best.ml_probability,
-            source_file=har_path.name,
-        )
+        # When no flows are present (e.g., all entries were skipped as malformed),
+        # still emit an explicit empty report so CLI output is deterministic.
+        if pipeline_result.flow_results:
+            best = max(
+                pipeline_result.flow_results,
+                key=lambda fr: fr.risk.score,
+            )
+            analysis_result = ReportAnalysisResult(
+                findings=all_findings,
+                risk=best.risk,
+                ml_probability=best.ml_probability,
+                source_file=har_path.name,
+            )
+        else:
+            empty_risk = self._scorer.calculate_risk(
+                ml_probability=0.0,
+                findings=[],
+                url="",
+                http_method="GET",
+            )
+            analysis_result = ReportAnalysisResult(
+                findings=[],
+                risk=empty_risk,
+                ml_probability=0.0,
+                source_file=har_path.name,
+            )
 
         stem = har_path.stem
         output_dir.mkdir(parents=True, exist_ok=True)

@@ -8,6 +8,7 @@ Ref:
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 from click.testing import CliRunner
@@ -100,8 +101,6 @@ class TestAnalyzeCommand:
 
     def test_analyze_json_output(self, tmp_path: Path) -> None:
         """analyze produces valid JSON output."""
-        import json
-
         output = tmp_path / "report.json"
         runner = CliRunner()
         runner.invoke(main, [
@@ -112,6 +111,37 @@ class TestAnalyzeCommand:
         with open(output, encoding="utf-8") as f:
             data = json.load(f)
         assert "csrf_shield_ai_report" in data
+
+    def test_analyze_empty_flow_har_still_writes_report(self, tmp_path: Path) -> None:
+        """Entries skipped during parse still produce a deterministic empty report."""
+        empty_flow_har = tmp_path / "empty_flow.har"
+        empty_flow_har.write_text(
+            json.dumps(
+                {
+                    "log": {
+                        "version": "1.2",
+                        "creator": {"name": "pytest", "version": "1.0"},
+                        "entries": [{"startedDateTime": "2026-03-15T00:00:00.000Z"}],
+                    }
+                }
+            ),
+            encoding="utf-8",
+        )
+
+        output = tmp_path / "empty_report.json"
+        runner = CliRunner()
+        result = runner.invoke(main, [
+            "analyze",
+            "--input", str(empty_flow_har),
+            "--output", str(output),
+        ])
+
+        assert result.exit_code == 0
+        assert output.exists()
+        data = json.loads(output.read_text(encoding="utf-8"))
+        report = data["csrf_shield_ai_report"]
+        assert report["summary"]["total_findings"] == 0
+        assert report["risk_score"] == 0
 
     def test_analyze_requires_input(self) -> None:
         """analyze fails without --input."""

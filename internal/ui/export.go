@@ -93,6 +93,7 @@ func (a *App) handleExport(g *gocui.Gui, v *gocui.View) error {
 		return err
 	}
 	g.SetViewOnTop("exportmodal")
+	g.Cursor = false
 	return nil
 }
 

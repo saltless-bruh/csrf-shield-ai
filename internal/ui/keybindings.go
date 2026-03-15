@@ -50,7 +50,6 @@ func (a *App) setupKeybindings(g *gocui.Gui) error {
 		{PanelSessions, 'x', gocui.ModNone, a.handleRemove},
 		{PanelSessions, 'c', gocui.ModNone, a.handleSessionGuardC},
 		{PanelSessions, 'f', gocui.ModNone, a.handleFilter},
-		{PanelSessions, '/', gocui.ModNone, a.handleFilter},
 
 		// Panel 2: Exchanges bindings.
 		{PanelExchanges, 'q', gocui.ModNone, a.handleQuit},
@@ -68,7 +67,6 @@ func (a *App) setupKeybindings(g *gocui.Gui) error {
 		{PanelExchanges, gocui.KeyArrowUp, gocui.ModNone, a.handleUp},
 		{PanelExchanges, 'c', gocui.ModNone, a.handleCopyCURL},
 		{PanelExchanges, 'f', gocui.ModNone, a.handleFilter},
-		{PanelExchanges, '/', gocui.ModNone, a.handleFilter},
 
 		// Panel 3: Analysis bindings.
 		{PanelAnalysis, 'q', gocui.ModNone, a.handleQuit},
@@ -109,6 +107,10 @@ func (a *App) setupKeybindings(g *gocui.Gui) error {
 		{"help", '?', gocui.ModNone, a.handleEsc},
 		{"exportmodal", gocui.KeyArrowDown, gocui.ModNone, a.handleExportDown},
 		{"exportmodal", gocui.KeyArrowUp, gocui.ModNone, a.handleExportUp},
+		{"exportmodal", 'j', gocui.ModNone, a.handleExportDown},
+		{"exportmodal", 'k', gocui.ModNone, a.handleExportUp},
+		{"exportmodal", gocui.KeyArrowLeft, gocui.ModNone, a.handleExportSpace},
+		{"exportmodal", gocui.KeyArrowRight, gocui.ModNone, a.handleExportSpace},
 		{"exportmodal", gocui.KeyEnter, gocui.ModNone, a.handleConfirmExport},
 		{"exportmodal", gocui.KeyTab, gocui.ModNone, a.handleExportTab},
 		{"exportmodal", gocui.KeySpace, gocui.ModNone, a.handleExportSpace},
@@ -288,13 +290,13 @@ func (a *App) handleFilter(g *gocui.Gui, v *gocui.View) error {
 	if a.activePanel == PanelIDAnalysis {
 		return nil
 	}
-	a.showToast("Filter (empty to clear)")
+	a.showToast("Filter: type text (e.g. cloudflare or GET), Enter to apply")
 	maxX, maxY := g.Size()
 	modal, err := g.SetView("filtermodal", maxX/2-25, maxY/2-1, maxX/2+25, maxY/2+1, 0)
 	if err != nil && err != gocui.ErrUnknownView {
 		return err
 	}
-	modal.Title = " Filter (empty to clear) "
+	modal.Title = " Filter (e.g. cloudflare, GET) "
 	modal.Editable = true
 	modal.Editor = gocui.DefaultEditor
 	modal.Clear()

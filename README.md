@@ -1,93 +1,91 @@
-# 🛡️ CSRF Shield AI
+# CSRF Shield AI
 
-> **AI-Powered CSRF Risk Scoring Tool**
+AI-powered CSRF risk analysis for HAR traffic captures.
 
-An automated security analysis tool that detects Cross-Site Request Forgery (CSRF) vulnerabilities by analyzing HTTP traffic captures. Combines static rule-based analysis with machine learning classification to produce quantified risk scores (0–100).
+CSRF Shield AI combines deterministic static checks with machine-learning scoring to produce actionable, per-session risk results and exportable security reports.
 
----
+## Highlights
 
-## Features
+- HAR ingestion and session-flow reconstruction.
+- 11 static CSRF/security checks (token, origin/referer, cookie and auth signals).
+- ML-assisted risk scoring (`0-100`) with severity classification.
+- Interactive Go TUI for investigation and triage.
+- JSON/HTML report export for CI and audit workflows.
 
-- 📂 **HAR File Analysis** — Parse browser-exported traffic captures
-- 🔍 **11 CSRF Detection Rules** — Comprehensive static analysis (tokens, cookies, headers, CORS)
-- 🤖 **ML Classification** — Random Forest / XGBoost vulnerability prediction
-- 📊 **Risk Scoring** — Quantified 0–100 scores with severity levels
-- 💻 **Interactive TUI** — Go-based terminal interface with Vim-style navigation and real-time analysis
-- 📝 **Reports** — JSON & HTML reports with remediation recommendations
+## Architecture
 
-## How to download
+The project uses a two-process model over NDJSON (`stdin/stdout`):
 
-### Prerequisites
+- Python backend: parsing, static analysis, ML inference, risk scoring, report generation.
+- Go TUI frontend: terminal UI, navigation, orchestration, IPC client.
 
-- **Python:** 3.10+
-- **Go:** 1.21+ (for building the TUI)
+## Prerequisites
 
-### Setup
+- Python `3.10+`
+- Go `1.21+`
+
+## Quick Start
 
 ```bash
-# Clone the repository
+# 1) Clone
 git clone https://github.com/saltless-bruh/csrf-shield-ai.git
 cd csrf-shield-ai
 
-# Install Python backend dependencies
+# 2) Python environment
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -e .
 
-# Build interactive TUI
-cd cmd/tui
-go build -o ../../csrf-shield-tui main.go
-cd ../..
+# 3) Build TUI binary
+go build -o bin/csrf-shield-tui ./cmd/tui
 ```
 
-## How to use
+## Usage
+
+### Interactive TUI (recommended)
 
 ```bash
-# Launch interactive TUI (Flagship Interface)
-./csrf-shield-tui --input traffic.har
-
-# Analyze a HAR file non-interactively (CI/CD)
-csrf-shield analyze --input traffic.har --output report.json --format json
-
-# Train ML model
-csrf-shield train --data data/training/ --output src/ml/models/csrf_rf_model.pkl
+bin/csrf-shield-tui --input path/to/traffic.har
 ```
 
-For more detailed usage instructions, please refer to the [User Guide](docs/guides/USER_GUIDE.md).
+### CLI analysis (non-interactive)
 
-## Project Structure
+```bash
+csrf-shield analyze --input path/to/traffic.har --output report.json --format json
+```
 
-See [`docs/proposal/PROPOSAL.md`](docs/proposal/PROPOSAL.md) §11.1 for the Python backend structure and [`docs/proposal/CLI_TUI_PROPOSAL.md`](docs/proposal/CLI_TUI_PROPOSAL.md) §11 for the Go TUI structure.
+### Train model
 
-## Technology Stack
+```bash
+csrf-shield train --data data/training --output src/ml/models/csrf_rf_model.pkl
+```
 
-The tool uses a **two-process architecture** communicating via NDJSON over stdin/stdout:
+## Developer Commands
 
-| Component     | Technology             | Role                                        |
-| ------------- | ---------------------- | ------------------------------------------- |
-| **Backend**   | Python 3.10+           | Heavy lifting: ML, static analysis, parsing |
-| **Frontend**  | Go 1.21+ / gocui       | Fast, responsive, single-binary Terminal UI |
-| **ML Models** | scikit-learn, XGBoost  | Classical ML for tabular HTTP data          |
-| **Testing**   | pytest (Py), `go test` | Cross-language unit/integration testing     |
+```bash
+# Python tests
+python -m pytest -q
+
+# Go tests
+go test ./...
+```
+
+## Project Layout
+
+- `src/` Python backend
+- `cmd/tui/` Go TUI entrypoint
+- `internal/` Go TUI internals (IPC, UI, models)
+- `tests/` Python test suite
+- `docs/` guides, specs, reports, reviews
+- `data/` sample and training datasets
 
 ## Documentation
 
-### Guides
-
 - [User Guide](docs/guides/USER_GUIDE.md)
 - [API Reference](docs/guides/API_REFERENCE.md)
-
-### Specifications
-
 - [Project Proposal](docs/proposal/PROPOSAL.md)
-- [TUI Extension Spec](docs/proposal/CLI_TUI_PROPOSAL.md)
-- [Defense Notes](docs/defense/DEFENSE_NOTES.md)
-- [Design Document](spec/Design.md)
-- [Requirements](spec/Requirements.md)
-- [Task Breakdown](spec/Tasks.md)
+- [CLI/TUI Proposal](docs/proposal/CLI_TUI_PROPOSAL.md)
 
 ## License
 
-Academic project — FPT University, IAW Course, Group 9.
-
----
-
-> **Status:** Phase 6 — Testing, Polish & Documentation
+Academic project for FPT University (IAW course, Group 9).
