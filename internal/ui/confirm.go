@@ -25,7 +25,7 @@ func (a *App) handleQuit(g *gocui.Gui, v *gocui.View) error {
 		g.SetCurrentView(panelName)
 		return nil
 	}
-	for _, modal := range []string{"help", "findingmodal", "exportmodal", "filtermodal"} {
+	for _, modal := range []string{"help", "findingmodal", "exportmodal", "filtermodal", "quitmodal"} {
 		if err := g.DeleteView(modal); err == nil {
 			g.SetCurrentView(panelName)
 			return nil
@@ -33,6 +33,7 @@ func (a *App) handleQuit(g *gocui.Gui, v *gocui.View) error {
 	}
 
 	// No modal open — show quit confirmation.
+	a.showToast("Quit CSRF Shield AI? [y/n]")
 	maxX, maxY := g.Size()
 	modal, err := g.SetView("quitmodal", maxX/2-15, maxY/2-2, maxX/2+15, maxY/2+2, 0)
 	if err != nil && err != gocui.ErrUnknownView {
@@ -45,6 +46,8 @@ func (a *App) handleQuit(g *gocui.Gui, v *gocui.View) error {
 	if _, err := g.SetCurrentView("quitmodal"); err != nil {
 		return err
 	}
+	g.SetViewOnTop("quitmodal")
+	g.Update(func(g *gocui.Gui) error { return nil })
 	return nil
 }
 
@@ -65,5 +68,6 @@ func (a *App) handleCancelQuit(g *gocui.Gui, v *gocui.View) error {
 		panelName = PanelAnalysis
 	}
 	g.SetCurrentView(panelName)
+	g.Update(func(g *gocui.Gui) error { return nil })
 	return nil
 }

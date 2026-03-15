@@ -24,6 +24,8 @@ func (a *App) renderSessions(g *gocui.Gui) {
 	selectedIdx := a.selectedIdx
 	analyses := a.analyses
 	filter := strings.ToLower(a.sessionFilter)
+	analyzingSID := a.analyzingSessionID
+	spinFrame := a.spinnerFrame
 	a.mu.Unlock()
 
 	// Build filtered index list.
@@ -71,10 +73,6 @@ func (a *App) renderSessions(g *gocui.Gui) {
 
 		// Spinner for currently-analyzing session (T-843).
 		risk := "--"
-		a.mu.Lock()
-		analyzingSID := a.analyzingSessionID
-		spinFrame := a.spinnerFrame
-		a.mu.Unlock()
 		if f.SessionID == analyzingSID && analyzingSID != "" {
 			spinnerChars := []string{"-", "\\", "|", "/"}
 			risk = "\033[1;33m[" + spinnerChars[spinFrame] + "]\033[0m"
@@ -91,14 +89,21 @@ func (a *App) renderSessions(g *gocui.Gui) {
 
 	// Scroll indicator + filter label.
 	w, _ := v.Size()
+	selectedVisible := 1
+	for i, realIdx := range visible {
+		if realIdx == selectedIdx {
+			selectedVisible = i + 1
+			break
+		}
+	}
 	if filter != "" {
 		v.Title = titleWithCounter(
 			fmt.Sprintf(" Sessions [Filter: %q] ", a.sessionFilter),
-			fmt.Sprintf(" [%d/%d] ", selectedIdx+1, len(visible)),
+			fmt.Sprintf(" [%d/%d] ", selectedVisible, len(visible)),
 			w,
 		)
 	} else if len(visible) > height {
-		v.Title = titleWithCounter(" Sessions ", fmt.Sprintf(" [%d/%d] ", selectedIdx+1, len(visible)), w)
+		v.Title = titleWithCounter(" Sessions ", fmt.Sprintf(" [%d/%d] ", selectedVisible, len(visible)), w)
 	} else {
 		v.Title = " Sessions "
 	}

@@ -1,0 +1,136 @@
+[
+  {
+    "probe": "quit_confirm",
+    "ok": false,
+    "steps": [
+      {
+        "label": "startup",
+        "ok": true
+      },
+      {
+        "label": "see_quit_prompt",
+        "ok": false,
+        "detail": "EOF: End Of File (EOF). Exception style platform.\n<pexpect.pty_spawn.spawn object at 0x706f402c8770>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bi"
+      }
+    ],
+    "log": "docs/reports/_tui_probe_quit_confirm.log",
+    "error": null
+  },
+  {
+    "probe": "help_modal",
+    "ok": true,
+    "steps": [
+      {
+        "label": "startup",
+        "ok": true
+      },
+      {
+        "label": "help_opened",
+        "ok": true
+      },
+      {
+        "label": "help_closed",
+        "ok": true
+      }
+    ],
+    "log": "docs/reports/_tui_probe_help_modal.log",
+    "error": null
+  },
+  {
+    "probe": "export_path_input",
+    "ok": false,
+    "steps": [
+      {
+        "label": "startup",
+        "ok": true
+      },
+      {
+        "label": "export_opened",
+        "ok": false,
+        "detail": "TIMEOUT: Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x706f41703800>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--inp"
+      }
+    ],
+    "log": "docs/reports/_tui_probe_export_path_input.log",
+    "error": null
+  },
+  {
+    "probe": "filter_text_input",
+    "ok": false,
+    "steps": [
+      {
+        "label": "startup",
+        "ok": true
+      },
+      {
+        "label": "filter_modal",
+        "ok": false,
+        "detail": "TIMEOUT: Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x706f40131a60>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--inp"
+      }
+    ],
+    "log": "docs/reports/_tui_probe_filter_text_input.log",
+    "error": null
+  },
+  {
+    "probe": "raw_view_modal",
+    "ok": false,
+    "steps": [
+      {
+        "label": "startup",
+        "ok": true
+      },
+      {
+        "label": "panel2_hint",
+        "ok": false,
+        "detail": "TIMEOUT: Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x706f40280aa0>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--inp"
+      }
+    ],
+    "log": "docs/reports/_tui_probe_raw_view_modal.log",
+    "error": null
+  },
+  {
+    "probe": "analyze_all",
+    "ok": false,
+    "steps": [
+      {
+        "label": "startup",
+        "ok": true
+      },
+      {
+        "label": "score_or_progress",
+        "ok": false,
+        "detail": "TIMEOUT: Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x706f40131910>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--inp"
+      }
+    ],
+    "log": "docs/reports/_tui_probe_analyze_all.log",
+    "error": null
+  },
+  {
+    "probe": "header_short_circuit",
+    "ok": true,
+    "steps": [
+      {
+        "label": "startup",
+        "ok": true
+      },
+      {
+        "label": "short_circuit_text",
+        "ok": true
+      }
+    ],
+    "log": "docs/reports/_tui_probe_header_short_circuit.log",
+    "error": null
+  },
+  {
+    "probe": "bad_input_behavior",
+    "ok": true,
+    "steps": [
+      {
+        "label": "stderr_output",
+        "ok": true,
+        "detail": "Error: file not found: data/sample_har/does_not_exist.har\r\n"
+      }
+    ],
+    "log": "(inline)",
+    "error": null
+  }
+]

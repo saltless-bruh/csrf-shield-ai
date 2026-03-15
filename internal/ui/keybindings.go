@@ -21,36 +21,102 @@ func (a *App) setupKeybindings(g *gocui.Gui) error {
 		mod  gocui.Modifier
 		fn   func(*gocui.Gui, *gocui.View) error
 	}{
-		{"", 'q', gocui.ModNone, a.handleQuit},
-		{"", gocui.KeyTab, gocui.ModNone, a.handleTab},
-		{"", gocui.KeyBacktab, gocui.ModNone, a.handlePrevPanel},
-		{"", '?', gocui.ModNone, a.handleHelp},
-		{"", 'e', gocui.ModNone, a.handleExport},
 		{"", gocui.KeyEsc, gocui.ModNone, a.handleEsc},
-		{"", gocui.KeyEnter, gocui.ModNone, a.handleEnter},
-		{"", 'r', gocui.ModNone, a.handleRestart},
-		{"", 'j', gocui.ModNone, a.handleDown},
-		{"", 'k', gocui.ModNone, a.handleUp},
-		{"", 'h', gocui.ModNone, a.handlePrevPanel},
-		{"", 'l', gocui.ModNone, a.handleTab},
-		{"", gocui.KeyArrowDown, gocui.ModNone, a.handleDown},
-		{"", gocui.KeyArrowUp, gocui.ModNone, a.handleUp},
-		{"", 'a', gocui.ModNone, a.handleAnalyze},
-		{"", 'A', gocui.ModNone, a.handleAnalyzeAll},
-		{"", 'x', gocui.ModNone, a.handleRemove},
-		{"", 'c', gocui.ModNone, a.handleCopyCURL},
+
+		// Loading/Error state bindings.
+		{"loading", 'q', gocui.ModNone, a.handleQuit},
+		{"loading", 'Q', gocui.ModNone, a.handleQuit},
+		{"error", 'q', gocui.ModNone, a.handleQuit},
+		{"error", 'Q', gocui.ModNone, a.handleQuit},
+		{"error", 'r', gocui.ModNone, a.handleRestart},
+		{"error", 'R', gocui.ModNone, a.handleRestart},
+
+		// Panel 1: Sessions bindings.
+		{PanelSessions, 'q', gocui.ModNone, a.handleQuit},
+		{PanelSessions, gocui.KeyTab, gocui.ModNone, a.handleTab},
+		{PanelSessions, gocui.KeyBacktab, gocui.ModNone, a.handlePrevPanel},
+		{PanelSessions, '?', gocui.ModNone, a.handleHelp},
+		{PanelSessions, 'e', gocui.ModNone, a.handleExport},
+		{PanelSessions, gocui.KeyEnter, gocui.ModNone, a.handleEnter},
+		{PanelSessions, 'r', gocui.ModNone, a.handleRestart},
+		{PanelSessions, 'j', gocui.ModNone, a.handleDown},
+		{PanelSessions, 'k', gocui.ModNone, a.handleUp},
+		{PanelSessions, 'h', gocui.ModNone, a.handlePrevPanel},
+		{PanelSessions, 'l', gocui.ModNone, a.handleTab},
+		{PanelSessions, gocui.KeyArrowDown, gocui.ModNone, a.handleDown},
+		{PanelSessions, gocui.KeyArrowUp, gocui.ModNone, a.handleUp},
+		{PanelSessions, 'a', gocui.ModNone, a.handleAnalyze},
+		{PanelSessions, 'A', gocui.ModNone, a.handleAnalyzeAll},
+		{PanelSessions, 'x', gocui.ModNone, a.handleRemove},
+		{PanelSessions, 'c', gocui.ModNone, a.handleSessionGuardC},
+		{PanelSessions, 'f', gocui.ModNone, a.handleFilter},
+		{PanelSessions, '/', gocui.ModNone, a.handleFilter},
+
+		// Panel 2: Exchanges bindings.
+		{PanelExchanges, 'q', gocui.ModNone, a.handleQuit},
+		{PanelExchanges, gocui.KeyTab, gocui.ModNone, a.handleTab},
+		{PanelExchanges, gocui.KeyBacktab, gocui.ModNone, a.handlePrevPanel},
+		{PanelExchanges, '?', gocui.ModNone, a.handleHelp},
+		{PanelExchanges, 'e', gocui.ModNone, a.handleExport},
+		{PanelExchanges, gocui.KeyEnter, gocui.ModNone, a.handleEnter},
+		{PanelExchanges, 'r', gocui.ModNone, a.handleRestart},
+		{PanelExchanges, 'j', gocui.ModNone, a.handleDown},
+		{PanelExchanges, 'k', gocui.ModNone, a.handleUp},
+		{PanelExchanges, 'h', gocui.ModNone, a.handlePrevPanel},
+		{PanelExchanges, 'l', gocui.ModNone, a.handleTab},
+		{PanelExchanges, gocui.KeyArrowDown, gocui.ModNone, a.handleDown},
+		{PanelExchanges, gocui.KeyArrowUp, gocui.ModNone, a.handleUp},
+		{PanelExchanges, 'c', gocui.ModNone, a.handleCopyCURL},
+		{PanelExchanges, 'f', gocui.ModNone, a.handleFilter},
+		{PanelExchanges, '/', gocui.ModNone, a.handleFilter},
+
+		// Panel 3: Analysis bindings.
+		{PanelAnalysis, 'q', gocui.ModNone, a.handleQuit},
+		{PanelAnalysis, gocui.KeyTab, gocui.ModNone, a.handleTab},
+		{PanelAnalysis, gocui.KeyBacktab, gocui.ModNone, a.handlePrevPanel},
+		{PanelAnalysis, '?', gocui.ModNone, a.handleHelp},
+		{PanelAnalysis, 'e', gocui.ModNone, a.handleExport},
+		{PanelAnalysis, gocui.KeyEnter, gocui.ModNone, a.handleEnter},
+		{PanelAnalysis, 'r', gocui.ModNone, a.handleRestart},
+		{PanelAnalysis, 'j', gocui.ModNone, a.handleDown},
+		{PanelAnalysis, 'k', gocui.ModNone, a.handleUp},
+		{PanelAnalysis, 'h', gocui.ModNone, a.handlePrevPanel},
+		{PanelAnalysis, 'l', gocui.ModNone, a.handleTab},
+		{PanelAnalysis, gocui.KeyArrowDown, gocui.ModNone, a.handleDown},
+		{PanelAnalysis, gocui.KeyArrowUp, gocui.ModNone, a.handleUp},
+
+		// Header panel routes to same analysis handlers.
+		{PanelAnalysisHdr, 'q', gocui.ModNone, a.handleQuit},
+		{PanelAnalysisHdr, gocui.KeyTab, gocui.ModNone, a.handleTab},
+		{PanelAnalysisHdr, gocui.KeyBacktab, gocui.ModNone, a.handlePrevPanel},
+		{PanelAnalysisHdr, '?', gocui.ModNone, a.handleHelp},
+		{PanelAnalysisHdr, 'e', gocui.ModNone, a.handleExport},
+		{PanelAnalysisHdr, gocui.KeyEnter, gocui.ModNone, a.handleEnter},
+		{PanelAnalysisHdr, 'r', gocui.ModNone, a.handleRestart},
+		{PanelAnalysisHdr, 'j', gocui.ModNone, a.handleDown},
+		{PanelAnalysisHdr, 'k', gocui.ModNone, a.handleUp},
+		{PanelAnalysisHdr, 'h', gocui.ModNone, a.handlePrevPanel},
+		{PanelAnalysisHdr, 'l', gocui.ModNone, a.handleTab},
+		{PanelAnalysisHdr, gocui.KeyArrowDown, gocui.ModNone, a.handleDown},
+		{PanelAnalysisHdr, gocui.KeyArrowUp, gocui.ModNone, a.handleUp},
+
 		{"quitmodal", 'y', gocui.ModNone, a.handleConfirmQuit},
 		{"quitmodal", 'Y', gocui.ModNone, a.handleConfirmQuit},
 		{"quitmodal", 'n', gocui.ModNone, a.handleCancelQuit},
 		{"quitmodal", 'N', gocui.ModNone, a.handleCancelQuit},
+		{"quitmodal", 'q', gocui.ModNone, a.handleCancelQuit},
+		{"help", 'q', gocui.ModNone, a.handleEsc},
+		{"help", '?', gocui.ModNone, a.handleEsc},
+		{"exportmodal", gocui.KeyArrowDown, gocui.ModNone, a.handleExportDown},
+		{"exportmodal", gocui.KeyArrowUp, gocui.ModNone, a.handleExportUp},
 		{"exportmodal", gocui.KeyEnter, gocui.ModNone, a.handleConfirmExport},
 		{"exportmodal", gocui.KeyTab, gocui.ModNone, a.handleExportTab},
 		{"exportmodal", gocui.KeySpace, gocui.ModNone, a.handleExportSpace},
 		{"exportmodal", gocui.KeyBackspace, gocui.ModNone, a.handleExportBackspace},
 		{"exportmodal", gocui.KeyBackspace2, gocui.ModNone, a.handleExportBackspace},
-		{"", 'f', gocui.ModNone, a.handleFilter},
-		{"", '/', gocui.ModNone, a.handleFilter},
+		{"exportmodal", gocui.KeyEsc, gocui.ModNone, a.handleEsc},
 		{"filtermodal", gocui.KeyEnter, gocui.ModNone, a.handleFilterSubmit},
+		{"filtermodal", gocui.KeyEsc, gocui.ModNone, a.handleEsc},
 		// Raw modal column keybindings (M2).
 		{"rawmodal_req", 'j', gocui.ModNone, a.handleRawScrollDown},
 		{"rawmodal_req", 'k', gocui.ModNone, a.handleRawScrollUp},
@@ -130,6 +196,7 @@ func (a *App) handleEsc(g *gocui.Gui, v *gocui.View) error {
 				a.mu.Unlock()
 			}
 			g.SetCurrentView(panelName)
+			g.Cursor = false
 			return nil
 		}
 	}
@@ -161,7 +228,10 @@ func (a *App) handleRestart(g *gocui.Gui, v *gocui.View) error {
 	a.state = models.StateLoading
 	a.errorMsg = ""
 	a.engineStatus = "Idle"
+	a.spinnerFrame = 0
 	a.mu.Unlock()
+	a.showToast("Loading")
+	g.Update(func(g *gocui.Gui) error { return nil })
 
 	// Stop old backend and re-start.
 	a.client.Stop()
@@ -218,6 +288,7 @@ func (a *App) handleFilter(g *gocui.Gui, v *gocui.View) error {
 	if a.activePanel == PanelIDAnalysis {
 		return nil
 	}
+	a.showToast("Filter (empty to clear)")
 	maxX, maxY := g.Size()
 	modal, err := g.SetView("filtermodal", maxX/2-25, maxY/2-1, maxX/2+25, maxY/2+1, 0)
 	if err != nil && err != gocui.ErrUnknownView {
@@ -232,27 +303,55 @@ func (a *App) handleFilter(g *gocui.Gui, v *gocui.View) error {
 		currentFilter = a.exchangeFilter
 	}
 	fmt.Fprint(modal, currentFilter)
+	modal.SetCursor(len(currentFilter), 0)
 
 	if _, err := g.SetCurrentView("filtermodal"); err != nil {
 		return err
 	}
+	g.SetViewOnTop("filtermodal")
+	g.Cursor = true
+	g.Update(func(g *gocui.Gui) error { return nil })
 	return nil
 }
 
 func (a *App) handleFilterSubmit(g *gocui.Gui, v *gocui.View) error {
+	targetPanel := a.activePanel
 	a.mu.Lock()
 	lines := v.BufferLines()
 	text := ""
 	if len(lines) > 0 {
 		text = strings.TrimSpace(lines[0])
 	}
-	if a.activePanel == PanelIDSessions {
+	if targetPanel == PanelIDSessions {
 		a.sessionFilter = text
 		a.selectedIdx = 0
 		a.exchIdx = 0 // exchange index follows session reset
-	} else if a.activePanel == PanelIDExchanges {
+		if text != "" {
+			needle := strings.ToLower(text)
+			for i, f := range a.flows {
+				if strings.Contains(strings.ToLower(f.SessionID), needle) ||
+					strings.Contains(strings.ToLower(f.Host), needle) {
+					a.selectedIdx = i
+					break
+				}
+			}
+		}
+	} else if targetPanel == PanelIDExchanges {
 		a.exchangeFilter = text
 		a.exchIdx = 0
+		if a.selectedIdx >= 0 && a.selectedIdx < len(a.flows) {
+			sid := a.flows[a.selectedIdx].SessionID
+			if exchanges, ok := a.flowExchanges[sid]; ok && text != "" {
+				needle := strings.ToLower(text)
+				for i, ex := range exchanges {
+					if strings.Contains(strings.ToLower(ex.RequestMethod), needle) ||
+						strings.Contains(strings.ToLower(ex.RequestURL), needle) {
+						a.exchIdx = i
+						break
+					}
+				}
+			}
+		}
 	}
 	a.mu.Unlock()
 
@@ -266,6 +365,23 @@ func (a *App) handleFilterSubmit(g *gocui.Gui, v *gocui.View) error {
 		panelName = PanelAnalysis
 	}
 	g.SetCurrentView(panelName)
+	g.Cursor = false
+
+	if targetPanel == PanelIDSessions {
+		if text == "" {
+			a.showToast("Sessions filter cleared")
+		} else {
+			a.showToast(fmt.Sprintf("Sessions filter: %s", text))
+		}
+	} else if targetPanel == PanelIDExchanges {
+		if text == "" {
+			a.showToast("Exchanges filter cleared")
+		} else {
+			a.showToast(fmt.Sprintf("Exchanges filter: %s", text))
+		}
+	}
+
+	g.Update(func(g *gocui.Gui) error { return nil })
 	return nil
 }
 
@@ -313,6 +429,7 @@ func (a *App) handleAnalyze(g *gocui.Gui, v *gocui.View) error {
 	a.analyzingSessionID = flow.SessionID
 	a.spinnerFrame = 0
 	a.mu.Unlock()
+	a.showToast("Analyzing")
 
 	// Spinner ticker goroutine.
 	spinnerDone := make(chan struct{})
@@ -398,6 +515,7 @@ func (a *App) handleAnalyzeAll(g *gocui.Gui, v *gocui.View) error {
 		delete(a.analyses, flow.SessionID)
 	}
 	a.mu.Unlock()
+	a.showToast("Analyzing all")
 
 	go func() {
 		resp, err := a.client.Call("analyze_all", map[string]interface{}{})
@@ -552,8 +670,25 @@ func (a *App) handleCopyCURL(g *gocui.Gui, v *gocui.View) error {
 
 	// Use the clipboard module for platform detection.
 	msg := clipboard.Copy(curlCmd)
+	if strings.HasPrefix(msg, "Copied") || strings.HasPrefix(msg, "copied") {
+		msg = "cURL copied to clipboard"
+	} else if strings.HasPrefix(msg, "Written to ") {
+		msg = "cURL written to /tmp/csrf-shield-curl.txt"
+	}
 	a.showToast(msg)
 
+	return nil
+}
+
+// handleSessionGuardC keeps panel-specific behavior explicit for the cURL action.
+func (a *App) handleSessionGuardC(g *gocui.Gui, v *gocui.View) error {
+	if a.isAnyModalOpen(g) {
+		return nil
+	}
+	if a.activePanel != PanelIDSessions {
+		return nil
+	}
+	a.showToast("Sessions: cURL copy is available in Exchanges")
 	return nil
 }
 

@@ -1,0 +1,198 @@
+[
+  {
+    "case": "scenario_vulnerable",
+    "checks": [
+      {
+        "label": "startup_sessions",
+        "ok": true,
+        "detail": "matched:Sessions"
+      },
+      {
+        "label": "startup_exchanges",
+        "ok": true,
+        "detail": "matched:Exchanges"
+      },
+      {
+        "label": "startup_analysis",
+        "ok": false,
+        "detail": "missing:Analysis Engine; err:TIMEOUT:Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x7b4c6069dd60>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--input', b'data/sample_har/vulnerable.har']\nbuffer (last 100 chars): '3H--\\x1b[26;4H"
+      },
+      {
+        "label": "status_panel1",
+        "ok": true,
+        "detail": "matched:<a> analyze"
+      },
+      {
+        "label": "panel2_status",
+        "ok": true,
+        "detail": "matched:copy cURL"
+      },
+      {
+        "label": "raw_modal_request",
+        "ok": true,
+        "detail": "matched:Request"
+      },
+      {
+        "label": "raw_modal_response",
+        "ok": true,
+        "detail": "matched:Response"
+      },
+      {
+        "label": "back_from_raw",
+        "ok": true,
+        "detail": "matched:Exchanges"
+      },
+      {
+        "label": "curl_toast",
+        "ok": false,
+        "detail": "missing:cURL copied to clipboard|cURL written to /tmp/csrf-shield-curl.txt|Copied via OSC 52; err:TIMEOUT:Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x7b4c6069dd60>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--input', b'data/sample_har/vulnerable.har']\nbuffer (last 100 chars): '4Her\\x1b[45;48"
+      },
+      {
+        "label": "filter_modal_open",
+        "ok": true,
+        "detail": "matched:Filter \\(empty to clear\\)"
+      },
+      {
+        "label": "filter_applied_exchanges",
+        "ok": false,
+        "detail": "missing:No exchanges matching \"qajcfre\"|Exchanges \\[Filter:; err:TIMEOUT:Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x7b4c6069dd60>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--input', b'data/sample_har/vulnerable.har']\nbuffer (last 100 chars): 'q>\\x1b[45;64Hq"
+      },
+      {
+        "label": "filter_modal_reopen",
+        "ok": false,
+        "detail": "missing:Filter \\(empty to clear\\); err:TIMEOUT:Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x7b4c6069dd60>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--input', b'data/sample_har/vulnerable.har']\nbuffer (last 100 chars): '\\x1b[45;74Hhel"
+      },
+      {
+        "label": "panel1_back",
+        "ok": false,
+        "detail": "missing:<A> analyze all; err:TIMEOUT:Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x7b4c6069dd60>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--input', b'data/sample_har/vulnerable.har']\nbuffer (last 100 chars): '\\x1b[?25l\\x1b["
+      },
+      {
+        "label": "analysis_progress_or_done",
+        "ok": false,
+        "detail": "missing:Analyzing|RISK SCORE; err:TIMEOUT:Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x7b4c6069dd60>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--input', b'data/sample_har/vulnerable.har']\nbuffer (last 100 chars): '\\x1b[?25l\\x1b["
+      },
+      {
+        "label": "analysis_done_score",
+        "ok": false,
+        "detail": "missing:RISK SCORE; err:TIMEOUT:Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x7b4c6069dd60>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--input', b'data/sample_har/vulnerable.har']\nbuffer (last 100 chars): '\\x1b[?25l\\x1b["
+      },
+      {
+        "label": "panel3_status",
+        "ok": false,
+        "detail": "missing:finding detail|j/k> scroll; err:TIMEOUT:Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x7b4c6069dd60>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--input', b'data/sample_har/vulnerable.har']\nbuffer (last 100 chars): '\\x1b[?25l\\x1b["
+      },
+      {
+        "label": "finding_detail_or_none",
+        "ok": false,
+        "detail": "missing:Finding Detail|No findings for this exchange; err:TIMEOUT:Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x7b4c6069dd60>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--input', b'data/sample_har/vulnerable.har']\nbuffer (last 100 chars): '\\x1b[?25l\\x1b["
+      },
+      {
+        "label": "help_open",
+        "ok": true,
+        "detail": "matched:Keybindings"
+      },
+      {
+        "label": "help_closed",
+        "ok": true,
+        "detail": "matched:Sessions|Exchanges"
+      },
+      {
+        "label": "export_open",
+        "ok": false,
+        "detail": "missing:Export Report; err:TIMEOUT:Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x7b4c6069dd60>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--input', b'data/sample_har/vulnerable.har']\nbuffer (last 100 chars): '\u2502\\x1b[44;26H\u2514\u2500"
+      },
+      {
+        "label": "export_done_toast",
+        "ok": false,
+        "detail": "missing:Exported to .*qa_jcfre_report.json|Export error; err:TIMEOUT:Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x7b4c6069dd60>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--input', b'data/sample_har/vulnerable.har']\nbuffer (last 100 chars): 'q>\\x1b[45;64Hq"
+      },
+      {
+        "label": "quit_confirm",
+        "ok": false,
+        "detail": "missing:Quit CSRF Shield AI\\? \\[y/n\\]; err:TIMEOUT:Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x7b4c6069dd60>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--input', b'data/sample_har/vulnerable.har']\nbuffer (last 100 chars): ' \\x1b[24;51H0 "
+      },
+      {
+        "label": "quit_cancelled",
+        "ok": true,
+        "detail": "matched:Sessions|Exchanges"
+      },
+      {
+        "label": "quit_confirm_2",
+        "ok": false,
+        "detail": "missing:Quit CSRF Shield AI\\? \\[y/n\\]; err:TIMEOUT:Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x7b4c6069dd60>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--input', b'data/sample_har/vulnerable.har']\nbuffer (last 100 chars): 'e>\\x1b[45;52He"
+      },
+      {
+        "label": "process_exit",
+        "ok": false,
+        "detail": "missing:<class 'pexpect.exceptions.EOF'>; err:TIMEOUT:Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x7b4c6069dd60>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--input', b'data/sample_har/vulnerable.har']\nbuffer (last 100 chars): 'q>\\x1b[45;64Hq"
+      }
+    ],
+    "errors": [],
+    "log_path": "docs/reports/_tui_runtime_retest_scenario_vulnerable.log"
+  },
+  {
+    "case": "scenario_mixed",
+    "checks": [
+      {
+        "label": "startup_sessions",
+        "ok": true,
+        "detail": "matched:Sessions"
+      },
+      {
+        "label": "has_header_badge",
+        "ok": false,
+        "detail": "missing:\\(H\\) Header|header_only|Header; err:TIMEOUT:Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x7b4c6054c3e0>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--input', b'data/sample_har/mixed_auth.har']\nbuffer (last 100 chars): '--\\x1b[25;4HPU"
+      },
+      {
+        "label": "analyze_all_status",
+        "ok": true,
+        "detail": "matched:Analyzing|ML: Analyzing"
+      },
+      {
+        "label": "cancelled_toast_or_idle",
+        "ok": false,
+        "detail": "missing:Analysis cancelled|ML: Idle|cancelled; err:TIMEOUT:Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x7b4c6054c3e0>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--input', b'data/sample_har/mixed_auth.har']\nbuffer (last 100 chars): '5;49Hremove\\x1"
+      },
+      {
+        "label": "remove_toast",
+        "ok": true,
+        "detail": "matched:removed|Session"
+      },
+      {
+        "label": "quit_confirm",
+        "ok": true,
+        "detail": "matched:Quit CSRF Shield AI\\? \\[y/n\\]"
+      },
+      {
+        "label": "process_exit",
+        "ok": false,
+        "detail": "missing:<class 'pexpect.exceptions.EOF'>; err:TIMEOUT:Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x7b4c6054c3e0>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--input', b'data/sample_har/mixed_auth.har']\nbuffer (last 100 chars): '5;49Hremove\\x1"
+      }
+    ],
+    "errors": [],
+    "log_path": "docs/reports/_tui_runtime_retest_scenario_mixed.log"
+  },
+  {
+    "case": "scenario_bad_input",
+    "checks": [
+      {
+        "label": "error_state_file_not_found",
+        "ok": true,
+        "detail": "matched:File not found|ERROR|error"
+      },
+      {
+        "label": "restart_attempt_feedback",
+        "ok": false,
+        "detail": "missing:Loading|File not found|ERROR; err:TIMEOUT:Timeout exceeded.\n<pexpect.pty_spawn.spawn object at 0x7b4c6054ca40>\ncommand: ./bin/csrf-shield-tui\nargs: [b'./bin/csrf-shield-tui', b'--input', b'data/sample_har/does_not_exist.har']\nbuffer (last 100 chars): '?25l\\x1b[?"
+      },
+      {
+        "label": "quit_from_error",
+        "ok": true,
+        "detail": "matched:Quit CSRF Shield AI\\? \\[y/n\\]|Press <q> to quit|quit"
+      }
+    ],
+    "errors": [],
+    "log_path": "docs/reports/_tui_runtime_retest_scenario_bad_input.log"
+  }
+]

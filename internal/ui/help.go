@@ -52,5 +52,6 @@ func (a *App) handleHelp(g *gocui.Gui, v *gocui.View) error {
 	if _, err := g.SetCurrentView("help"); err != nil {
 		return err
 	}
+	g.SetViewOnTop("help")
 	return nil
 }

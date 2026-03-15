@@ -1,0 +1,50 @@
+[
+  {
+    "probe": "q_confirmation",
+    "ok": true,
+    "detail": [
+      "OK startup",
+      "OK fallback expect Quit\\s+CSRF\\s+Shield\\s*AI\\?\\s*\\[y/n\\]"
+    ]
+  },
+  {
+    "probe": "filter_modal",
+    "ok": true,
+    "detail": [
+      "OK startup",
+      "OK expect Filter\\s*\\(empty\\s+to\\s+clear\\)"
+    ]
+  },
+  {
+    "probe": "export_modal",
+    "ok": true,
+    "detail": [
+      "OK startup",
+      "OK expect Export\\s*Report"
+    ]
+  },
+  {
+    "probe": "tab_to_exchanges",
+    "ok": true,
+    "detail": [
+      "OK startup",
+      "OK expect Exchanges"
+    ]
+  },
+  {
+    "probe": "raw_modal",
+    "ok": true,
+    "detail": [
+      "OK startup",
+      "OK expect Exchanges",
+      "OK expect Request|Response|Raw"
+    ]
+  },
+  {
+    "probe": "invalid_path_error_state",
+    "ok": true,
+    "detail": [
+      "OK in-app error state"
+    ]
+  }
+]

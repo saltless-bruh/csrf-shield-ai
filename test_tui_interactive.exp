@@ -1,0 +1,37 @@
+#!/usr/bin/expect -f
+set timeout 5
+spawn ./test_bin --input data/sample_har/minimal.har
+expect "Sessions"
+
+# 1. Test Filter interaction
+send "f"
+expect "Filter"
+# Type letters that used to trigger global functions
+send "reqx"
+# Hit enter
+send "\r"
+
+# 2. Test Help Modal interaction
+send "?"
+expect "Keybindings"
+# Hit escape
+send "\033"
+expect "Sessions"
+
+# 3. Test Export Modal interaction
+send "e"
+expect "Export Report"
+# Press arrow down to go to path
+send "\033\[B"
+send "\033\[B"
+# Type letters that used to trigger globals, e.g. "qajcfre"
+send "my_report.json"
+# Hit Enter to trigger export
+send "\r"
+
+# 4. Quit
+send "q"
+expect "Quit CSRF Shield AI?"
+send "y"
+
+expect eof

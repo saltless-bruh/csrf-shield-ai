@@ -64,10 +64,11 @@ type App struct {
 	harPath string
 
 	// Export form state.
-	exportFocusIdx int    // 0:Format, 1:Scope, 2:Path
-	exportFormat   string // "json" or "html"
-	exportScope    string // "selected" or "all"
-	exportPath     string
+	exportFocusIdx   int    // 0:Format, 1:Scope, 2:Path
+	exportFormat     string // "json" or "html"
+	exportScope      string // "selected" or "all"
+	exportPath       string
+	exportPathEdited bool
 
 	// Toast.
 	toastMsg  string
@@ -222,7 +223,7 @@ func (a *App) layout(g *gocui.Gui) error {
 		hdrV.Wrap = true
 	}
 	// Panel 3 body: scrollable findings/features/recommendations (shares top border with header).
-	if v, err := g.SetView(PanelAnalysis, leftWidth, 4, leftWidth+rightWidth, statusY, gocui.TOP); err != nil {
+	if v, err := g.SetView(PanelAnalysis, leftWidth, 4, leftWidth+rightWidth, statusY, 0); err != nil {
 		if err != gocui.ErrUnknownView {
 			return err
 		}
@@ -235,7 +236,7 @@ func (a *App) layout(g *gocui.Gui) error {
 			return err
 		}
 		v.Frame = false
-                v.BgColor = gocui.ColorBlue
+		v.BgColor = gocui.ColorBlue
 		v.FgColor = gocui.ColorWhite
 	}
 

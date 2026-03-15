@@ -1,0 +1,41 @@
+[
+  {
+    "probe": "q_confirmation",
+    "ok": false,
+    "detail": [
+      "OK expect Sessions",
+      "FAIL expect Quit CSRF Shield AI\\? \\[y/n\\]: TIMEOUT"
+    ]
+  },
+  {
+    "probe": "filter_modal",
+    "ok": true,
+    "detail": [
+      "OK expect Sessions",
+      "OK expect Filter \\(empty to clear\\)"
+    ]
+  },
+  {
+    "probe": "export_modal",
+    "ok": false,
+    "detail": [
+      "OK expect Sessions",
+      "FAIL expect Export Report: TIMEOUT"
+    ]
+  },
+  {
+    "probe": "tab_to_exchanges",
+    "ok": true,
+    "detail": [
+      "OK expect Sessions",
+      "OK expect copy cURL|view raw|Exchanges"
+    ]
+  },
+  {
+    "probe": "invalid_path_error_state",
+    "ok": true,
+    "detail": [
+      "OK expect ERROR|file not found|Press <r> to restart|Press <q> to quit"
+    ]
+  }
+]

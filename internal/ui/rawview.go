@@ -94,6 +94,8 @@ func (a *App) showRawExchangeModal(g *gocui.Gui) error {
 	if _, err := g.SetCurrentView("rawmodal_req"); err != nil {
 		return err
 	}
+	g.SetViewOnTop("rawmodal_resp")
+	g.SetViewOnTop("rawmodal_req")
 	return nil
 }
 

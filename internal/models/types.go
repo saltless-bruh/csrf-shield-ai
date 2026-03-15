@@ -188,14 +188,15 @@ func AuthBadge(auth string) string {
 
 // BodyTypeBadge derives the body type badge from content type.
 func BodyTypeBadge(contentType string) string {
+	ct := strings.ToLower(contentType)
 	switch {
-	case strings.Contains(contentType, "form-urlencoded"):
+	case strings.Contains(ct, "form-urlencoded"):
 		return "[Form]"
-	case strings.Contains(contentType, "multipart"):
+	case strings.Contains(ct, "multipart"):
 		return "[Multi]"
-	case strings.Contains(contentType, "json"):
+	case strings.Contains(ct, "json"):
 		return "[JSON]"
-	case strings.Contains(contentType, "text/plain"):
+	case strings.Contains(ct, "text/plain"):
 		return "[Text]"
 	default:
 		return "[None]"

@@ -1,33 +1,919 @@
-2026-03-10 21:21:55,597 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
-2026-03-10 21:21:56,320 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
-2026-03-10 21:21:56,320 [INFO] __main__: IPC server starting (version 1.0)
-2026-03-10 21:21:56,511 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
-2026-03-10 21:21:56,933 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
-2026-03-10 21:21:56,933 [INFO] __main__: IPC server starting (version 1.0)
-2026-03-10 21:21:56,934 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
-2026-03-10 21:21:56,934 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
-2026-03-10 21:21:57,124 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
-2026-03-10 21:21:57,536 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
-2026-03-10 21:21:57,536 [INFO] __main__: IPC server starting (version 1.0)
-2026-03-10 23:36:35,161 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
-2026-03-10 23:36:35,627 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
-2026-03-10 23:36:35,627 [INFO] __main__: IPC server starting (version 1.0)
-2026-03-10 23:36:35,853 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
-2026-03-10 23:36:36,296 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
-2026-03-10 23:36:36,296 [INFO] __main__: IPC server starting (version 1.0)
-2026-03-10 23:36:36,296 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
-2026-03-10 23:36:36,296 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
-2026-03-10 23:36:36,531 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
-2026-03-10 23:36:36,963 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
-2026-03-10 23:36:36,963 [INFO] __main__: IPC server starting (version 1.0)
-2026-03-12 18:25:28,270 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
-2026-03-12 18:25:29,026 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
-2026-03-12 18:25:29,026 [INFO] __main__: IPC server starting (version 1.0)
-2026-03-12 18:25:29,229 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
-2026-03-12 18:25:29,655 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
-2026-03-12 18:25:29,655 [INFO] __main__: IPC server starting (version 1.0)
-2026-03-12 18:25:29,655 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
-2026-03-12 18:25:29,655 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
-2026-03-12 18:25:29,853 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
-2026-03-12 18:25:30,291 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
-2026-03-12 18:25:30,291 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 19:45:37,952 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 19:45:38,406 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 19:45:38,406 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 19:45:38,408 [INFO] src.input.har_parser: Parsed 1 exchanges from minimal.har
+2026-03-14 19:45:38,408 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 1 exchange(s)
+2026-03-14 19:57:28,392 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 19:57:28,847 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 19:57:28,847 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 19:57:28,847 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 19:57:28,847 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 19:57:31,763 [INFO] src.analysis.static_analyzer: Analyzed flow vuln_sess_001: 3 exchanges, 9 findings
+2026-03-14 19:57:31,793 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-20 final=14 (LOW)
+2026-03-14 19:57:31,809 [INFO] src.scoring.risk_scorer: Risk: base=70.0 modifiers=+10 final=80 (CRITICAL)
+2026-03-14 19:57:31,824 [INFO] src.scoring.risk_scorer: Risk: base=46.0 modifiers=-10 final=36 (MEDIUM)
+2026-03-14 20:09:28,106 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:09:28,586 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:09:28,586 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:09:28,586 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 20:09:28,586 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 20:10:17,640 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:10:18,084 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:10:18,084 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:10:18,084 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 20:10:18,084 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 20:19:31,203 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:19:31,656 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:19:31,656 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:19:31,656 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 20:19:31,656 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 20:20:54,524 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:20:54,548 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:20:55,001 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:20:55,001 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:20:55,001 [INFO] src.input.har_parser: Parsed 1 exchanges from minimal.har
+2026-03-14 20:20:55,001 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 1 exchange(s)
+2026-03-14 20:20:55,032 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:20:55,032 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:20:55,032 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:20:55,032 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:21:07,127 [INFO] src.analysis.static_analyzer: Analyzed flow mixed_sess_001: 2 exchanges, 4 findings
+2026-03-14 20:21:07,145 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-10 final=24 (MEDIUM)
+2026-03-14 20:21:07,160 [INFO] src.scoring.risk_scorer: Risk: base=40.0 modifiers=-10 final=30 (MEDIUM)
+2026-03-14 20:22:00,607 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:22:01,050 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:22:01,050 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:22:01,050 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 20:22:01,050 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 20:23:18,925 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:23:19,427 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:23:19,427 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:23:19,427 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:23:19,427 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:23:31,493 [INFO] src.analysis.static_analyzer: Analyzed flow mixed_sess_001: 2 exchanges, 4 findings
+2026-03-14 20:23:31,511 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-10 final=24 (MEDIUM)
+2026-03-14 20:23:31,526 [INFO] src.scoring.risk_scorer: Risk: base=40.0 modifiers=-10 final=30 (MEDIUM)
+2026-03-14 20:25:51,997 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:25:52,411 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:25:52,411 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:25:52,411 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:25:52,411 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:25:52,854 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:25:53,292 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:25:53,292 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:25:53,292 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:25:53,292 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:25:54,653 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:25:55,081 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:25:55,081 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:25:55,081 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:25:55,081 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:25:55,133 [INFO] src.output.report_generator: JSON report written to mixed_s_report.json
+2026-03-14 20:26:04,314 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:26:04,782 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:26:04,783 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:26:04,783 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:26:04,783 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:26:13,850 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:26:14,338 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:26:14,338 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:26:14,338 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:26:14,338 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:26:23,357 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:26:23,861 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:26:23,861 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:26:23,861 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:26:23,861 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:26:23,913 [INFO] src.analysis.static_analyzer: Analyzed flow mixed_sess_001: 2 exchanges, 4 findings
+2026-03-14 20:26:23,930 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-10 final=24 (MEDIUM)
+2026-03-14 20:26:23,945 [INFO] src.scoring.risk_scorer: Risk: base=40.0 modifiers=-10 final=30 (MEDIUM)
+2026-03-14 20:26:50,218 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:26:50,723 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:26:50,724 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:26:50,724 [INFO] src.input.har_parser: Parsed 1 exchanges from bearer_auth.har
+2026-03-14 20:26:50,724 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 1 exchange(s)
+2026-03-14 20:26:50,777 [INFO] src.analysis.static_analyzer: Short-circuited flow no-session-62583c41 (header-only auth)
+2026-03-14 20:37:47,908 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:37:48,367 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:37:48,367 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:37:48,367 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:37:48,367 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:37:48,907 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:37:49,341 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:37:49,341 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:37:49,341 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:37:49,341 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:38:02,422 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:38:02,873 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:38:02,873 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:38:02,873 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:38:02,873 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:38:02,925 [INFO] src.output.report_generator: JSON report written to mixed_s_report.json
+2026-03-14 20:38:15,942 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:38:16,432 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:38:16,432 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:38:16,432 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:38:16,432 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:38:36,943 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:38:37,442 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:38:37,442 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:38:37,442 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:38:37,442 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:38:50,614 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:38:51,107 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:38:51,108 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:38:51,108 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:38:51,108 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:38:52,371 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:38:52,816 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:38:52,816 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:38:52,816 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:38:52,816 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:39:05,958 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:39:06,436 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:39:06,436 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:39:06,436 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:39:06,436 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:39:07,888 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:39:08,412 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:39:08,412 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:39:35,042 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:39:35,555 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:39:35,555 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:39:35,555 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:39:35,555 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:39:46,752 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:39:47,202 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:39:47,203 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:39:47,203 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:39:47,203 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:40:32,604 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:40:33,121 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:40:33,121 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:40:33,401 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:40:33,872 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:40:33,872 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:40:33,872 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:40:33,872 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:40:34,083 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:40:34,535 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:40:34,535 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:47:50,371 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:47:50,802 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:47:50,802 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:47:50,802 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:47:50,802 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:48:56,160 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:48:56,601 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:48:56,602 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:48:56,602 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:48:56,602 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:49:05,334 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:50:11,989 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:50:12,452 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:50:12,452 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:50:12,453 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:50:12,453 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:50:21,197 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:50:21,640 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:50:21,640 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:50:21,640 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:50:21,641 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:50:22,594 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:50:23,026 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:50:23,026 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:50:23,026 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:50:23,026 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:50:31,754 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:50:32,211 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:50:32,212 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:50:32,212 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:50:32,212 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:50:33,171 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:50:33,618 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:50:33,618 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:50:33,618 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:50:33,618 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:50:42,722 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:50:43,169 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:50:43,169 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:51:41,588 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:51:42,042 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:51:42,042 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:51:42,042 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:51:42,043 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:51:50,750 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:51:51,198 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:51:51,198 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:51:51,198 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:51:51,198 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:51:52,179 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:51:52,616 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:51:52,616 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:51:52,616 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:51:52,616 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:52:01,357 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:52:01,822 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:52:01,822 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:52:01,822 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:52:01,822 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:52:02,783 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:52:03,248 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:52:03,249 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 20:52:03,249 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 20:52:03,249 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 20:52:12,352 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 20:52:12,806 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 20:52:12,806 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:02:59,199 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:02:59,643 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:02:59,643 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:02:59,643 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:02:59,643 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:03:15,461 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:03:15,919 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:03:15,919 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:03:15,919 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 21:03:15,919 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 21:04:41,503 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:04:41,958 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:04:41,958 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:04:41,958 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 21:04:41,958 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 21:05:07,052 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:05:07,510 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:05:07,510 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:05:07,510 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 21:05:07,510 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 21:05:07,563 [INFO] src.analysis.static_analyzer: Analyzed flow vuln_sess_001: 3 exchanges, 9 findings
+2026-03-14 21:05:07,579 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-20 final=14 (LOW)
+2026-03-14 21:05:07,595 [INFO] src.scoring.risk_scorer: Risk: base=70.0 modifiers=+10 final=80 (CRITICAL)
+2026-03-14 21:05:07,611 [INFO] src.scoring.risk_scorer: Risk: base=46.0 modifiers=-10 final=36 (MEDIUM)
+2026-03-14 21:05:10,449 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:05:10,903 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:05:10,903 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:05:10,903 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:05:10,904 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:05:22,355 [INFO] src.analysis.static_analyzer: Analyzed flow mixed_sess_001: 2 exchanges, 4 findings
+2026-03-14 21:05:22,373 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-10 final=24 (MEDIUM)
+2026-03-14 21:05:22,388 [INFO] src.scoring.risk_scorer: Risk: base=40.0 modifiers=-10 final=30 (MEDIUM)
+2026-03-14 21:05:39,053 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:05:39,533 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:05:39,533 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:05:39,534 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 21:05:39,534 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 21:05:52,328 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:05:52,818 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:05:52,818 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:05:52,819 [INFO] src.input.har_parser: Parsed 2 exchanges from multipart.har
+2026-03-14 21:05:52,819 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:05:53,514 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:05:53,949 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:05:53,949 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:05:53,949 [INFO] src.input.har_parser: Parsed 1 exchanges from text_plain_request.har
+2026-03-14 21:05:53,949 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 1 exchange(s)
+2026-03-14 21:05:54,682 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:05:55,133 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:05:55,133 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:06:19,818 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:19:41,255 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:19:41,747 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:19:41,747 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:19:41,747 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:19:41,747 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:19:57,525 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:19:57,984 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:19:57,984 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:19:57,984 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 21:19:57,984 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 21:21:23,631 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:21:24,070 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:21:24,070 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:21:24,071 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 21:21:24,071 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 21:21:49,202 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:21:49,647 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:21:49,647 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:21:49,647 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 21:21:49,647 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 21:21:49,699 [INFO] src.analysis.static_analyzer: Analyzed flow vuln_sess_001: 3 exchanges, 9 findings
+2026-03-14 21:21:49,717 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-20 final=14 (LOW)
+2026-03-14 21:21:49,732 [INFO] src.scoring.risk_scorer: Risk: base=70.0 modifiers=+10 final=80 (CRITICAL)
+2026-03-14 21:21:49,747 [INFO] src.scoring.risk_scorer: Risk: base=46.0 modifiers=-10 final=36 (MEDIUM)
+2026-03-14 21:21:52,592 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:21:53,058 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:21:53,058 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:21:53,058 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:21:53,058 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:22:04,510 [INFO] src.analysis.static_analyzer: Analyzed flow mixed_sess_001: 2 exchanges, 4 findings
+2026-03-14 21:22:04,528 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-10 final=24 (MEDIUM)
+2026-03-14 21:22:04,543 [INFO] src.scoring.risk_scorer: Risk: base=40.0 modifiers=-10 final=30 (MEDIUM)
+2026-03-14 21:22:21,204 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:22:21,675 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:22:21,675 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:22:21,675 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 21:22:21,675 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 21:22:34,506 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:22:34,980 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:22:34,980 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:22:34,980 [INFO] src.input.har_parser: Parsed 2 exchanges from multipart.har
+2026-03-14 21:22:34,980 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:22:35,674 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:22:36,097 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:22:36,097 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:22:36,098 [INFO] src.input.har_parser: Parsed 1 exchanges from text_plain_request.har
+2026-03-14 21:22:36,098 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 1 exchange(s)
+2026-03-14 21:22:36,803 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:22:37,243 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:22:37,243 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:23:01,939 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:33:19,277 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:33:19,718 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:33:19,718 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:33:19,718 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:33:19,718 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:33:35,494 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:33:35,936 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:33:35,936 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:33:35,936 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 21:33:35,936 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 21:35:01,595 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:35:02,049 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:35:02,049 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:35:02,049 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 21:35:02,049 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 21:35:27,181 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:35:27,632 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:35:27,632 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:35:27,632 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 21:35:27,632 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 21:35:27,684 [INFO] src.analysis.static_analyzer: Analyzed flow vuln_sess_001: 3 exchanges, 9 findings
+2026-03-14 21:35:27,701 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-20 final=14 (LOW)
+2026-03-14 21:35:27,715 [INFO] src.scoring.risk_scorer: Risk: base=70.0 modifiers=+10 final=80 (CRITICAL)
+2026-03-14 21:35:27,730 [INFO] src.scoring.risk_scorer: Risk: base=46.0 modifiers=-10 final=36 (MEDIUM)
+2026-03-14 21:35:30,580 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:35:31,032 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:35:31,032 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:35:31,032 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:35:31,032 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:35:42,485 [INFO] src.analysis.static_analyzer: Analyzed flow mixed_sess_001: 2 exchanges, 4 findings
+2026-03-14 21:35:42,503 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-10 final=24 (MEDIUM)
+2026-03-14 21:35:42,519 [INFO] src.scoring.risk_scorer: Risk: base=40.0 modifiers=-10 final=30 (MEDIUM)
+2026-03-14 21:35:59,180 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:35:59,615 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:35:59,615 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:35:59,615 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 21:35:59,615 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 21:36:12,418 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:36:12,878 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:36:12,878 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:36:12,878 [INFO] src.input.har_parser: Parsed 2 exchanges from multipart.har
+2026-03-14 21:36:12,878 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:36:13,580 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:36:14,028 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:36:14,028 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:36:14,028 [INFO] src.input.har_parser: Parsed 1 exchanges from text_plain_request.har
+2026-03-14 21:36:14,028 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 1 exchange(s)
+2026-03-14 21:36:14,726 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:36:15,153 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:36:15,153 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:36:39,843 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:40:42,108 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:40:42,613 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:40:42,613 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:40:42,614 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:40:42,614 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:40:58,423 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:40:58,890 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:40:58,891 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:40:58,891 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 21:40:58,891 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 21:42:02,338 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:42:02,776 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:42:02,776 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:42:02,777 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 21:42:02,777 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 21:42:27,871 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:42:28,318 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:42:28,318 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:42:28,318 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 21:42:28,318 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 21:42:28,370 [INFO] src.analysis.static_analyzer: Analyzed flow vuln_sess_001: 3 exchanges, 9 findings
+2026-03-14 21:42:28,387 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-20 final=14 (LOW)
+2026-03-14 21:42:28,402 [INFO] src.scoring.risk_scorer: Risk: base=70.0 modifiers=+10 final=80 (CRITICAL)
+2026-03-14 21:42:28,417 [INFO] src.scoring.risk_scorer: Risk: base=46.0 modifiers=-10 final=36 (MEDIUM)
+2026-03-14 21:42:31,258 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:42:31,707 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:42:31,707 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:42:31,707 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:42:31,707 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:42:33,111 [INFO] src.analysis.static_analyzer: Analyzed flow mixed_sess_001: 2 exchanges, 4 findings
+2026-03-14 21:42:33,142 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-10 final=24 (MEDIUM)
+2026-03-14 21:42:33,170 [INFO] src.scoring.risk_scorer: Risk: base=40.0 modifiers=-10 final=30 (MEDIUM)
+2026-03-14 21:42:49,795 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:42:50,244 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:42:50,244 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:42:50,244 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 21:42:50,244 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 21:43:03,045 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:43:03,516 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:43:03,517 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:43:03,517 [INFO] src.input.har_parser: Parsed 2 exchanges from multipart.har
+2026-03-14 21:43:03,517 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:43:04,250 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:43:04,711 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:43:04,711 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:43:04,711 [INFO] src.input.har_parser: Parsed 1 exchanges from text_plain_request.har
+2026-03-14 21:43:04,711 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 1 exchange(s)
+2026-03-14 21:43:05,457 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:43:05,926 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:43:05,927 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:43:30,604 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:46:10,513 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:46:11,070 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:46:11,070 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:46:11,070 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:46:11,070 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:46:19,746 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:46:20,182 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:46:20,182 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:46:20,183 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:46:20,183 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:46:21,130 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:46:21,568 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:46:21,568 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:46:21,568 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:46:21,568 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:46:22,558 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:46:22,997 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:46:22,997 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:46:22,998 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:46:22,998 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:46:23,981 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:46:24,422 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:46:24,422 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:46:24,422 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:46:24,422 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:46:33,501 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:46:33,975 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:46:33,975 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:51:42,964 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:51:43,440 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:51:43,440 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:51:43,440 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:51:43,440 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:51:52,150 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:51:52,586 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:51:52,586 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:51:52,586 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:51:52,586 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:51:53,569 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:51:54,002 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:51:54,002 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:51:54,003 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:51:54,003 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:51:54,977 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:51:55,408 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:51:55,408 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:51:55,408 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:51:55,408 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:51:56,367 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:51:56,805 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:51:56,805 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:51:56,806 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:51:56,806 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:52:05,838 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:52:06,297 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:52:06,297 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:52:21,548 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:52:22,029 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:52:22,029 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:52:22,029 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:52:22,029 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:55:57,006 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:55:57,477 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:55:57,477 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:55:57,477 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:55:57,477 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:56:06,491 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:56:06,930 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:56:06,930 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:56:06,930 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:56:06,930 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:56:07,896 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:56:08,338 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:56:08,338 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:56:08,338 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:56:08,338 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:56:09,303 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:56:09,752 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:56:09,752 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:56:09,753 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:56:09,753 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:56:10,719 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:56:11,145 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:56:11,145 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 21:56:11,145 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 21:56:11,145 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 21:56:20,258 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 21:56:20,739 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 21:56:20,739 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:08:36,464 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:08:36,907 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:08:36,907 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:08:36,907 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:08:36,907 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:08:45,874 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:08:46,304 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:08:46,304 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:08:46,304 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:08:46,304 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:08:47,300 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:08:47,744 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:08:47,744 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:08:47,744 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:08:47,744 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:08:48,730 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:08:49,165 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:08:49,165 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:08:49,165 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:08:49,165 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:08:50,153 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:08:50,613 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:08:50,613 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:08:50,613 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:08:50,613 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:08:59,681 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:09:00,169 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:09:00,170 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:19:58,191 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:19:58,690 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:19:58,690 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:19:58,691 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:19:58,691 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:20:07,685 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:20:08,133 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:20:08,133 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:20:08,133 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:20:08,133 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:20:09,095 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:20:09,540 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:20:09,540 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:20:09,540 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:20:09,540 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:20:10,539 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:20:10,979 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:20:10,979 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:20:10,979 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:20:10,979 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:20:11,927 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:20:12,370 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:20:12,370 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:20:12,370 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:20:12,370 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:20:13,704 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:20:14,147 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:20:14,147 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:29:44,532 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:29:45,017 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:29:45,017 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:29:45,017 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:29:45,017 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:30:00,768 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:30:01,232 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:30:01,233 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:30:01,233 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 22:30:01,233 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 22:31:04,678 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:31:05,165 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:31:05,165 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:31:05,165 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 22:31:05,165 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 22:31:30,260 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:31:30,720 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:31:30,720 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:31:30,720 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 22:31:30,720 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 22:31:30,772 [INFO] src.analysis.static_analyzer: Analyzed flow vuln_sess_001: 3 exchanges, 9 findings
+2026-03-14 22:31:30,789 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-20 final=14 (LOW)
+2026-03-14 22:31:30,804 [INFO] src.scoring.risk_scorer: Risk: base=70.0 modifiers=+10 final=80 (CRITICAL)
+2026-03-14 22:31:30,819 [INFO] src.scoring.risk_scorer: Risk: base=46.0 modifiers=-10 final=36 (MEDIUM)
+2026-03-14 22:31:33,665 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:31:34,111 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:31:34,111 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:31:34,111 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:31:34,111 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:31:35,514 [INFO] src.analysis.static_analyzer: Analyzed flow mixed_sess_001: 2 exchanges, 4 findings
+2026-03-14 22:31:35,531 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-10 final=24 (MEDIUM)
+2026-03-14 22:31:35,547 [INFO] src.scoring.risk_scorer: Risk: base=40.0 modifiers=-10 final=30 (MEDIUM)
+2026-03-14 22:31:52,214 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:31:52,698 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:31:52,698 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:31:52,699 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 22:31:52,699 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 22:32:05,474 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:32:05,903 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:32:05,903 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:32:05,903 [INFO] src.input.har_parser: Parsed 2 exchanges from multipart.har
+2026-03-14 22:32:05,903 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:32:06,611 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:32:07,044 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:32:07,044 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:32:07,044 [INFO] src.input.har_parser: Parsed 1 exchanges from text_plain_request.har
+2026-03-14 22:32:07,044 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 1 exchange(s)
+2026-03-14 22:32:07,752 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:32:08,184 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:32:08,185 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:32:32,880 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:36:06,289 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:36:06,759 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:36:06,759 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:36:06,759 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 22:36:06,759 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 22:38:45,446 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:38:45,938 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:38:45,938 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:38:45,938 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:38:45,938 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:38:58,050 [INFO] src.analysis.static_analyzer: Analyzed flow mixed_sess_001: 2 exchanges, 4 findings
+2026-03-14 22:38:58,067 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-10 final=24 (MEDIUM)
+2026-03-14 22:38:58,083 [INFO] src.scoring.risk_scorer: Risk: base=40.0 modifiers=-10 final=30 (MEDIUM)
+2026-03-14 22:39:15,542 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:39:16,031 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:39:16,031 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:49:48,600 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:49:49,082 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:49:49,082 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:49:49,082 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:49:49,082 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:49:58,075 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:49:58,558 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:49:58,558 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:49:58,559 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:49:58,559 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:49:59,542 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:49:59,980 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:49:59,980 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:49:59,980 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:49:59,981 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:50:00,962 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:50:01,389 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:50:01,389 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:50:01,389 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:50:01,389 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:50:02,339 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:50:02,764 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:50:02,764 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:50:02,765 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:50:02,765 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:50:04,126 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:50:04,574 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:50:04,574 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:50:08,177 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:50:08,612 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:50:08,612 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:50:08,612 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:50:08,612 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:50:24,484 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:50:24,968 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:50:24,969 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:50:24,969 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 22:50:24,969 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 22:51:28,406 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:51:28,871 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:51:28,871 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:51:28,871 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 22:51:28,871 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 22:51:53,955 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:51:54,447 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:51:54,447 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:51:54,447 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 22:51:54,447 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 22:51:54,499 [INFO] src.analysis.static_analyzer: Analyzed flow vuln_sess_001: 3 exchanges, 9 findings
+2026-03-14 22:51:54,515 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-20 final=14 (LOW)
+2026-03-14 22:51:54,530 [INFO] src.scoring.risk_scorer: Risk: base=70.0 modifiers=+10 final=80 (CRITICAL)
+2026-03-14 22:51:54,545 [INFO] src.scoring.risk_scorer: Risk: base=46.0 modifiers=-10 final=36 (MEDIUM)
+2026-03-14 22:51:57,378 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:51:57,868 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:51:57,868 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:51:57,868 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:51:57,868 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:51:59,271 [INFO] src.analysis.static_analyzer: Analyzed flow mixed_sess_001: 2 exchanges, 4 findings
+2026-03-14 22:51:59,288 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-10 final=24 (MEDIUM)
+2026-03-14 22:51:59,304 [INFO] src.scoring.risk_scorer: Risk: base=40.0 modifiers=-10 final=30 (MEDIUM)
+2026-03-14 22:52:15,974 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:52:16,465 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:52:16,465 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:52:16,466 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 22:52:16,466 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 22:52:29,267 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:52:29,701 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:52:29,701 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:52:29,701 [INFO] src.input.har_parser: Parsed 2 exchanges from multipart.har
+2026-03-14 22:52:29,701 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:52:30,424 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:52:30,857 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:52:30,857 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:52:30,857 [INFO] src.input.har_parser: Parsed 1 exchanges from text_plain_request.har
+2026-03-14 22:52:30,857 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 1 exchange(s)
+2026-03-14 22:52:31,553 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:52:31,973 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:52:31,973 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:52:56,626 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:58:08,955 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:58:09,418 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:58:09,418 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:58:09,418 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:58:09,418 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:58:25,214 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:58:25,655 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:58:25,655 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:58:25,656 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 22:58:25,656 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 22:59:29,143 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:59:29,625 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:59:29,625 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:59:29,625 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 22:59:29,625 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 22:59:54,716 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:59:55,188 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:59:55,188 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:59:55,188 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 22:59:55,188 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 22:59:55,240 [INFO] src.analysis.static_analyzer: Analyzed flow vuln_sess_001: 3 exchanges, 9 findings
+2026-03-14 22:59:55,256 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-20 final=14 (LOW)
+2026-03-14 22:59:55,272 [INFO] src.scoring.risk_scorer: Risk: base=70.0 modifiers=+10 final=80 (CRITICAL)
+2026-03-14 22:59:55,286 [INFO] src.scoring.risk_scorer: Risk: base=46.0 modifiers=-10 final=36 (MEDIUM)
+2026-03-14 22:59:58,140 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 22:59:58,584 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 22:59:58,584 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 22:59:58,584 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 22:59:58,584 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 22:59:59,988 [INFO] src.analysis.static_analyzer: Analyzed flow mixed_sess_001: 2 exchanges, 4 findings
+2026-03-14 23:00:00,005 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-10 final=24 (MEDIUM)
+2026-03-14 23:00:00,021 [INFO] src.scoring.risk_scorer: Risk: base=40.0 modifiers=-10 final=30 (MEDIUM)
+2026-03-14 23:00:16,722 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 23:00:17,202 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 23:00:17,202 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 23:00:17,202 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 23:00:17,202 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 23:00:29,973 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 23:00:30,432 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 23:00:30,432 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 23:00:30,432 [INFO] src.input.har_parser: Parsed 2 exchanges from multipart.har
+2026-03-14 23:00:30,432 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 23:00:31,157 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 23:00:31,572 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 23:00:31,573 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 23:00:31,573 [INFO] src.input.har_parser: Parsed 1 exchanges from text_plain_request.har
+2026-03-14 23:00:31,573 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 1 exchange(s)
+2026-03-14 23:00:32,261 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 23:00:32,687 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 23:00:32,687 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 23:00:57,370 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 23:05:37,903 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 23:05:38,374 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 23:05:38,374 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 23:05:38,374 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 23:05:38,374 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 23:05:54,131 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 23:05:54,590 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 23:05:54,590 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 23:05:54,590 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 23:05:54,590 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 23:06:58,050 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 23:06:58,551 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 23:06:58,551 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 23:06:58,551 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 23:06:58,551 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 23:07:23,633 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 23:07:24,123 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 23:07:24,123 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 23:07:24,123 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 23:07:24,123 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 23:07:24,174 [INFO] src.analysis.static_analyzer: Analyzed flow vuln_sess_001: 3 exchanges, 9 findings
+2026-03-14 23:07:24,191 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-20 final=14 (LOW)
+2026-03-14 23:07:24,205 [INFO] src.scoring.risk_scorer: Risk: base=70.0 modifiers=+10 final=80 (CRITICAL)
+2026-03-14 23:07:24,220 [INFO] src.scoring.risk_scorer: Risk: base=46.0 modifiers=-10 final=36 (MEDIUM)
+2026-03-14 23:07:27,074 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 23:07:27,510 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 23:07:27,510 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 23:07:27,510 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-14 23:07:27,510 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 23:07:28,913 [INFO] src.analysis.static_analyzer: Analyzed flow mixed_sess_001: 2 exchanges, 4 findings
+2026-03-14 23:07:28,931 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-10 final=24 (MEDIUM)
+2026-03-14 23:07:28,947 [INFO] src.scoring.risk_scorer: Risk: base=40.0 modifiers=-10 final=30 (MEDIUM)
+2026-03-14 23:07:45,613 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 23:07:46,080 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 23:07:46,080 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 23:07:46,081 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-14 23:07:46,081 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-14 23:07:58,932 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 23:07:59,400 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 23:07:59,401 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 23:07:59,401 [INFO] src.input.har_parser: Parsed 2 exchanges from multipart.har
+2026-03-14 23:07:59,401 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-14 23:08:00,097 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 23:08:00,520 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 23:08:00,520 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 23:08:00,520 [INFO] src.input.har_parser: Parsed 1 exchanges from text_plain_request.har
+2026-03-14 23:08:00,521 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 1 exchange(s)
+2026-03-14 23:08:01,217 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-14 23:08:01,655 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-14 23:08:01,655 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-14 23:08:26,336 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 20:56:11,386 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 20:56:12,146 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-15 20:56:12,147 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-15 20:56:12,147 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-15 20:56:12,147 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-15 20:56:27,922 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 20:56:28,421 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-15 20:56:28,421 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-15 20:56:28,422 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-15 20:56:28,422 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-15 20:57:31,922 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 20:57:32,426 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-15 20:57:32,426 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-15 20:57:32,426 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-15 20:57:32,426 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-15 20:57:57,500 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 20:57:57,990 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-15 20:57:57,991 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-15 20:57:57,991 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-15 20:57:57,991 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-15 20:57:58,042 [INFO] src.analysis.static_analyzer: Analyzed flow vuln_sess_001: 3 exchanges, 9 findings
+2026-03-15 20:57:58,073 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-20 final=14 (LOW)
+2026-03-15 20:57:58,088 [INFO] src.scoring.risk_scorer: Risk: base=70.0 modifiers=+10 final=80 (CRITICAL)
+2026-03-15 20:57:58,103 [INFO] src.scoring.risk_scorer: Risk: base=46.0 modifiers=-10 final=36 (MEDIUM)
+2026-03-15 20:58:00,921 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 20:58:01,418 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-15 20:58:01,418 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-15 20:58:01,418 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-15 20:58:01,419 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-15 20:58:02,821 [INFO] src.analysis.static_analyzer: Analyzed flow mixed_sess_001: 2 exchanges, 4 findings
+2026-03-15 20:58:02,839 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-10 final=24 (MEDIUM)
+2026-03-15 20:58:02,855 [INFO] src.scoring.risk_scorer: Risk: base=40.0 modifiers=-10 final=30 (MEDIUM)
+2026-03-15 20:58:19,467 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 20:58:19,968 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-15 20:58:19,969 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-15 20:58:19,969 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-15 20:58:19,969 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-15 20:58:32,722 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 20:58:33,226 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-15 20:58:33,226 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-15 20:58:33,227 [INFO] src.input.har_parser: Parsed 2 exchanges from multipart.har
+2026-03-15 20:58:33,227 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-15 20:58:33,953 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 20:58:34,388 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-15 20:58:34,388 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-15 20:58:34,388 [INFO] src.input.har_parser: Parsed 1 exchanges from text_plain_request.har
+2026-03-15 20:58:34,389 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 1 exchange(s)
+2026-03-15 20:58:35,086 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 20:58:35,508 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-15 20:58:35,508 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-15 20:59:00,188 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 20:59:15,227 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 20:59:15,695 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-15 20:59:15,695 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-15 20:59:15,695 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-15 20:59:15,695 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-15 20:59:24,722 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 20:59:25,211 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-15 20:59:25,211 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-15 20:59:25,211 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-15 20:59:25,211 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-15 20:59:26,190 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 20:59:26,645 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-15 20:59:26,645 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-15 20:59:26,646 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-15 20:59:26,646 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-15 20:59:27,646 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 20:59:28,063 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-15 20:59:28,064 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-15 20:59:28,064 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-15 20:59:28,064 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-15 20:59:29,041 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 20:59:29,473 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-15 20:59:29,473 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-15 20:59:29,473 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-15 20:59:29,473 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-15 20:59:30,803 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 20:59:31,252 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-15 20:59:31,252 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-15 21:00:56,605 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 21:00:57,082 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-15 21:00:57,082 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-15 21:00:57,082 [INFO] src.input.har_parser: Parsed 3 exchanges from vulnerable.har
+2026-03-15 21:00:57,082 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 3 exchange(s)
+2026-03-15 21:03:45,858 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 21:03:46,366 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-15 21:03:46,366 [INFO] __main__: IPC server starting (version 1.0)
+2026-03-15 21:03:46,366 [INFO] src.input.har_parser: Parsed 2 exchanges from mixed_auth.har
+2026-03-15 21:03:46,366 [INFO] src.input.flow_reconstructor: Reconstructed 1 session flow(s) from 2 exchange(s)
+2026-03-15 21:03:58,477 [INFO] src.analysis.static_analyzer: Analyzed flow mixed_sess_001: 2 exchanges, 4 findings
+2026-03-15 21:03:58,494 [INFO] src.scoring.risk_scorer: Risk: base=34.0 modifiers=-10 final=24 (MEDIUM)
+2026-03-15 21:03:58,510 [INFO] src.scoring.risk_scorer: Risk: base=40.0 modifiers=-10 final=30 (MEDIUM)
+2026-03-15 21:04:15,989 [INFO] src.analysis.static_analyzer: Loaded 11 rules from /home/laz/Documents/csrf-shield-ai/config/rules.yaml
+2026-03-15 21:04:16,471 [INFO] src.ml.predictor: Loaded model from /home/laz/Documents/csrf-shield-ai/models/csrf_model.pkl (26 features)
+2026-03-15 21:04:16,471 [INFO] __main__: IPC server starting (version 1.0)

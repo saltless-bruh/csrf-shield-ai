@@ -36,11 +36,15 @@ func (a *App) drawExportModal(v *gocui.View) {
 	// Path Input
 	pathStr := fmt.Sprintf("  Path:     %s\n", a.exportPath)
 	if a.exportFocusIdx == 2 {
-		pathStr = "\033[30;47m" + pathStr[:len(pathStr)-1] + "_\033[0m\n" // Invert color for focus + cursor
+		pathStr = "\033[30;47m" + pathStr[:len(pathStr)-1] + "\033[0m\n" // Invert color for focus
 	}
 
 	fmt.Fprintf(v, "\n%s%s\n%s\n", formatStr, scopeStr, pathStr)
 	fmt.Fprintf(v, "           [ Enter to Export ]\n")
+
+	if a.exportFocusIdx == 2 {
+		v.SetCursor(12+len(a.exportPath), 4)
+	}
 }
 
 // handleExport opens the export report modal.
@@ -49,11 +53,8 @@ func (a *App) handleExport(g *gocui.Gui, v *gocui.View) error {
 	if a.isAnyModalOpen(g) {
 		return nil
 	}
+	a.showToast("Export Report")
 	flow := a.selectedFlow()
-	if flow == nil {
-		a.showToast("No session selected")
-		return nil
-	}
 
 	maxX, maxY := g.Size()
 	modal, err := g.SetView("exportmodal", maxX/2-25, maxY/2-5, maxX/2+25, maxY/2+5, 0)
@@ -62,16 +63,24 @@ func (a *App) handleExport(g *gocui.Gui, v *gocui.View) error {
 	}
 	modal.Title = " Export Report "
 
-	sid := flow.SessionID
-	if len(sid) > 7 {
-		sid = sid[:7]
+	sid := "report"
+	if flow != nil {
+		sid = flow.SessionID
+		if len(sid) > 7 {
+			sid = sid[:7]
+		}
 	}
 
 	a.mu.Lock()
 	a.exportFocusIdx = 0
 	a.exportFormat = "json"
-	a.exportScope = "selected"
+	if flow == nil {
+		a.exportScope = "all"
+	} else {
+		a.exportScope = "selected"
+	}
 	a.exportPath = fmt.Sprintf("%s_report.json", sid)
+	a.exportPathEdited = false
 	a.mu.Unlock()
 
 	// Use custom editor to capture text input when Path is focused
@@ -83,14 +92,17 @@ func (a *App) handleExport(g *gocui.Gui, v *gocui.View) error {
 	if _, err := g.SetCurrentView("exportmodal"); err != nil {
 		return err
 	}
+	g.SetViewOnTop("exportmodal")
 	return nil
 }
 
 func (a *App) handleExportTab(g *gocui.Gui, v *gocui.View) error {
 	a.mu.Lock()
 	a.exportFocusIdx = (a.exportFocusIdx + 1) % 3
+	focusIdx := a.exportFocusIdx
 	a.mu.Unlock()
 	a.drawExportModal(v)
+	g.Cursor = focusIdx == 2
 	return nil
 }
 
@@ -109,6 +121,10 @@ func (a *App) handleExportSpace(g *gocui.Gui, v *gocui.View) error {
 			a.exportScope = "selected"
 		}
 	} else if a.exportFocusIdx == 2 {
+		if !a.exportPathEdited {
+			a.exportPath = ""
+			a.exportPathEdited = true
+		}
 		a.exportPath += " "
 	}
 	a.mu.Unlock()
@@ -119,6 +135,7 @@ func (a *App) handleExportSpace(g *gocui.Gui, v *gocui.View) error {
 func (a *App) handleExportBackspace(g *gocui.Gui, v *gocui.View) error {
 	a.mu.Lock()
 	if a.exportFocusIdx == 2 && len(a.exportPath) > 0 {
+		a.exportPathEdited = true
 		a.exportPath = a.exportPath[:len(a.exportPath)-1]
 	}
 	a.mu.Unlock()
@@ -130,6 +147,10 @@ func (a *App) exportEditor(v *gocui.View, key gocui.Key, ch rune, mod gocui.Modi
 	a.mu.Lock()
 	if a.exportFocusIdx == 2 {
 		if ch != 0 && mod == gocui.ModNone {
+			if !a.exportPathEdited {
+				a.exportPath = ""
+				a.exportPathEdited = true
+			}
 			a.exportPath += string(ch)
 		}
 	}
@@ -141,9 +162,6 @@ func (a *App) exportEditor(v *gocui.View, key gocui.Key, ch rune, mod gocui.Modi
 // Ref: CLI_TUI_PROPOSAL.md §7.3
 func (a *App) handleConfirmExport(g *gocui.Gui, v *gocui.View) error {
 	flow := a.selectedFlow()
-	if flow == nil {
-		return nil
-	}
 
 	_ = g.DeleteView("exportmodal")
 	// Return focus.
@@ -155,12 +173,17 @@ func (a *App) handleConfirmExport(g *gocui.Gui, v *gocui.View) error {
 		panelName = PanelAnalysis
 	}
 	g.SetCurrentView(panelName)
+	g.Cursor = false
 
 	a.mu.Lock()
 	format := a.exportFormat
 	scope := a.exportScope
 	path := a.exportPath
 	a.mu.Unlock()
+	if path == "" {
+		a.showToast("Export error: empty path")
+		return nil
+	}
 
 	go func() {
 		params := map[string]interface{}{
@@ -168,8 +191,11 @@ func (a *App) handleConfirmExport(g *gocui.Gui, v *gocui.View) error {
 			"scope":  scope,
 			"path":   path,
 		}
-		if scope == "selected" {
+		if scope == "selected" && flow != nil {
 			params["session_id"] = flow.SessionID
+		} else if scope == "selected" && flow == nil {
+			a.showToast("Export error: no selected session")
+			return
 		}
 		resp, err := a.client.Call("export_report", params)
 		if err != nil {
@@ -193,5 +219,25 @@ func (a *App) handleConfirmExport(g *gocui.Gui, v *gocui.View) error {
 		g.Update(func(g *gocui.Gui) error { return nil })
 	}()
 
+	return nil
+}
+
+func (a *App) handleExportDown(g *gocui.Gui, v *gocui.View) error {
+	a.mu.Lock()
+	a.exportFocusIdx = (a.exportFocusIdx + 1) % 3
+	focusIdx := a.exportFocusIdx
+	a.mu.Unlock()
+	a.drawExportModal(v)
+	g.Cursor = focusIdx == 2
+	return nil
+}
+
+func (a *App) handleExportUp(g *gocui.Gui, v *gocui.View) error {
+	a.mu.Lock()
+	a.exportFocusIdx = (a.exportFocusIdx - 1 + 3) % 3
+	focusIdx := a.exportFocusIdx
+	a.mu.Unlock()
+	a.drawExportModal(v)
+	g.Cursor = focusIdx == 2
 	return nil
 }

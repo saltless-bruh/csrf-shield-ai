@@ -27,12 +27,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Validate input file exists.
-	if _, err := os.Stat(*inputFile); os.IsNotExist(err) {
-		fmt.Fprintf(os.Stderr, "Error: file not found: %s\n", *inputFile)
-		os.Exit(1)
-	}
-
 	// Resolve absolute path.
 	absInput, err := filepath.Abs(*inputFile)
 	if err != nil {

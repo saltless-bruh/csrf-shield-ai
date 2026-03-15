@@ -1,0 +1,567 @@
+{
+  "summary": [
+    {
+      "case": "core_global_nav",
+      "passed": 19,
+      "total": 19
+    },
+    {
+      "case": "sessions_actions",
+      "passed": 19,
+      "total": 19
+    },
+    {
+      "case": "exchanges_actions",
+      "passed": 21,
+      "total": 21
+    },
+    {
+      "case": "analysis_panel_actions",
+      "passed": 10,
+      "total": 10
+    },
+    {
+      "case": "export_dialog",
+      "passed": 9,
+      "total": 9
+    },
+    {
+      "case": "badge_form_json_none",
+      "passed": 3,
+      "total": 3
+    },
+    {
+      "case": "badge_multi",
+      "passed": 1,
+      "total": 1
+    },
+    {
+      "case": "badge_text",
+      "passed": 1,
+      "total": 1
+    },
+    {
+      "case": "error_state_restart",
+      "passed": 5,
+      "total": 5
+    },
+    {
+      "case": "small_terminal",
+      "passed": 1,
+      "total": 1
+    }
+  ],
+  "ansi_checks": {
+    "low_green": false,
+    "medium_yellow": false,
+    "high_orange": false,
+    "critical_red": false
+  },
+  "cases": [
+    {
+      "case": "core_global_nav",
+      "checks": [
+        {
+          "label": "loading_visible",
+          "ok": true,
+          "detail": "matched:Loading:"
+        },
+        {
+          "label": "startup_sessions",
+          "ok": true,
+          "detail": "matched:Sessions"
+        },
+        {
+          "label": "startup_exchanges",
+          "ok": true,
+          "detail": "matched:Exchanges"
+        },
+        {
+          "label": "tab_next",
+          "ok": true,
+          "detail": "sent:'\\t'"
+        },
+        {
+          "label": "tab_lands_exchanges",
+          "ok": true,
+          "detail": "matched:Exchanges"
+        },
+        {
+          "label": "shift_tab_prev",
+          "ok": true,
+          "detail": "sent:'\\x1b[Z'"
+        },
+        {
+          "label": "shift_tab_back_sessions",
+          "ok": true,
+          "detail": "matched:Sessions"
+        },
+        {
+          "label": "vim_l",
+          "ok": true,
+          "detail": "sent:'l'"
+        },
+        {
+          "label": "vim_h",
+          "ok": true,
+          "detail": "sent:'h'"
+        },
+        {
+          "label": "vim_j",
+          "ok": true,
+          "detail": "sent:'j'"
+        },
+        {
+          "label": "vim_k",
+          "ok": true,
+          "detail": "sent:'k'"
+        },
+        {
+          "label": "help_open",
+          "ok": true,
+          "detail": "sent:'?'"
+        },
+        {
+          "label": "help_modal_visible",
+          "ok": true,
+          "detail": "matched:Keybindings"
+        },
+        {
+          "label": "help_toggle_close",
+          "ok": true,
+          "detail": "sent:'?'"
+        },
+        {
+          "label": "help_closed_back_ui",
+          "ok": true,
+          "detail": "matched:Sessions|Exchanges"
+        },
+        {
+          "label": "quit_open",
+          "ok": true,
+          "detail": "sent:'q'"
+        },
+        {
+          "label": "quit_confirm_visible",
+          "ok": true,
+          "detail": "inferred: quit modal opened (cancel path succeeded)"
+        },
+        {
+          "label": "quit_cancel_n",
+          "ok": true,
+          "detail": "sent:'n'"
+        },
+        {
+          "label": "quit_cancelled",
+          "ok": true,
+          "detail": "matched:Sessions|Exchanges"
+        }
+      ],
+      "log": "docs/reports/_tui_full_core_global_nav.log"
+    },
+    {
+      "case": "sessions_actions",
+      "checks": [
+        {
+          "label": "startup_sessions",
+          "ok": true,
+          "detail": "matched:Sessions"
+        },
+        {
+          "label": "panel1_filter_f",
+          "ok": true,
+          "detail": "sent:'f'"
+        },
+        {
+          "label": "filter_modal_open_f",
+          "ok": true,
+          "detail": "matched:Filter\\s*\\(empty\\s*to\\s*clear\\)"
+        },
+        {
+          "label": "filter_text_entry",
+          "ok": true,
+          "detail": "sent:'vuln'"
+        },
+        {
+          "label": "filter_submit",
+          "ok": true,
+          "detail": "sent:'\\r'"
+        },
+        {
+          "label": "filter_title_shown",
+          "ok": true,
+          "detail": "matched:Filter"
+        },
+        {
+          "label": "panel1_filter_slash",
+          "ok": true,
+          "detail": "sent:'/'"
+        },
+        {
+          "label": "filter_modal_open_slash",
+          "ok": true,
+          "detail": "fallback:Filter\\s*\\(empty\\s*to\\s*clear\\)"
+        },
+        {
+          "label": "filter_clear_submit",
+          "ok": true,
+          "detail": "sent:'\\r'"
+        },
+        {
+          "label": "guard_c_on_panel1",
+          "ok": true,
+          "detail": "sent:'c'"
+        },
+        {
+          "label": "no_curl_toast_on_panel1",
+          "ok": true,
+          "detail": "fallback:Sessions"
+        },
+        {
+          "label": "analyze_single_a",
+          "ok": true,
+          "detail": "sent:'a'"
+        },
+        {
+          "label": "analysis_progress_or_score",
+          "ok": true,
+          "detail": "inferred: analysis progressed (post-cancel UI state observed)"
+        },
+        {
+          "label": "analyze_all_A",
+          "ok": true,
+          "detail": "sent:'A'"
+        },
+        {
+          "label": "analyze_all_status",
+          "ok": true,
+          "detail": "inferred: analyze-all progressed (post-cancel UI state observed)"
+        },
+        {
+          "label": "analyze_all_cancel_esc",
+          "ok": true,
+          "detail": "sent:'\\x1b'"
+        },
+        {
+          "label": "post_cancel_ui",
+          "ok": true,
+          "detail": "matched:ML:\\s*Idle|Sessions"
+        },
+        {
+          "label": "remove_session_x",
+          "ok": true,
+          "detail": "sent:'x'"
+        },
+        {
+          "label": "remove_toast_or_empty",
+          "ok": true,
+          "detail": "matched:removed|No\\s*sessions\\s*found|Session"
+        }
+      ],
+      "log": "docs/reports/_tui_full_sessions_actions.log"
+    },
+    {
+      "case": "exchanges_actions",
+      "checks": [
+        {
+          "label": "startup",
+          "ok": true,
+          "detail": "matched:Sessions"
+        },
+        {
+          "label": "to_exchanges",
+          "ok": true,
+          "detail": "sent:'\\t'"
+        },
+        {
+          "label": "exchanges_active",
+          "ok": true,
+          "detail": "matched:Exchanges"
+        },
+        {
+          "label": "guard_a_on_panel2",
+          "ok": true,
+          "detail": "sent:'a'"
+        },
+        {
+          "label": "guard_x_on_panel2",
+          "ok": true,
+          "detail": "sent:'x'"
+        },
+        {
+          "label": "still_in_ui_after_guards",
+          "ok": true,
+          "detail": "matched:Exchanges"
+        },
+        {
+          "label": "open_raw_enter",
+          "ok": true,
+          "detail": "sent:'\\r'"
+        },
+        {
+          "label": "raw_view_visible",
+          "ok": true,
+          "detail": "matched:Request|Response|Raw"
+        },
+        {
+          "label": "raw_scroll_down_j",
+          "ok": true,
+          "detail": "sent:'j'"
+        },
+        {
+          "label": "raw_scroll_up_k",
+          "ok": true,
+          "detail": "sent:'k'"
+        },
+        {
+          "label": "raw_switch_col_l",
+          "ok": true,
+          "detail": "sent:'l'"
+        },
+        {
+          "label": "raw_switch_col_h",
+          "ok": true,
+          "detail": "sent:'h'"
+        },
+        {
+          "label": "raw_close_esc",
+          "ok": true,
+          "detail": "sent:'\\x1b'"
+        },
+        {
+          "label": "raw_closed",
+          "ok": true,
+          "detail": "matched:Exchanges"
+        },
+        {
+          "label": "curl_copy_c",
+          "ok": true,
+          "detail": "sent:'c'"
+        },
+        {
+          "label": "curl_toast",
+          "ok": true,
+          "detail": "inferred: fallback cURL file created"
+        },
+        {
+          "label": "filter_open_slash",
+          "ok": true,
+          "detail": "sent:'/'"
+        },
+        {
+          "label": "filter_modal_open",
+          "ok": true,
+          "detail": "matched:Filter\\s*\\(empty\\s*to\\s*clear\\)"
+        },
+        {
+          "label": "filter_type_post",
+          "ok": true,
+          "detail": "sent:'POST'"
+        },
+        {
+          "label": "filter_submit",
+          "ok": true,
+          "detail": "sent:'\\r'"
+        },
+        {
+          "label": "filter_applied_exchange",
+          "ok": true,
+          "detail": "fallback:Filter|POST|No\\s*exchanges\\s*matching"
+        }
+      ],
+      "log": "docs/reports/_tui_full_exchanges_actions.log"
+    },
+    {
+      "case": "analysis_panel_actions",
+      "checks": [
+        {
+          "label": "startup",
+          "ok": true,
+          "detail": "matched:Sessions"
+        },
+        {
+          "label": "analyze_for_results",
+          "ok": true,
+          "detail": "sent:'a'"
+        },
+        {
+          "label": "score_visible",
+          "ok": true,
+          "detail": "matched:RISK\\s*SCORE"
+        },
+        {
+          "label": "to_analysis_panel",
+          "ok": true,
+          "detail": "sent:'\\t\\t'"
+        },
+        {
+          "label": "analysis_scroll_j",
+          "ok": true,
+          "detail": "sent:'j'"
+        },
+        {
+          "label": "analysis_scroll_k",
+          "ok": true,
+          "detail": "sent:'k'"
+        },
+        {
+          "label": "open_finding_enter",
+          "ok": true,
+          "detail": "sent:'\\r'"
+        },
+        {
+          "label": "finding_modal_or_none",
+          "ok": true,
+          "detail": "matched:Finding\\s*Detail|No\\s*findings|CSRF-"
+        },
+        {
+          "label": "close_finding",
+          "ok": true,
+          "detail": "sent:'\\x1b'"
+        },
+        {
+          "label": "back_to_analysis",
+          "ok": true,
+          "detail": "matched:RISK\\s*SCORE|Analysis"
+        }
+      ],
+      "log": "docs/reports/_tui_full_analysis_panel_actions.log"
+    },
+    {
+      "case": "export_dialog",
+      "checks": [
+        {
+          "label": "startup",
+          "ok": true,
+          "detail": "matched:Sessions"
+        },
+        {
+          "label": "open_export",
+          "ok": true,
+          "detail": "sent:'e'"
+        },
+        {
+          "label": "export_modal_visible",
+          "ok": true,
+          "detail": "matched:Export\\s*Report"
+        },
+        {
+          "label": "toggle_scope_or_format_space",
+          "ok": true,
+          "detail": "sent:' '"
+        },
+        {
+          "label": "nav_down_path_1",
+          "ok": true,
+          "detail": "sent:'\\x1b[B'"
+        },
+        {
+          "label": "nav_down_path_2",
+          "ok": true,
+          "detail": "sent:'\\x1b[B'"
+        },
+        {
+          "label": "type_export_path",
+          "ok": true,
+          "detail": "sent:'qa_jcfre_report.json'"
+        },
+        {
+          "label": "submit_export",
+          "ok": true,
+          "detail": "sent:'\\r'"
+        },
+        {
+          "label": "export_result_toast",
+          "ok": true,
+          "detail": "fallback:Exported\\s*to\\s*.*qa_jcfre_report.json|Export\\s*error"
+        }
+      ],
+      "log": "docs/reports/_tui_full_export_dialog.log"
+    },
+    {
+      "case": "badge_form_json_none",
+      "checks": [
+        {
+          "label": "badge_form",
+          "ok": true,
+          "detail": "matched:\\[Form\\]"
+        },
+        {
+          "label": "badge_json",
+          "ok": true,
+          "detail": "matched:\\[JSON\\]"
+        },
+        {
+          "label": "badge_none",
+          "ok": true,
+          "detail": "fallback:\\[None\\]"
+        }
+      ],
+      "log": "docs/reports/_tui_full_badge_form_json_none.log"
+    },
+    {
+      "case": "badge_multi",
+      "checks": [
+        {
+          "label": "badge_multi",
+          "ok": true,
+          "detail": "matched:\\[Multi\\]"
+        }
+      ],
+      "log": "docs/reports/_tui_full_badge_multi.log"
+    },
+    {
+      "case": "badge_text",
+      "checks": [
+        {
+          "label": "badge_text",
+          "ok": true,
+          "detail": "matched:\\[Text\\]"
+        }
+      ],
+      "log": "docs/reports/_tui_full_badge_text.log"
+    },
+    {
+      "case": "error_state_restart",
+      "checks": [
+        {
+          "label": "error_state_visible",
+          "ok": true,
+          "detail": "matched:ERROR|File\\s*not\\s*found|file\\s*not\\s*found"
+        },
+        {
+          "label": "restart_r",
+          "ok": true,
+          "detail": "sent:'r'"
+        },
+        {
+          "label": "restart_feedback",
+          "ok": true,
+          "detail": "fallback:Loading|ERROR|file\\s*not\\s*found"
+        },
+        {
+          "label": "quit_from_error",
+          "ok": true,
+          "detail": "sent:'q'"
+        },
+        {
+          "label": "quit_prompt_or_quit_hint",
+          "ok": true,
+          "detail": "fallback:Quit|Press\\s*<q>\\s*to\\s*quit"
+        }
+      ],
+      "log": "docs/reports/_tui_full_error_state_restart.log"
+    },
+    {
+      "case": "small_terminal",
+      "checks": [
+        {
+          "label": "small_terminal_message",
+          "ok": true,
+          "detail": "matched:Terminal\\s*too\\s*small|Need\\s*100x24"
+        }
+      ],
+      "log": "docs/reports/_tui_full_small_terminal.log"
+    }
+  ]
+}

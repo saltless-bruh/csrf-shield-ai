@@ -104,14 +104,21 @@ func (a *App) renderExchanges(g *gocui.Gui) {
 
 	// Scroll indicator + filter label.
 	w, _ := v.Size()
+	selectedVisible := 1
+	for i, realIdx := range visible {
+		if realIdx == exchIdx {
+			selectedVisible = i + 1
+			break
+		}
+	}
 	if filter != "" {
 		v.Title = titleWithCounter(
 			fmt.Sprintf(" Exchanges [Filter: %q] ", a.exchangeFilter),
-			fmt.Sprintf(" [%d/%d] ", exchIdx+1, len(visible)),
+			fmt.Sprintf(" [%d/%d] ", selectedVisible, len(visible)),
 			w,
 		)
 	} else if len(visible) > height {
-		v.Title = titleWithCounter(" Exchanges ", fmt.Sprintf(" [%d/%d] ", exchIdx+1, len(visible)), w)
+		v.Title = titleWithCounter(" Exchanges ", fmt.Sprintf(" [%d/%d] ", selectedVisible, len(visible)), w)
 	} else {
 		v.Title = " Exchanges "
 	}

@@ -1,0 +1,17 @@
+{
+  "csrf_shield_ai_report": {
+    "generated_at": "2026-03-14 20:38:02",
+    "source_file": "mixed_sess_001",
+    "risk_score": 5,
+    "risk_level": "LOW",
+    "base_score": 5.0,
+    "ml_probability": 0.0,
+    "context_modifiers": [],
+    "findings": [],
+    "remediations": [],
+    "summary": {
+      "total_findings": 0,
+      "critical_high_count": 0
+    }
+  }
+}
