@@ -48,5 +48,6 @@ tui
 # Ignored Spec/Workflow assets
 .github/
 artifacts/
+tests/manual/artifacts/
 spec/
 spec_tui_v2/

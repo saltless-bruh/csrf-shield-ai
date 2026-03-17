@@ -1,5 +1,6 @@
 #!/usr/bin/expect -f
 set timeout 5
+cd [file dirname [file normalize [info script]]]/../..
 spawn ./test_bin --input data/sample_har/minimal.har
 expect "Sessions"
 
@@ -25,7 +26,7 @@ expect "Export Report"
 send "\033\[B"
 send "\033\[B"
 # Type letters that used to trigger globals, e.g. "qajcfre"
-send "my_report.json"
+send "tests/manual/artifacts/my_report.json"
 # Hit Enter to trigger export
 send "\r"
 

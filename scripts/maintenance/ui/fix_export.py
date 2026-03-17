@@ -1,6 +1,10 @@
 import re
+from pathlib import Path
 
-with open("internal/ui/export.go", "r") as f:
+repo_root = Path(__file__).resolve().parents[3]
+target_file = repo_root / "internal/ui/export.go"
+
+with target_file.open("r") as f:
     content = f.read()
 
 # Replace fake cursor and add terminal cursor placing
@@ -35,5 +39,5 @@ if old_draw in content:
 else:
     print("WARN: drawExportModal not found")
 
-with open("internal/ui/export.go", "w") as f:
+with target_file.open("w") as f:
     f.write(content)

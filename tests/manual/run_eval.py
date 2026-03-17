@@ -1,16 +1,22 @@
 import os
 import pty
 import time
+from pathlib import Path
+
+repo_root = Path(__file__).resolve().parents[2]
+artifacts_dir = repo_root / "tests/manual/artifacts"
+artifacts_dir.mkdir(parents=True, exist_ok=True)
 
 pid, fd = pty.fork()
 
 # Ensure backend log is empty
-open('backend.log', 'w').close()
-open('tui.log', 'w').close()
+(artifacts_dir / 'backend.log').write_text('')
+(artifacts_dir / 'tui.log').write_text('')
 
 if pid == 0:
     # Child process
     os.environ['TERM'] = 'xterm-256color'
+    os.chdir(repo_root)
     os.execvp('./test_bin', ['./test_bin', '--input', 'data/sample_har/minimal.har'])
 else:
     # Parent process uses the fd string to simulate keystrokes
@@ -36,8 +42,8 @@ else:
     os.write(fd, b'\033[B\033[B')  # Down twice to Format -> Scope -> Path
     time.sleep(0.5)
 
-    # Type "report.json"
-    os.write(fd, b'report.json')
+    # Type output path in manual artifacts folder
+    os.write(fd, b'tests/manual/artifacts/report.json')
     time.sleep(0.5)
 
     # Confirm Export

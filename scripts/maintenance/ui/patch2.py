@@ -1,6 +1,10 @@
 import re
+from pathlib import Path
 
-with open("internal/ui/keybindings.go", "r") as f:
+repo_root = Path(__file__).resolve().parents[3]
+target_file = repo_root / "internal/ui/keybindings.go"
+
+with target_file.open("r") as f:
     text = f.read()
 
 # Instead of literal match, we do regex or replace line by line
@@ -28,6 +32,6 @@ insert_block += '\t\t{"help", \'q\', gocui.ModNone, a.handleEsc},\n'
 text = text.replace('{"quitmodal", \'y\', gocui.ModNone, a.handleConfirmQuit},',
                     insert_block + '\t\t{"quitmodal", \'y\', gocui.ModNone, a.handleConfirmQuit},')
 
-with open("internal/ui/keybindings.go", "w") as f:
+with target_file.open("w") as f:
     f.write(text)
 print("Done2")

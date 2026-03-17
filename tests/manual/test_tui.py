@@ -1,15 +1,19 @@
 import pexpect
 import time
-import sys
+from pathlib import Path
+
+repo_root = Path(__file__).resolve().parents[2]
+artifacts_dir = repo_root / "tests/manual/artifacts"
+artifacts_dir.mkdir(parents=True, exist_ok=True)
 
 def main():
-    p = pexpect.spawn('./csrf-shield-tui --input data/sample_har/vulnerable.har', dimensions=(30, 100))
+    p = pexpect.spawn('./csrf-shield-tui --input data/sample_har/vulnerable.har', cwd=str(repo_root), dimensions=(30, 100))
     time.sleep(1)
     
     # Send '?'
     p.send('?')
     time.sleep(0.5)
-    with open('screen_help.txt', 'wb') as f:
+    with (artifacts_dir / 'screen_help.txt').open('wb') as f:
         f.write(p.read_nonblocking(4096, timeout=1))
     
     p.send('\x1b') # ESC
@@ -22,7 +26,7 @@ def main():
     # Try tab
     p.send('\t')
     time.sleep(0.5)
-    with open('screen_export.txt', 'wb') as f:
+    with (artifacts_dir / 'screen_export.txt').open('wb') as f:
         f.write(p.read_nonblocking(4096, timeout=1))
         
     p.send('\x1b') # ESC
@@ -33,7 +37,7 @@ def main():
     time.sleep(0.5)
     p.send('test')
     time.sleep(0.5)
-    with open('screen_filter.txt', 'wb') as f:
+    with (artifacts_dir / 'screen_filter.txt').open('wb') as f:
         f.write(p.read_nonblocking(4096, timeout=1))
     
     p.terminate()

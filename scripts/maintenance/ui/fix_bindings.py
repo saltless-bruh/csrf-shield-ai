@@ -1,4 +1,9 @@
-with open("internal/ui/keybindings.go", "r") as f:
+from pathlib import Path
+
+repo_root = Path(__file__).resolve().parents[3]
+target_file = repo_root / "internal/ui/keybindings.go"
+
+with target_file.open("r") as f:
     lines = f.readlines()
 
 new_lines = []
@@ -20,6 +25,6 @@ for line in lines:
     else:
         new_lines.append(line)
 
-with open("internal/ui/keybindings.go", "w") as f:
+with target_file.open("w") as f:
     f.writelines(new_lines)
 print("Done3")
